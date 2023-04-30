@@ -1,0 +1,81 @@
+name: onjobb
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.6 <3.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get: ^4.6.5  
+  flutter_screenutil: ^5.7.0
+  easy_localization: ^3.0.1
+  cached_network_image: ^3.2.3
+  image_picker: ^0.8.7+3
+  google_fonts: ^4.0.3
+  connectivity_plus: ^2.3.6 # discover network connectivity and configure themselves accordingly. It can distinguish between cellular vs WiFi connection.
+  shared_preferences: ^2.0.15 #Wraps platform-specific persistent storage for simple data 
+  flutter_svg: ^1.1.6
+  google_sign_in: ^5.0.7
+  flutter_switch: ^0.3.2
+  carousel_slider: ^4.0.0
+  smooth_page_indicator: ^1.0.0+2
+  pin_code_fields: ^7.3.0
+  sms_autofill: ^2.0.0
+  pin_input_text_field: ^4.1.0
+  intl: ^0.17.0
+  fluttertoast: ^8.0.8
+
+
+
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^2.0.0
+
+
+flutter:
+
+  
+  uses-material-design: true
+
+
+  assets: 
+    - assets/
+    - assets/images/
+  fonts: 
+    - family: Plus Jakarta Sans
+      fonts: 
+        - asset: assets/fonts/PlusJakartaSansBold.ttf
+          weight: 700
+        - asset: assets/fonts/PlusJakartaSansMedium.ttf
+          weight: 500
+        - asset: assets/fonts/PlusJakartaSansSemiBold.ttf
+          weight: 600
+    - family: Inter
+      fonts: 
+        - asset: assets/fonts/InterRegular.ttf
+          weight: 400
+        - asset: assets/fonts/InterMedium.ttf
+          weight: 500
+        - asset: assets/fonts/InterBold.ttf
+          weight: 700
+        - asset: assets/fonts/InterSemiBold.ttf
+          weight: 600
+    - family: Poppins
+      fonts: 
+        - asset: assets/fonts/PoppinsMedium.ttf
+          weight: 500
+        - asset: assets/fonts/PoppinsRegular.ttf
+          weight: 400
+
