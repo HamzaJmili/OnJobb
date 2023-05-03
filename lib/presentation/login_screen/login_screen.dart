@@ -131,7 +131,8 @@ class LoginScreen extends GetWidget<LoginController> {
                           fontStyle:
                               ButtonFontStyle.PlusJakartaSansSemiBold16Gray50,
                           onTap: () {
-                            onTapContinuewithemail();
+                            // onTapContinuewithemail();
+                             Get.toNamed( AppRoutes.homeContainerScreen,);
                           }),
                       Padding(
                           padding: getPadding(left: 41, top: 26, right: 41),

@@ -129,7 +129,8 @@ class SignUpCreateAcountScreen extends GetWidget<SignUpCreateAcountController> {
                           fontStyle:
                               ButtonFontStyle.PlusJakartaSansSemiBold16Gray50,
                           onTap: () {
-                            onTapContinuewithemail();
+                            // onTapContinuewithemail();
+                             Get.toNamed( AppRoutes.homeContainerScreen,);
                           }),
                       Padding(
                           padding: getPadding(left: 40, top: 28, right: 40),
@@ -145,7 +146,8 @@ class SignUpCreateAcountScreen extends GetWidget<SignUpCreateAcountController> {
                                                 getHorizontalSize(0.08))),
                                 GestureDetector(
                                     onTap: () {
-                                      onTapTxtLogin();
+                                      //  Get.toNamed( AppRoutes.homeContainerScreen,);
+                                       onTapTxtLogin();
                                     },
                                     child: Padding(
                                         padding: getPadding(left: 3),
