@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "231868490284",
+    "project_id": "onjobb-68aac",
+    "storage_bucket": "onjobb-68aac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231868490284:android:f957f4b3b03f443f586789",
+        "android_client_info": {
+          "package_name": "com.example.onjobb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231868490284-g1ntiu46jertcp2g2eim3seeofsr1vnn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9hkv898ylerDB-igdG9usYsQT7s_c6vk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231868490284-g1ntiu46jertcp2g2eim3seeofsr1vnn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
