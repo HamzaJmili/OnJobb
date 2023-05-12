@@ -21,7 +21,7 @@ class CustomTextFormField extends StatelessWidget {
       this.prefixConstraints,
       this.suffix,
       this.suffixConstraints,
-      this.validator});
+      this.validator , });
 
   TextFormFieldShape? shape;
 

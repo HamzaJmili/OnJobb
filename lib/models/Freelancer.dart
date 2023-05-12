@@ -29,18 +29,17 @@ class Freelancer extends User {
           isFreelancer: isFreelancer,
         );
 
-  factory Freelancer.fromDocumentSnapshot(DocumentSnapshot snapshot) {
-Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+   factory Freelancer.fromJson(Map<String, dynamic> json) {
     return Freelancer(
-      uid: snapshot.id,
-      firstname: data['firstname'],
-      lastname: data['lastname'],
-      email: data['email'],
-      location: data['location'],
-      bio: data['bio'],
-      photoUrl: data['photoUrl'],
-      isFreelancer: data['isFreelancer'],
-      speciallization : data['speciallization'],
+      uid: 'id',
+      firstname: json['firstname'],
+      lastname: json['lastname'],
+      email: json['email'],
+      location: json['location'],
+      bio: json['bio'],
+      photoUrl: json['photoUrl'],
+      isFreelancer: json['isFreelancer'] ,
+      speciallization: json['speciallization'],
     );
   }
 

@@ -75,9 +75,11 @@ class LogoutPopupDialog extends StatelessWidget {
   }
 
   onTapLogout() {
+    controller.logout();
     Get.offAllNamed(
       AppRoutes.signUpCreateAcountScreen,
     );
+    
   }
 
   onTapCancel() {

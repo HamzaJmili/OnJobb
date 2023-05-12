@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:onjobb/core/app_export.dart';
 import 'package:onjobb/widgets/custom_button.dart';
 import 'package:onjobb/widgets/custom_text_form_field.dart';
-import 'package:onjobb/data/models/register/post_register_req.dart';
-import 'package:onjobb/data/models/register/post_register_resp.dart';
-import 'package:onjobb/core/constants/user.dart';
-import 'package:onjobb/core/constants/role.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
 
-class SignUpCompleteAccountScreen
-    extends GetWidget<SignUpCompleteAccountController> {
+class SignUpCompleteAccountScreen  extends GetWidget<SignUpCompleteAccountController> {
+      
+      final bool isFreelancer = Get.arguments['isFreelancer'];
+    final String email = Get.arguments['email'];
+
+     
   @override
   Widget build(BuildContext context) {
+    
     return SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
@@ -228,31 +230,39 @@ class SignUpCompleteAccountScreen
   }
 
   Future<void> onTapContinuewithemail() async {
-    PostRegisterReq postRegisterReq = PostRegisterReq(
-      username: controller.frameOneOneController.text,
-      password: controller.frameOneTwoController.text,
-      email: User.email,
-      name: controller.frameOneController.text,
-      role: Role.user,
+    
+    await controller.signUpWithEmailAndPassword(email:email , password: controller.frameOneTwoController.text.trim(), firstName: controller.frameOneController.text.trim(), lastName: controller.frameOneOneController.text.trim(), bio: 'hi i am software Devlepoer', country: 'morocco', isFreelancer: isFreelancer);
+      Get.offNamed(
+      AppRoutes.homeContainerScreen,
     );
-    try {
-      await controller.callCreateRegister(
-        postRegisterReq.toJson(),
-      );
-      _onOnTapSignUpSuccess();
-    } on PostRegisterResp {
-      _onOnTapSignUpError();
-    } on NoInternetException catch (e) {
-      Get.rawSnackbar(message: e.toString());
-    } catch (e) {
-      //TODO: Handle generic errors
-    }
+    
+    
+    
+    
+    
+    // PostRegisterReq postRegisterReq = PostRegisterReq(
+    //   username: controller.frameOneOneController.text,
+    //   password: controller.frameOneTwoController.text,
+    //   email: User.email,
+    //   name: controller.frameOneController.text,
+    //   role: Role.user,
+    // );
+    // try {
+    //   await controller.callCreateRegister(
+    //     postRegisterReq.toJson(),
+    //   );
+    //   _onOnTapSignUpSuccess();
+    // } on PostRegisterResp {
+    //   _onOnTapSignUpError();
+    // } on NoInternetException catch (e) {
+    //   Get.rawSnackbar(message: e.toString());
+    // } catch (e) {
+    //   //TODO: Handle generic errors
+    // }
   }
 
   void _onOnTapSignUpSuccess() {
-    Get.offNamed(
-      AppRoutes.jobTypeScreen,
-    );
+  
   }
 
   void _onOnTapSignUpError() {

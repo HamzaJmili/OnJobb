@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:onjobb/models/Freelancer.dart';
 import '../home_page/widgets/listgroup_item_widget.dart';
 import '../home_page/widgets/listuser_item_widget.dart';
 import 'controller/home_controller.dart';
@@ -13,10 +16,55 @@ import 'package:onjobb/widgets/app_bar/custom_app_bar.dart';
 class HomePage extends StatelessWidget {
   HomeController controller = Get.put(HomeController(HomeModel().obs));
 
+  Rx<Freelancer?> freelancer = Rx<Freelancer?>(null);
+  final FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    Future<void> getCurrentUser() async {
+      try {
+        User user = auth.currentUser!;
+        DocumentReference userDocRef =
+            FirebaseFirestore.instance.collection('users').doc(user.uid);
+        final docSnapshot = await userDocRef.get();
+        Map<String, dynamic> data = docSnapshot.data() as Map<String, dynamic>;
+        print(
+            " print inside getCurentuser in home screen this  before put data in freelancer object");
+        // print("${data['email']}");
+        freelancer.value = Freelancer.fromJson(data);
+        freelancer.value?.uid = docSnapshot.id;
+        print(" print inside getCurentuser in home screen this ");
+        print(freelancer.value?.uid);
+        print(" print inside getCurentuser in home screen after  ");
+      } catch (e) {
+        print("print inside the catch of getuserController before print e ");
+        print(e);
+      }
+    }
+
+    // void getCurrentUser() async {
+    //   final FirebaseAuth auth = FirebaseAuth.instance;
+    //   User user = await auth.currentUser!;
+    //   DocumentReference userDocRef =
+    //       FirebaseFirestore.instance.collection('users').doc(user.uid);
+    //   final docSnapshot = await userDocRef.get();
+    //   print(" print inside getCurentuser in home  screen this ");
+    //   print(docSnapshot.data().toString());
+    //   print(Freelancer.fromDocumentSnapshot(docSnapshot).email);
+    //   freelancer.value = Freelancer.fromDocumentSnapshot(docSnapshot);
+    //   print(
+    //       " print inside getCurentuser in home  screen and this is docScanpshot ");
+    // }
+
+    // Call getCurrentUser when the widget is first built
+    getCurrentUser();
+
+    return SafeArea(child: Obx(() {
+      if (freelancer.value == null) {
+        // Show a loading indicator while the freelancer value is null
+
+        return Center(child: CircularProgressIndicator());
+      } else {
+        return Scaffold(
             backgroundColor: ColorConstant.whiteA70002,
             appBar: CustomAppBar(
                 height: getVerticalSize(50),
@@ -34,7 +82,8 @@ class HomePage extends StatelessWidget {
                         children: [
                           Align(
                               alignment: Alignment.centerLeft,
-                              child: Text("msg_hi_welcome_bac".tr,
+                              child: Text(
+                                  "Hi welcome back ${freelancer.value?.firstname}", // the recent value of text "msg_hi_welcome_bac ".tr
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.left,
                                   style: AppStyle.txtPlusJakartaSansBold14
@@ -45,7 +94,8 @@ class HomePage extends StatelessWidget {
                               alignment: Alignment.centerLeft,
                               child: Padding(
                                   padding: getPadding(top: 9, right: 33),
-                                  child: Text("msg_find_your_dream".tr,
+                                  child: Text(
+                                      "${freelancer.value?.bio}", //   the recent value of text "msg_find_your_dream".tr
                                       overflow: TextOverflow.ellipsis,
                                       textAlign: TextAlign.left,
                                       style: AppStyle.txtPlusJakartaSansMedium12
@@ -167,7 +217,7 @@ class HomePage extends StatelessWidget {
                           child: Padding(
                               padding: getPadding(left: 24, top: 16, right: 24),
                               child: Obx(() => ListView.separated(
-                                  physics: NeverScrollableScrollPhysics(),
+                                  physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   separatorBuilder: (context, index) {
                                     return SizedBox(
@@ -186,7 +236,9 @@ class HomePage extends StatelessWidget {
                                       onTapColumngroup();
                                     });
                                   }))))
-                    ]))));
+                    ])));
+      }
+    }));
   }
 
   onTapColumngroup() {

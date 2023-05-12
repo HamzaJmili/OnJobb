@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:onjobb/core/app_export.dart';
 import 'package:onjobb/presentation/sign_up_complete_account_screen/models/sign_up_complete_account_model.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +29,74 @@ class SignUpCompleteAccountController extends GetxController {
     frameOneController.dispose();
     frameOneOneController.dispose();
     frameOneTwoController.dispose();
+  }
+
+  Future<void> signUpWithEmailAndPassword({
+    required String email,
+    required String password,
+    required String firstName,
+    required String lastName,
+    required String bio,
+    required String country,
+    required bool isFreelancer,
+  }) async {
+    // Check that all required fields are not empty
+    if (email.isEmpty ||
+        password.isEmpty ||
+        firstName.isEmpty ||
+        lastName.isEmpty ||
+        country.isEmpty
+        ) {
+      Get.snackbar('Error', 'Please fill in all required fields');
+      throw Exception('Please fill in all required fields');
+    }
+UserCredential? userCredential;
+
+try {
+  userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    email: email,
+    password: password,
+  );
+} on FirebaseAuthException catch (e) {
+  if (e.code == 'invalid-email') {
+   Get.snackbar('Error', 'invalid-email');
+
+  } else if (e.code == 'email-already-in-use') {
+    Get.snackbar('Error', 'email-already-in-use');
+
+  } else if (e.code == 'weak-password') {
+    Get.snackbar('Error', 'Weak password');
+
+  } else if (e.code == 'operation-not-allowed') {
+Get.snackbar('Error', 'operation-not-allowed');
+
+  } else if (e.code == 'network-request-failed') {
+Get.snackbar('Error', 'network-request-failed');
+  } else {
+    // Handle unknown error
+  }
+
+}
+
+if (userCredential != null) {
+  // Save additional user data to Firestore database
+  await FirebaseFirestore.instance
+      .collection('users')
+      .doc(userCredential.user!.uid)
+      .set({
+      'firstname': firstName,
+      'lastname': lastName,
+      'email': email,
+      'location': country,
+      'bio': bio,
+      'photoUrl': "photooo",
+      'isFreelancer': isFreelancer,
+      'speciallization':'speciallization',
+    });
+    
+ 
+}
+
   }
 
   Future<void> callCreateRegister(Map req) async {

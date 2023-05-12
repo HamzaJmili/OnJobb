@@ -5,6 +5,7 @@ import 'package:onjobb/widgets/custom_button.dart';
 import 'package:onjobb/widgets/custom_icon_button.dart';
 
 class JobTypeScreen extends GetWidget<JobTypeController> {
+  final String email = Get.arguments;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -47,122 +48,174 @@ class JobTypeScreen extends GetWidget<JobTypeController> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Expanded(
-                                    child: Container(
-                                        margin: getMargin(right: 7),
-                                        padding: getPadding(
-                                            left: 18,
-                                            top: 24,
-                                            right: 18,
-                                            bottom: 24),
-                                        decoration: AppDecoration.outlineGray900
-                                            .copyWith(
-                                                borderRadius: BorderRadiusStyle
-                                                    .roundedBorder24),
-                                        child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              CustomIconButton(
-                                                  height: 64,
-                                                  width: 64,
-                                                  variant: IconButtonVariant
-                                                      .FillGray90065,
-                                                  shape: IconButtonShape
-                                                      .CircleBorder32,
-                                                  padding: IconButtonPadding
-                                                      .PaddingAll16,
-                                                  child: CustomImageView(
-                                                      svgPath: ImageConstant
-                                                          .imgIcon)),
-                                              Padding(
-                                                  padding: getPadding(top: 29),
-                                                  child: Text(
-                                                      "lbl_find_a_job".tr,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      textAlign: TextAlign.left,
-                                                      style: AppStyle
-                                                          .txtPlusJakartaSansSemiBold16Gray900
-                                                          .copyWith(
-                                                              letterSpacing:
-                                                                  getHorizontalSize(
-                                                                      0.08)))),
-                                              Container(
-                                                  width: getHorizontalSize(120),
-                                                  margin: getMargin(
-                                                      top: 9, bottom: 1),
-                                                  child: Text(
-                                                      "msg_it_s_easy_to_fi".tr,
-                                                      maxLines: null,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: AppStyle
-                                                          .txtPlusJakartaSansMedium12
-                                                          .copyWith(
-                                                              letterSpacing:
-                                                                  getHorizontalSize(
-                                                                      0.06))))
-                                            ]))),
+                                    child: GestureDetector(
+                                        onTap: () {
+                                          controller.isFreelancer.value = true;
+                                          print(controller.isFreelancer);
+                                        },
+                                        child: Obx(
+                                          () => Container(
+                                              margin: getMargin(right: 7),
+                                              padding: getPadding(
+                                                  left: 18,
+                                                  top: 24,
+                                                  right: 18,
+                                                  bottom: 24),
+                                              decoration: controller
+                                                      .isFreelancer.isTrue
+                                                  ? AppDecoration.outlineGray900
+                                                      .copyWith(
+                                                          borderRadius:
+                                                              BorderRadiusStyle
+                                                                  .roundedBorder24)
+                                                  : AppDecoration
+                                                      .outlineGray70014
+                                                      .copyWith(
+                                                          borderRadius:
+                                                              BorderRadiusStyle
+                                                                  .roundedBorder24),
+                                              child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    CustomIconButton(
+                                                        height: 64,
+                                                        width: 64,
+                                                        variant:
+                                                            IconButtonVariant
+                                                                .FillGray90065,
+                                                        shape: IconButtonShape
+                                                            .CircleBorder32,
+                                                        padding:
+                                                            IconButtonPadding
+                                                                .PaddingAll16,
+                                                        child: CustomImageView(
+                                                            svgPath:
+                                                                ImageConstant
+                                                                    .imgIcon)),
+                                                    Padding(
+                                                        padding:
+                                                            getPadding(top: 29),
+                                                        child: Text(
+                                                            "lbl_find_a_job".tr,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                            style: AppStyle
+                                                                .txtPlusJakartaSansSemiBold16Gray900
+                                                                .copyWith(
+                                                                    letterSpacing:
+                                                                        getHorizontalSize(
+                                                                            0.08)))),
+                                                    Container(
+                                                        width:
+                                                            getHorizontalSize(
+                                                                120),
+                                                        margin: getMargin(
+                                                            top: 9, bottom: 1),
+                                                        child: Text(
+                                                            "msg_it_s_easy_to_fi"
+                                                                .tr,
+                                                            maxLines: null,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: AppStyle
+                                                                .txtPlusJakartaSansMedium12
+                                                                .copyWith(
+                                                                    letterSpacing:
+                                                                        getHorizontalSize(
+                                                                            0.06))))
+                                                  ])),
+                                        ))),
                                 Expanded(
-                                    child: Container(
-                                        margin: getMargin(left: 7),
-                                        padding: getPadding(
-                                            left: 14,
-                                            top: 24,
-                                            right: 14,
-                                            bottom: 24),
-                                        decoration: AppDecoration
-                                            .outlineGray70014
-                                            .copyWith(
-                                                borderRadius: BorderRadiusStyle
-                                                    .roundedBorder24),
-                                        child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              CustomIconButton(
-                                                  height: 64,
-                                                  width: 64,
-                                                  variant: IconButtonVariant
-                                                      .FillOrange50065,
-                                                  shape: IconButtonShape
-                                                      .CircleBorder32,
-                                                  padding: IconButtonPadding
-                                                      .PaddingAll16,
-                                                  child: CustomImageView(
-                                                      svgPath: ImageConstant
-                                                          .imgUser)),
-                                              Padding(
-                                                  padding: getPadding(top: 29),
-                                                  child: Text(
-                                                      "lbl_find_a_employee".tr,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      textAlign: TextAlign.left,
-                                                      style: AppStyle
-                                                          .txtPlusJakartaSansSemiBold16Gray900
-                                                          .copyWith(
-                                                              letterSpacing:
-                                                                  getHorizontalSize(
-                                                                      0.08)))),
-                                              Container(
-                                                  width: getHorizontalSize(109),
-                                                  margin: getMargin(
-                                                      top: 9, bottom: 1),
-                                                  child: Text(
-                                                      "msg_it_s_easy_to_fi2".tr,
-                                                      maxLines: null,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: AppStyle
-                                                          .txtPlusJakartaSansMedium12
-                                                          .copyWith(
-                                                              letterSpacing:
-                                                                  getHorizontalSize(
-                                                                      0.06))))
-                                            ])))
+                                    child: GestureDetector(
+                                        onTap: () {
+                                          controller.isFreelancer.value = false;
+                                          print(controller.isFreelancer);
+                                        },
+                                        child: Obx(
+                                          () => Container(
+                                              margin: getMargin(left: 7),
+                                              padding: getPadding(
+                                                  left: 14,
+                                                  top: 24,
+                                                  right: 14,
+                                                  bottom: 24),
+                                              decoration: controller
+                                                      .isFreelancer.isFalse
+                                                  ? AppDecoration.outlineGray900
+                                                      .copyWith(
+                                                          borderRadius:
+                                                              BorderRadiusStyle
+                                                                  .roundedBorder24)
+                                                  : AppDecoration
+                                                      .outlineGray70014
+                                                      .copyWith(
+                                                          borderRadius:
+                                                              BorderRadiusStyle
+                                                                  .roundedBorder24),
+                                              child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    CustomIconButton(
+                                                        height: 64,
+                                                        width: 64,
+                                                        variant:
+                                                            IconButtonVariant
+                                                                .FillOrange50065,
+                                                        shape: IconButtonShape
+                                                            .CircleBorder32,
+                                                        padding:
+                                                            IconButtonPadding
+                                                                .PaddingAll16,
+                                                        child: CustomImageView(
+                                                            svgPath:
+                                                                ImageConstant
+                                                                    .imgUser)),
+                                                    Padding(
+                                                        padding:
+                                                            getPadding(top: 29),
+                                                        child: Text(
+                                                            "lbl_find_a_employee"
+                                                                .tr,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                            style: AppStyle
+                                                                .txtPlusJakartaSansSemiBold16Gray900
+                                                                .copyWith(
+                                                                    letterSpacing:
+                                                                        getHorizontalSize(
+                                                                            0.08)))),
+                                                    Container(
+                                                        width:
+                                                            getHorizontalSize(
+                                                                109),
+                                                        margin: getMargin(
+                                                            top: 9, bottom: 1),
+                                                        child: Text(
+                                                            "msg_it_s_easy_to_fi2"
+                                                                .tr,
+                                                            maxLines: null,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: AppStyle
+                                                                .txtPlusJakartaSansMedium12
+                                                                .copyWith(
+                                                                    letterSpacing:
+                                                                        getHorizontalSize(
+                                                                            0.06))))
+                                                  ])),
+                                        )))
                               ]))
                     ])),
             bottomNavigationBar: CustomButton(
@@ -181,8 +234,9 @@ class JobTypeScreen extends GetWidget<JobTypeController> {
   }
 
   onTapContinue() {
-    Get.toNamed(
-      AppRoutes.speciallizationScreen,
-    );
+    Get.toNamed(AppRoutes.signUpCompleteAccountScreen, arguments: {
+      'isFreelancer': controller.isFreelancer.value,
+      'email': email,
+    });
   }
 }

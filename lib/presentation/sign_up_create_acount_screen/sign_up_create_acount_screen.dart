@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'controller/sign_up_create_acount_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:onjobb/core/app_export.dart';
@@ -6,8 +8,10 @@ import 'package:onjobb/widgets/custom_text_form_field.dart';
 import 'package:onjobb/domain/googleauth/google_auth_helper.dart';
 
 class SignUpCreateAcountScreen extends GetWidget<SignUpCreateAcountController> {
+
   @override
   Widget build(BuildContext context) {
+   
     return SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
@@ -129,8 +133,10 @@ class SignUpCreateAcountScreen extends GetWidget<SignUpCreateAcountController> {
                           fontStyle:
                               ButtonFontStyle.PlusJakartaSansSemiBold16Gray50,
                           onTap: () {
-                            // onTapContinuewithemail();
-                             Get.toNamed( AppRoutes.homeContainerScreen,);
+                            onTapContinuewithemail();
+                            // Get.toNamed(
+                            //   AppRoutes.homeContainerScreen,
+                            // );
                           }),
                       Padding(
                           padding: getPadding(left: 40, top: 28, right: 40),
@@ -147,7 +153,7 @@ class SignUpCreateAcountScreen extends GetWidget<SignUpCreateAcountController> {
                                 GestureDetector(
                                     onTap: () {
                                       //  Get.toNamed( AppRoutes.homeContainerScreen,);
-                                       onTapTxtLogin();
+                                      onTapTxtLogin();
                                     },
                                     child: Padding(
                                         padding: getPadding(left: 3),
@@ -212,26 +218,66 @@ class SignUpCreateAcountScreen extends GetWidget<SignUpCreateAcountController> {
   }
 
   onTapContinuewithgoogle() async {
-    await GoogleAuthHelper().googleSignInProcess().then((googleUser) {
-      if (googleUser != null) {
-        //TODO Actions to be performed after signin
-      } else {
-        Get.snackbar('Error', 'user data is empty');
-      }
-    }).catchError((onError) {
-      Get.snackbar('Error', onError.toString());
-    });
+
+GoogleAuthHelper googleAuthHelper = GoogleAuthHelper();
+
+// Call the sign-in function when the Google Sign-in button is pressed
+       
+ 
+  UserCredential? userCredential = await googleAuthHelper.signInWithGoogle();
+  if (userCredential != null) {
+        String displayName = userCredential.user!.displayName ?? '';
+    String email = userCredential.user!.email ?? '';
+
+ 
+    print('Signed in with Google: displayName=$displayName, email=$email');
+    
+  } else {
+    Get.snackbar('Error', 'Failed to sign in with Google');
   }
 
-  onTapContinuewithemail() {
-    Get.toNamed(
-      AppRoutes.signUpCompleteAccountScreen,
+
+
+
+    
+    // await GoogleAuthHelper().googleSignInProcess().then((googleUser) {
+    //   if (googleUser != null) {
+    //     //TODO Actions to be performed after signin
+    //   } else {
+    //     Get.snackbar('Error', 'user data is empty');
+    //   }
+    // }).catchError((onError) {
+    //   Get.snackbar('Error', onError.toString());
+    // });
+  }
+
+onTapContinuewithemail() {
+  // Validate email format using a regular expression
+  RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+ 
+  if (controller.frameOneController.text.isEmpty) {
+
+    Get.snackbar('Error', 'Please enter your email address');
+  } 
+  else if (!emailRegex.hasMatch(controller.frameOneController.text)) {
+
+    Get.snackbar('Error', 'Please enter a valid email address',snackPosition: SnackPosition.BOTTOM);
+  } 
+  else {
+   
+    print('the email value passed to next screen : ${controller.frameOneController.text}');
+    
+    Get.toNamed(AppRoutes.jobTypeScreen, 
+    arguments: controller.frameOneController.text,
     );
   }
+}
+
 
   onTapTxtLogin() {
     Get.toNamed(
       AppRoutes.loginScreen,
+    
     );
   }
 }

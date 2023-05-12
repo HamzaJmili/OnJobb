@@ -57,18 +57,18 @@ class LoginScreen extends GetWidget<LoginController> {
                           onTap: () {
                             onTapContinuewithgoogle();
                           }),
-                      CustomButton(
-                          height: getVerticalSize(56),
-                          text: "msg_continue_with_a".tr,
-                          margin: getMargin(top: 16),
-                          variant: ButtonVariant.OutlineGray900,
-                          padding: ButtonPadding.PaddingT17,
-                          fontStyle: ButtonFontStyle
-                              .PlusJakartaSansSemiBold16Gray900_1,
-                          prefixWidget: Container(
-                              margin: getMargin(right: 12),
-                              child: CustomImageView(
-                                  svgPath: ImageConstant.imgFire))),
+                      // CustomButton(
+                      //     height: getVerticalSize(56),
+                      //     text: "msg_continue_with_a".tr,
+                      //     margin: getMargin(top: 16),
+                      //     variant: ButtonVariant.OutlineGray900,
+                      //     padding: ButtonPadding.PaddingT17,
+                      //     fontStyle: ButtonFontStyle
+                      //         .PlusJakartaSansSemiBold16Gray900_1,
+                      //     prefixWidget: Container(
+                      //         margin: getMargin(right: 12),
+                      //         child: CustomImageView(
+                      //             svgPath: ImageConstant.imgFire))),
                       Padding(
                           padding: getPadding(left: 33, top: 26, right: 33),
                           child: Row(
@@ -117,12 +117,33 @@ class LoginScreen extends GetWidget<LoginController> {
                                               getHorizontalSize(0.07))))),
                       CustomTextFormField(
                           focusNode: FocusNode(),
-                          controller: controller.frameOneController,
+                          controller: controller.email,
                           hintText: "msg_enter_your_emai".tr,
                           margin: getMargin(top: 9),
                           padding: TextFormFieldPadding.PaddingT15,
                           textInputAction: TextInputAction.done,
                           textInputType: TextInputType.emailAddress),
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                              padding: getPadding(top: 28),
+                              child: Text("Password",
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                  style: AppStyle
+                                      .txtPlusJakartaSansMedium14Bluegray900
+                                      .copyWith(
+                                          letterSpacing:
+                                              getHorizontalSize(0.07))))),
+                      CustomTextFormField(
+                          focusNode: FocusNode(),
+                          controller: controller.password,
+                          hintText: "Enter your password",
+                          margin: getMargin(top: 9),
+                          padding: TextFormFieldPadding.PaddingT15,
+                          textInputAction: TextInputAction.done,
+                          textInputType: TextInputType.visiblePassword),
+
                       CustomButton(
                           height: getVerticalSize(56),
                           text: "msg_continue_with_e".tr,
@@ -131,8 +152,8 @@ class LoginScreen extends GetWidget<LoginController> {
                           fontStyle:
                               ButtonFontStyle.PlusJakartaSansSemiBold16Gray50,
                           onTap: () {
-                            // onTapContinuewithemail();
-                             Get.toNamed( AppRoutes.homeContainerScreen,);
+                            onTapContinuewithemail();
+                            
                           }),
                       Padding(
                           padding: getPadding(left: 41, top: 26, right: 41),
@@ -228,9 +249,15 @@ class LoginScreen extends GetWidget<LoginController> {
   }
 
   onTapContinuewithemail() {
-    Get.toNamed(
-      AppRoutes.enterOtpScreen,
-    );
+    print('print in the top of function');
+   controller.signInWithEmailPassword(
+        controller.email.text, controller.password.text) ;
+    print('print before get tonamed');
+      Get.toNamed(
+        AppRoutes.enterOtpScreen,
+      );
+    
+    print('error sign in error');
   }
 
   onTapTxtLanguage() {
