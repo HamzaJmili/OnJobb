@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'User.dart';
 
 class Freelancer extends User {
-  String speciallization;  // to think if it should of client side too 
-  // Skills[skill] + Saved Jobs 
+  String speciallization; // to think if it should of client side too
+  // Skills[skill] + Saved Jobs
 
   Freelancer({
     required String uid,
@@ -12,11 +12,9 @@ class Freelancer extends User {
     required String lastname,
     required String email,
     required String location,
-     required String bio,
+    required String bio,
     required String photoUrl,
     bool isFreelancer = false,
-
-   
     required this.speciallization,
   }) : super(
           uid: uid,
@@ -24,12 +22,12 @@ class Freelancer extends User {
           lastname: lastname,
           email: email,
           location: location,
-          bio: bio, 
+          bio: bio,
           photoUrl: photoUrl,
           isFreelancer: isFreelancer,
         );
 
-   factory Freelancer.fromJson(Map<String, dynamic> json) {
+  factory Freelancer.fromJson(Map<String, dynamic> json) {
     return Freelancer(
       uid: 'id',
       firstname: json['firstname'],
@@ -38,7 +36,7 @@ class Freelancer extends User {
       location: json['location'],
       bio: json['bio'],
       photoUrl: json['photoUrl'],
-      isFreelancer: json['isFreelancer'] ,
+      isFreelancer: json['isFreelancer'],
       speciallization: json['speciallization'],
     );
   }
@@ -52,7 +50,7 @@ class Freelancer extends User {
       'bio': bio,
       'photoUrl': photoUrl,
       'isFreelancer': isFreelancer,
-      'speciallization':speciallization,
+      'speciallization': speciallization,
     };
   }
 }

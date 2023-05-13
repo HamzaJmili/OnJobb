@@ -5,9 +5,10 @@ import 'package:onjobb/presentation/logout_popup_dialog/models/logout_popup_mode
 class LogoutPopupController extends GetxController {
   Rx<LogoutPopupModel> logoutPopupModelObj = LogoutPopupModel().obs;
 
-Future<void> logout() async {
-  await FirebaseAuth.instance.signOut();
-}
+  Future<void> logout() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
   @override
   void onReady() {
     super.onReady();

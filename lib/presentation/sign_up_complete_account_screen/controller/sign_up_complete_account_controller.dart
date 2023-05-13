@@ -7,6 +7,8 @@ import 'package:onjobb/data/models/register/post_register_resp.dart';
 import 'package:onjobb/data/apiClient/api_client.dart';
 
 class SignUpCompleteAccountController extends GetxController {
+  
+  
   TextEditingController frameOneController = TextEditingController();
 
   TextEditingController frameOneOneController = TextEditingController();
@@ -31,7 +33,7 @@ class SignUpCompleteAccountController extends GetxController {
     frameOneTwoController.dispose();
   }
 
-  Future<void> signUpWithEmailAndPassword({
+  Future<bool> signUpWithEmailAndPassword({
     required String email,
     required String password,
     required String firstName,
@@ -45,58 +47,59 @@ class SignUpCompleteAccountController extends GetxController {
         password.isEmpty ||
         firstName.isEmpty ||
         lastName.isEmpty ||
-        country.isEmpty
-        ) {
+        country.isEmpty) {
       Get.snackbar('Error', 'Please fill in all required fields');
-      throw Exception('Please fill in all required fields');
+      return false;
     }
-UserCredential? userCredential;
+    UserCredential? userCredential;
 
-try {
-  userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-    email: email,
-    password: password,
-  );
-} on FirebaseAuthException catch (e) {
-  if (e.code == 'invalid-email') {
-   Get.snackbar('Error', 'invalid-email');
+    try {
+      userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-email') {
+        Get.snackbar('Error', 'invalid-email');
+        return false;
+      } else if (e.code == 'email-already-in-use') {
+        Get.snackbar('Error', 'email-already-in-use');
+        return false;
+      } else if (e.code == 'weak-password') {
+        Get.snackbar('Error', 'Weak password');
+        return false;
+      } else if (e.code == 'operation-not-allowed') {
+        Get.snackbar('Error', 'operation-not-allowed');
+        return false;
+      } else if (e.code == 'network-request-failed') {
+        Get.snackbar('Error', 'network-request-failed');
+        return false;
+      } else {
+        // Handle unknown error
+        return false;
+      }
+    }
 
-  } else if (e.code == 'email-already-in-use') {
-    Get.snackbar('Error', 'email-already-in-use');
+    if (userCredential != null) {
+      // Save additional user data to Firestore database
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set({
+        'firstname': firstName,
+        'lastname': lastName,
+        'email': email,
+        'location': country,
+        'bio': bio,
+        'photoUrl': "photooo",
+        'isFreelancer': isFreelancer,
+        'speciallization': 'speciallization',
+      });
 
-  } else if (e.code == 'weak-password') {
-    Get.snackbar('Error', 'Weak password');
-
-  } else if (e.code == 'operation-not-allowed') {
-Get.snackbar('Error', 'operation-not-allowed');
-
-  } else if (e.code == 'network-request-failed') {
-Get.snackbar('Error', 'network-request-failed');
-  } else {
-    // Handle unknown error
-  }
-
-}
-
-if (userCredential != null) {
-  // Save additional user data to Firestore database
-  await FirebaseFirestore.instance
-      .collection('users')
-      .doc(userCredential.user!.uid)
-      .set({
-      'firstname': firstName,
-      'lastname': lastName,
-      'email': email,
-      'location': country,
-      'bio': bio,
-      'photoUrl': "photooo",
-      'isFreelancer': isFreelancer,
-      'speciallization':'speciallization',
-    });
-    
- 
-}
-
+      return true;
+    }
+    return false;
   }
 
   Future<void> callCreateRegister(Map req) async {

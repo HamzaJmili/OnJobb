@@ -8,10 +8,8 @@ import 'package:onjobb/widgets/custom_text_form_field.dart';
 import 'package:onjobb/domain/googleauth/google_auth_helper.dart';
 
 class SignUpCreateAcountScreen extends GetWidget<SignUpCreateAcountController> {
-
   @override
   Widget build(BuildContext context) {
-   
     return SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
@@ -218,28 +216,20 @@ class SignUpCreateAcountScreen extends GetWidget<SignUpCreateAcountController> {
   }
 
   onTapContinuewithgoogle() async {
-
-GoogleAuthHelper googleAuthHelper = GoogleAuthHelper();
+    GoogleAuthHelper googleAuthHelper = GoogleAuthHelper();
 
 // Call the sign-in function when the Google Sign-in button is pressed
-       
- 
-  UserCredential? userCredential = await googleAuthHelper.signInWithGoogle();
-  if (userCredential != null) {
-        String displayName = userCredential.user!.displayName ?? '';
-    String email = userCredential.user!.email ?? '';
 
- 
-    print('Signed in with Google: displayName=$displayName, email=$email');
-    
-  } else {
-    Get.snackbar('Error', 'Failed to sign in with Google');
-  }
+    UserCredential? userCredential = await googleAuthHelper.signInWithGoogle();
+    if (userCredential != null) {
+      String displayName = userCredential.user!.displayName ?? '';
+      String email = userCredential.user!.email ?? '';
 
+      print('Signed in with Google: displayName=$displayName, email=$email');
+    } else {
+      Get.snackbar('Error', 'Failed to sign in with Google');
+    }
 
-
-
-    
     // await GoogleAuthHelper().googleSignInProcess().then((googleUser) {
     //   if (googleUser != null) {
     //     //TODO Actions to be performed after signin
@@ -251,33 +241,29 @@ GoogleAuthHelper googleAuthHelper = GoogleAuthHelper();
     // });
   }
 
-onTapContinuewithemail() {
-  // Validate email format using a regular expression
-  RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
- 
-  if (controller.frameOneController.text.isEmpty) {
+  onTapContinuewithemail() {
+    // Validate email format using a regular expression
+    RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 
-    Get.snackbar('Error', 'Please enter your email address');
-  } 
-  else if (!emailRegex.hasMatch(controller.frameOneController.text)) {
+    if (controller.frameOneController.text.isEmpty) {
+      Get.snackbar('Error', 'Please enter your email address');
+    } else if (!emailRegex.hasMatch(controller.frameOneController.text)) {
+      Get.snackbar('Error', 'Please enter a valid email address',
+          snackPosition: SnackPosition.BOTTOM);
+    } else {
+      print(
+          'the email value passed to next screen : ${controller.frameOneController.text}');
 
-    Get.snackbar('Error', 'Please enter a valid email address',snackPosition: SnackPosition.BOTTOM);
-  } 
-  else {
-   
-    print('the email value passed to next screen : ${controller.frameOneController.text}');
-    
-    Get.toNamed(AppRoutes.jobTypeScreen, 
-    arguments: controller.frameOneController.text,
-    );
+      Get.toNamed(
+        AppRoutes.jobTypeScreen,
+        arguments: controller.frameOneController.text,
+      );
+    }
   }
-}
-
 
   onTapTxtLogin() {
     Get.toNamed(
       AppRoutes.loginScreen,
-    
     );
   }
 }

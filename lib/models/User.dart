@@ -22,14 +22,14 @@ class User {
   });
 
   factory User.fromDocumentSnapshot(DocumentSnapshot doc) {
-Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
     return User(
       uid: doc.id,
       firstname: data['firstname'],
       lastname: data['lastname'],
       email: data['email'],
       location: data['location'],
-      bio:data['bio'],
+      bio: data['bio'],
       isFreelancer: data['isFreelancer'],
       photoUrl: data['photoUrl'],
     );

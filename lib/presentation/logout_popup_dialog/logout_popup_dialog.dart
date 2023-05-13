@@ -79,7 +79,6 @@ class LogoutPopupDialog extends StatelessWidget {
     Get.offAllNamed(
       AppRoutes.signUpCreateAcountScreen,
     );
-    
   }
 
   onTapCancel() {

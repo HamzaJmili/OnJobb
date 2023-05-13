@@ -3,8 +3,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleAuthHelper {
   /// Handle Google Signin to authenticate user
-  /// 
-  /// 
+  ///
+  ///
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
@@ -17,7 +17,8 @@ class GoogleAuthHelper {
 
     try {
       // Step 2: Obtain the Google auth details from the request
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
       // Step 3: Create a Firebase credential using the Google tokens
       final AuthCredential credential = GoogleAuthProvider.credential(
@@ -26,7 +27,8 @@ class GoogleAuthHelper {
       );
 
       // Step 4: Sign in or sign up the user with Firebase using the credential
-      final UserCredential userCredential = await _firebaseAuth.signInWithCredential(credential);
+      final UserCredential userCredential =
+          await _firebaseAuth.signInWithCredential(credential);
       return userCredential;
     } catch (e) {
       print('Failed to sign in with Google: $e');
@@ -34,30 +36,6 @@ class GoogleAuthHelper {
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
   Future<GoogleSignInAccount?> googleSignInProcess() async {
     GoogleSignIn _googleSignIn = GoogleSignIn();
     GoogleSignInAccount? googleUser = await _googleSignIn.signIn();

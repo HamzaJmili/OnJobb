@@ -16,7 +16,9 @@ class CustomSearchView extends StatelessWidget {
       this.prefix,
       this.prefixConstraints,
       this.suffix,
-      this.suffixConstraints});
+      this.suffixConstraints,
+    
+      });
 
   SearchViewShape? shape;
 
@@ -46,6 +48,8 @@ class CustomSearchView extends StatelessWidget {
 
   BoxConstraints? suffixConstraints;
 
+ 
+
   @override
   Widget build(BuildContext context) {
     return alignment != null
@@ -65,6 +69,7 @@ class CustomSearchView extends StatelessWidget {
         focusNode: focusNode,
         style: _setFontStyle(),
         decoration: _buildDecoration(),
+      
       ),
     );
   }

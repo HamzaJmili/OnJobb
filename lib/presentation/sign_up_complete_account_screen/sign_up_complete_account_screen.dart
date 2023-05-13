@@ -6,15 +6,26 @@ import 'package:onjobb/widgets/custom_text_form_field.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
 
-class SignUpCompleteAccountScreen  extends GetWidget<SignUpCompleteAccountController> {
-      
-      final bool isFreelancer = Get.arguments['isFreelancer'];
-    final String email = Get.arguments['email'];
+class SignUpCompleteAccountScreen
+    extends GetWidget<SignUpCompleteAccountController> {
+  final bool isFreelancer = Get.arguments['isFreelancer'];
+  final String email = Get.arguments['email'];
+  final String selectedCountry =
+      Get.arguments['selectedCountry'] ?? 'Select a Country';
 
-     
   @override
   Widget build(BuildContext context) {
-    
+    print(selectedCountry);
+    String? previousRoute = Get.previousRoute;
+    print(previousRoute);
+    if (previousRoute == AppRoutes.selectACountryScreen) {
+      // user came from ScreenOne
+      print('User came from selected country screen');
+    } else if (previousRoute == AppRoutes.signUpCreateAcountScreen) {
+      // user came from ScreenTwo
+      print('User came from Sign create account screen');
+    }
+
     return SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
@@ -130,10 +141,18 @@ class SignUpCompleteAccountScreen  extends GetWidget<SignUpCompleteAccountContro
                                                 letterSpacing:
                                                     getHorizontalSize(0.08)))),
                                 CustomImageView(
-                                    svgPath: ImageConstant.imgArrowrightGray900,
-                                    height: getSize(24),
-                                    width: getSize(24),
-                                    margin: getMargin(top: 1, bottom: 1))
+                                  svgPath: ImageConstant.imgArrowrightGray900,
+                                  height: getSize(24),
+                                  width: getSize(24),
+                                  margin: getMargin(top: 1, bottom: 1),
+                                  onTap: () {
+                                    Get.toNamed(AppRoutes.selectACountryScreen,
+                                        arguments: {
+                                          'isFreelancer': isFreelancer,
+                                          'email': email,
+                                        });
+                                  },
+                                )
                               ])),
                       CustomButton(
                           height: getVerticalSize(56),
@@ -230,16 +249,23 @@ class SignUpCompleteAccountScreen  extends GetWidget<SignUpCompleteAccountContro
   }
 
   Future<void> onTapContinuewithemail() async {
-    
-    await controller.signUpWithEmailAndPassword(email:email , password: controller.frameOneTwoController.text.trim(), firstName: controller.frameOneController.text.trim(), lastName: controller.frameOneOneController.text.trim(), bio: 'hi i am software Devlepoer', country: 'morocco', isFreelancer: isFreelancer);
+    bool? situation = await controller.signUpWithEmailAndPassword(
+        email: email,
+        password: controller.frameOneTwoController.text.trim(),
+        firstName: controller.frameOneController.text.trim(),
+        lastName: controller.frameOneOneController.text.trim(),
+        bio: 'hi i am software Devlepoer',
+        country: 'morocco',
+        isFreelancer: isFreelancer);
+    if (situation == false) {
+      print(
+          "error in ontaopcontinuewith email in sign up complete account screen");
+    } else {
       Get.offNamed(
-      AppRoutes.homeContainerScreen,
-    );
-    
-    
-    
-    
-    
+        AppRoutes.homeContainerScreen,
+      );
+    }
+
     // PostRegisterReq postRegisterReq = PostRegisterReq(
     //   username: controller.frameOneOneController.text,
     //   password: controller.frameOneTwoController.text,
@@ -261,9 +287,7 @@ class SignUpCompleteAccountScreen  extends GetWidget<SignUpCompleteAccountContro
     // }
   }
 
-  void _onOnTapSignUpSuccess() {
-  
-  }
+  void _onOnTapSignUpSuccess() {}
 
   void _onOnTapSignUpError() {
     Fluttertoast.showToast(

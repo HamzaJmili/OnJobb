@@ -153,7 +153,6 @@ class LoginScreen extends GetWidget<LoginController> {
                               ButtonFontStyle.PlusJakartaSansSemiBold16Gray50,
                           onTap: () {
                             onTapContinuewithemail();
-                            
                           }),
                       Padding(
                           padding: getPadding(left: 41, top: 26, right: 41),
@@ -248,16 +247,19 @@ class LoginScreen extends GetWidget<LoginController> {
     });
   }
 
-  onTapContinuewithemail() {
+  onTapContinuewithemail() async {
     print('print in the top of function');
-   controller.signInWithEmailPassword(
-        controller.email.text, controller.password.text) ;
-    print('print before get tonamed');
+    String? userid = await controller.signInWithEmailPassword(
+        controller.email.text, controller.password.text);
+    if (userid == null) {
+      print('error in sign in');
+    } else {
       Get.toNamed(
-        AppRoutes.enterOtpScreen,
+        AppRoutes.homeContainerScreen,
       );
-    
-    print('error sign in error');
+
+      print('error sign in error');
+    }
   }
 
   onTapTxtLanguage() {

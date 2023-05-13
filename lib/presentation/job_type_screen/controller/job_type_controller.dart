@@ -4,10 +4,11 @@ import 'package:onjobb/presentation/job_type_screen/models/job_type_model.dart';
 class JobTypeController extends GetxController {
   Rx<JobTypeModel> jobTypeModelObj = JobTypeModel().obs;
   Rx<bool> isFreelancer = true.obs;
-  
- void toggleIsFreelancer() {
+
+  void toggleIsFreelancer() {
     isFreelancer.toggle();
   }
+
   @override
   void onReady() {
     super.onReady();

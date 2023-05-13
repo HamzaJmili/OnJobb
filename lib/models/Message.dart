@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Message {
@@ -9,15 +8,15 @@ class Message {
   DateTime sendAt;
 
   Message({
-   required this.id,
-  required this.senderId,
-   required this.receiverId,
-   required this.text,
-   required this.sendAt,
+    required this.id,
+    required this.senderId,
+    required this.receiverId,
+    required this.text,
+    required this.sendAt,
   });
 
   factory Message.fromDocumentSnapshot(DocumentSnapshot snapshot) {
-Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
     return Message(
       id: snapshot.id,
       senderId: data['senderId'],

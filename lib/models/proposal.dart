@@ -11,19 +11,19 @@ class Proposal {
   DateTime sendAt;
 
   Proposal({
-  required  this.id,
-   required this.freelancerId,
-   required this.jobId,
-   required this.portfolio,
-   required this.firstName,
-   required this.lastName,
-   required this.phoneNumber,
-   required this.sendAt,
+    required this.id,
+    required this.freelancerId,
+    required this.jobId,
+    required this.portfolio,
+    required this.firstName,
+    required this.lastName,
+    required this.phoneNumber,
+    required this.sendAt,
   });
 
   factory Proposal.fromDocumentSnapshot(DocumentSnapshot snapshot) {
-Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-    
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+
     return Proposal(
       id: snapshot.id,
       freelancerId: data['freelancerId'],
@@ -37,7 +37,6 @@ Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
   }
 
   Map<String, dynamic> toMap() {
-
     return {
       'freelancerId': freelancerId,
       'jobId': jobId,

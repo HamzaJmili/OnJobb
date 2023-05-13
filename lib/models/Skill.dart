@@ -6,14 +6,14 @@ class Skill {
 
   Skill({required this.id, required this.name});
 
-factory Skill.fromMap(Map<String, dynamic> map) {
+  factory Skill.fromMap(Map<String, dynamic> map) {
     return Skill(
       id: map['id'] as String,
       name: map['name'] as String,
     );
   }
   factory Skill.fromDocumentSnapshot(DocumentSnapshot snapshot) {
-Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
     return Skill(
       id: snapshot.id,
       name: data['name'],

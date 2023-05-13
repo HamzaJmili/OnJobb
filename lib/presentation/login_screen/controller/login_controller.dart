@@ -20,11 +20,9 @@ class LoginController extends GetxController {
       if (e.code == 'user-not-found') {
         Get.snackbar('Error', 'No user found for that email.',
             snackPosition: SnackPosition.BOTTOM);
-      
       } else if (e.code == 'wrong-password') {
         Get.snackbar('Error', 'Wrong password provided for that user.',
             snackPosition: SnackPosition.BOTTOM);
-      
       } else {
         print(e.toString());
       }
