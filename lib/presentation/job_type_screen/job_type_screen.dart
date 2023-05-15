@@ -234,7 +234,7 @@ class JobTypeScreen extends GetWidget<JobTypeController> {
   }
 
   onTapContinue() {
-    Get.toNamed(AppRoutes.signUpCompleteAccountScreen, arguments: {
+    Get.toNamed(AppRoutes.speciallizationScreen, arguments: {
       'isFreelancer': controller.isFreelancer.value,
       'email': email,
     });

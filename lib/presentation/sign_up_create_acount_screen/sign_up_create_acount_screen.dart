@@ -117,7 +117,7 @@ class SignUpCreateAcountScreen extends GetWidget<SignUpCreateAcountController> {
                                               getHorizontalSize(0.07))))),
                       CustomTextFormField(
                           focusNode: FocusNode(),
-                          controller: controller.frameOneController,
+                          controller: controller.email,
                           hintText: "msg_enter_your_emai".tr,
                           margin: getMargin(top: 9),
                           padding: TextFormFieldPadding.PaddingT15,
@@ -245,18 +245,18 @@ class SignUpCreateAcountScreen extends GetWidget<SignUpCreateAcountController> {
     // Validate email format using a regular expression
     RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 
-    if (controller.frameOneController.text.isEmpty) {
+    if (controller.email.text.isEmpty) {
       Get.snackbar('Error', 'Please enter your email address');
-    } else if (!emailRegex.hasMatch(controller.frameOneController.text)) {
+    } else if (!emailRegex.hasMatch(controller.email.text)) {
       Get.snackbar('Error', 'Please enter a valid email address',
           snackPosition: SnackPosition.BOTTOM);
     } else {
       print(
-          'the email value passed to next screen : ${controller.frameOneController.text}');
+          'the email value passed to next screen : ${controller.email.text}');
 
       Get.toNamed(
         AppRoutes.jobTypeScreen,
-        arguments: controller.frameOneController.text,
+        arguments: controller.email.text,
       );
     }
   }

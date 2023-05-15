@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'User.dart';
 
 class Freelancer extends User {
-  String speciallization; // to think if it should of client side too
+  List<dynamic> speciallization; // to think if it should of client side too
   // Skills[skill] + Saved Jobs
 
   Freelancer({

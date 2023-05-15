@@ -3,7 +3,7 @@ import 'package:onjobb/presentation/sign_up_create_acount_screen/models/sign_up_
 import 'package:flutter/material.dart';
 
 class SignUpCreateAcountController extends GetxController {
-  TextEditingController frameOneController = TextEditingController();
+  TextEditingController email = TextEditingController();
 
   Rx<SignUpCreateAcountModel> signUpCreateAcountModelObj =
       SignUpCreateAcountModel().obs;

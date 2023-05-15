@@ -12,7 +12,9 @@ class CustomRadioButton extends StatelessWidget {
       this.groupValue,
       this.text,
       this.width,
-      this.margin});
+      this.margin ,
+     
+      });
 
   RadioFontStyle? fontStyle;
 
@@ -94,24 +96,28 @@ class CustomRadioButton extends StatelessWidget {
     );
   }
 
-  Widget getRadioWidget() {
-    return SizedBox(
-      height: iconSize,
-      width: iconSize,
-      child: Radio<String>(
-        value: value ?? "",
-        groupValue: groupValue,
-        activeColor: ColorConstant.indigo5001,
-        onChanged: (value) {
-          onChange!(value!);
-        },
-        visualDensity: VisualDensity(
-          vertical: -4,
-          horizontal: -4,
-        ),
+ Widget getRadioWidget() {
+  final bool isSelected = value == groupValue;
+  final Color activeColor = isSelected ? Colors.blue : Colors.grey;
+
+  return SizedBox(
+    height: iconSize,
+    width: iconSize,
+    child: Radio<String>(
+      value: value ?? "",
+      groupValue: groupValue,
+      activeColor: activeColor,
+      onChanged: (value) {
+        onChange!(value!);
+      },
+      visualDensity: VisualDensity(
+        vertical: -4,
+        horizontal: -4,
       ),
-    );
-  }
+    ),
+  );
+}
+
 
   _setFontStyle() {
     switch (fontStyle) {

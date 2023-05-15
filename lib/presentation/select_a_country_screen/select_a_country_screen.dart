@@ -8,6 +8,7 @@ import 'package:onjobb/widgets/custom_radio_button.dart';
 import 'package:onjobb/widgets/custom_search_view.dart';
 
 class SelectACountryScreen extends GetWidget<SelectACountryController> {
+  final List<String> specializations = Get.arguments['specializations'];
   final bool isFreelancer = Get.arguments['isFreelancer'];
   final String email = Get.arguments['email'];
   @override
@@ -86,11 +87,15 @@ class SelectACountryScreen extends GetWidget<SelectACountryController> {
   }
 
   void onTapClose([String? selectedCountry] ) {
+    for(int i= 0 ; i < specializations.length ; i++ ) {
+      print(specializations[i]);
+    }
    Get.toNamed(
         AppRoutes.signUpCompleteAccountScreen,
         arguments: {
       'isFreelancer': isFreelancer,
       'email': email,
+       'specializations' : specializations  ,
       'selectedCountry' : selectedCountry,
     }
       );

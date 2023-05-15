@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:onjobb/models/Freelancer.dart';
@@ -16,7 +17,7 @@ import 'package:onjobb/widgets/app_bar/custom_app_bar.dart';
 class HomePage extends StatelessWidget {
   HomeController controller = Get.put(HomeController(HomeModel().obs));
 
-  Rx<Freelancer?> freelancer = Rx<Freelancer?>(null);
+   Rx<Freelancer?> freelancer = Rx<Freelancer?>(null);
   final FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
@@ -41,21 +42,6 @@ class HomePage extends StatelessWidget {
       }
     }
 
-    // void getCurrentUser() async {
-    //   final FirebaseAuth auth = FirebaseAuth.instance;
-    //   User user = await auth.currentUser!;
-    //   DocumentReference userDocRef =
-    //       FirebaseFirestore.instance.collection('users').doc(user.uid);
-    //   final docSnapshot = await userDocRef.get();
-    //   print(" print inside getCurentuser in home  screen this ");
-    //   print(docSnapshot.data().toString());
-    //   print(Freelancer.fromDocumentSnapshot(docSnapshot).email);
-    //   freelancer.value = Freelancer.fromDocumentSnapshot(docSnapshot);
-    //   print(
-    //       " print inside getCurentuser in home  screen and this is docScanpshot ");
-    // }
-
-    // Call getCurrentUser when the widget is first built
     getCurrentUser();
 
     return SafeArea(child: Obx(() {
@@ -69,12 +55,19 @@ class HomePage extends StatelessWidget {
             appBar: CustomAppBar(
                 height: getVerticalSize(50),
                 leadingWidth: 74,
-                leading: CustomImageView(
-                    imagePath: ImageConstant.imgImage50x501,
-                    height: getSize(50),
-                    width: getSize(50),
-                    radius: BorderRadius.circular(getHorizontalSize(25)),
-                    margin: getMargin(left: 24)),
+                leading: Obx(() => CircleAvatar(
+  backgroundImage: CachedNetworkImageProvider(
+    freelancer.value?.photoUrl ?? "",
+  ),
+  radius: 25,
+  child: ClipOval(
+    child: CachedNetworkImage(
+      imageUrl: freelancer.value?.photoUrl ?? "",
+      fit: BoxFit.cover,
+      errorWidget: (context, url, error) => const  Icon(Icons.person),
+    ),
+  ),
+)),
                 title: Padding(
                     padding: getPadding(left: 10),
                     child: Column(

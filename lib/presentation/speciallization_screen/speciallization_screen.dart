@@ -1,12 +1,17 @@
-import 'controller/speciallization_controller.dart';
+import 'package:onjobb/presentation/speciallization_screen/controller/speciallization_controller.dart';
+
+import '../../widgets/custom_radio_button.dart';
+import '../../widgets/custom_search_view.dart';
+
 import 'package:flutter/material.dart';
 import 'package:onjobb/core/app_export.dart';
 import 'package:onjobb/widgets/custom_button.dart';
-import 'package:onjobb/widgets/custom_text_form_field.dart';
 import 'package:onjobb/presentation/confirmation_dialog/confirmation_dialog.dart';
 import 'package:onjobb/presentation/confirmation_dialog/controller/confirmation_controller.dart';
 
 class SpeciallizationScreen extends GetWidget<SpeciallizationController> {
+  final bool isFreelancer = Get.arguments['isFreelancer'];
+  final String email = Get.arguments['email'];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -45,104 +50,55 @@ class SpeciallizationScreen extends GetWidget<SpeciallizationController> {
                                   .txtPlusJakartaSansMedium14Bluegray400
                                   .copyWith(
                                       letterSpacing: getHorizontalSize(0.07)))),
-                      CustomTextFormField(
-                          focusNode: FocusNode(),
-                          controller: controller.group163009Controller,
-                          hintText: "msg_design_creati".tr,
-                          margin: getMargin(top: 31),
-                          padding: TextFormFieldPadding.PaddingT13,
-                          fontStyle: TextFormFieldFontStyle
-                              .PlusJakartaSansSemiBold16Gray900,
-                          prefix: Container(
-                              margin: getMargin(
-                                  left: 16, top: 12, right: 16, bottom: 12),
-                              decoration:
-                                  BoxDecoration(color: ColorConstant.gray900),
-                              child: CustomImageView(
-                                  svgPath: ImageConstant.imgCheckmark24x24)),
-                          prefixConstraints:
-                              BoxConstraints(maxHeight: getVerticalSize(48))),
-                      CustomTextFormField(
-                          focusNode: FocusNode(),
-                          controller: controller.group163010Controller,
-                          hintText: "msg_development_i".tr,
-                          margin: getMargin(top: 16),
-                          padding: TextFormFieldPadding.PaddingT13,
-                          fontStyle: TextFormFieldFontStyle
-                              .PlusJakartaSansSemiBold16Gray900,
-                          prefix: Container(
-                              margin: getMargin(
-                                  left: 16, top: 12, right: 17, bottom: 12),
-                              child: CustomImageView(
-                                  svgPath:
-                                      ImageConstant.imgSettingsIndigo5001)),
-                          prefixConstraints:
-                              BoxConstraints(maxHeight: getVerticalSize(48))),
-                      CustomTextFormField(
-                          focusNode: FocusNode(),
-                          controller: controller.group163011Controller,
-                          hintText: "msg_engineering_a".tr,
-                          margin: getMargin(top: 16),
-                          padding: TextFormFieldPadding.PaddingT13,
-                          fontStyle: TextFormFieldFontStyle
-                              .PlusJakartaSansSemiBold16Gray900,
-                          prefix: Container(
-                              margin: getMargin(
-                                  left: 16, top: 12, right: 17, bottom: 12),
-                              child: CustomImageView(
-                                  svgPath:
-                                      ImageConstant.imgSettingsIndigo5001)),
-                          prefixConstraints:
-                              BoxConstraints(maxHeight: getVerticalSize(48))),
-                      CustomTextFormField(
-                          focusNode: FocusNode(),
-                          controller: controller.group163012Controller,
-                          hintText: "msg_sales_marketi".tr,
-                          margin: getMargin(top: 16),
-                          padding: TextFormFieldPadding.PaddingT13,
-                          fontStyle: TextFormFieldFontStyle
-                              .PlusJakartaSansSemiBold16Gray900,
-                          prefix: Container(
-                              margin: getMargin(
-                                  left: 16, top: 12, right: 17, bottom: 12),
-                              child: CustomImageView(
-                                  svgPath:
-                                      ImageConstant.imgSettingsIndigo5001)),
-                          prefixConstraints:
-                              BoxConstraints(maxHeight: getVerticalSize(48))),
-                      CustomTextFormField(
-                          focusNode: FocusNode(),
-                          controller: controller.group163013Controller,
-                          hintText: "lbl_writing".tr,
-                          margin: getMargin(top: 16),
-                          padding: TextFormFieldPadding.PaddingT13,
-                          fontStyle: TextFormFieldFontStyle
-                              .PlusJakartaSansSemiBold16Gray900,
-                          prefix: Container(
-                              margin: getMargin(
-                                  left: 16, top: 12, right: 17, bottom: 12),
-                              child: CustomImageView(
-                                  svgPath:
-                                      ImageConstant.imgSettingsIndigo5001)),
-                          prefixConstraints:
-                              BoxConstraints(maxHeight: getVerticalSize(48))),
-                      CustomTextFormField(
-                          focusNode: FocusNode(),
-                          controller: controller.group163014Controller,
-                          hintText: "lbl_finance".tr,
-                          margin: getMargin(top: 16, bottom: 5),
-                          padding: TextFormFieldPadding.PaddingT13,
-                          fontStyle: TextFormFieldFontStyle
-                              .PlusJakartaSansSemiBold16Gray900,
-                          textInputAction: TextInputAction.done,
-                          prefix: Container(
-                              margin: getMargin(
-                                  left: 16, top: 12, right: 17, bottom: 12),
-                              child: CustomImageView(
-                                  svgPath:
-                                      ImageConstant.imgSettingsIndigo5001)),
-                          prefixConstraints:
-                              BoxConstraints(maxHeight: getVerticalSize(48)))
+                      CustomSearchView(
+                        focusNode: FocusNode(),
+                        controller: controller.searchtext,
+                        hintText: "lbl_search".tr,
+                        margin: getMargin(top: 12),
+                        prefix: Container(
+                          margin: getMargin(
+                              left: 16, top: 17, right: 8, bottom: 17),
+                          child:
+                              CustomImageView(svgPath: ImageConstant.imgSearch),
+                        ),
+                        prefixConstraints:
+                            BoxConstraints(maxHeight: getVerticalSize(52)),
+                        suffix: Padding(
+                          padding:
+                              EdgeInsets.only(right: getHorizontalSize(15)),
+                          child: IconButton(
+                            onPressed: () {
+                              controller.searchtext.clear();
+                            },
+                            icon:
+                                Icon(Icons.clear, color: Colors.grey.shade600),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Obx(
+                          () => ListView.builder(
+                            itemCount:
+                                controller.filteredSpecializationList.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return CustomRadioButton(
+                                text: controller
+                                    .filteredSpecializationList[index],
+                                value: controller
+                                    .filteredSpecializationList[index],
+                                groupValue: controller.radioGroup.value,
+                                margin: getMargin(right: 68),
+                                fontStyle: RadioFontStyle
+                                    .PlusJakartaSansSemiBold16Gray900,
+                                
+                                onChange: (value) {
+                              controller.addSpecialization(value);
+},
+                              );
+                            },
+                          ),
+                        ),
+                      ),
                     ])),
             bottomNavigationBar: CustomButton(
                 height: getVerticalSize(56),
@@ -160,15 +116,14 @@ class SpeciallizationScreen extends GetWidget<SpeciallizationController> {
   }
 
   onTapContinue() {
-    Get.dialog(AlertDialog(
-      backgroundColor: Colors.transparent,
-      contentPadding: EdgeInsets.zero,
-      insetPadding: EdgeInsets.only(left: 0),
-      content: ConfirmationDialog(
-        Get.put(
-          ConfirmationController(),
-        ),
-      ),
-    ));
+    List<String> specializationList = controller.selectedSpecializationList.map((e) => e.toString()).toList();
+    for(int i= 0 ; i < specializationList.length ; i++ ) {
+      print(specializationList[i]);
+    }
+   Get.toNamed(AppRoutes.signUpCompleteAccountScreen, arguments: {
+      'isFreelancer': isFreelancer,
+      'email': email,
+      'specializations' : specializationList ,
+    });
   }
 }
