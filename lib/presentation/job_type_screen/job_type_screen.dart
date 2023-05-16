@@ -234,9 +234,14 @@ class JobTypeScreen extends GetWidget<JobTypeController> {
   }
 
   onTapContinue() {
-    Get.toNamed(AppRoutes.speciallizationScreen, arguments: {
-      'isFreelancer': controller.isFreelancer.value,
-      'email': email,
-    });
+    controller.isFreelancer.value == true ?
+     Get.toNamed(AppRoutes.speciallizationScreen, arguments: {
+            'isFreelancer': controller.isFreelancer.value,
+            'email': email,
+          })
+        : Get.toNamed(AppRoutes.signUpCompleteAccountScreen, arguments: {
+            'isFreelancer': controller.isFreelancer.value,
+            'email': email,
+          });
   }
 }

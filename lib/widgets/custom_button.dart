@@ -111,6 +111,12 @@ class CustomButton extends StatelessWidget {
           right: 17,
           bottom: 17,
         );
+        case ButtonPadding.PaddingT18:
+        return getPadding(
+          top: 80,
+          right: 20,
+          bottom: 10,
+        );
       case ButtonPadding.PaddingAll16:
         return getPadding(
           all: 14,
@@ -450,7 +456,7 @@ enum ButtonPadding {
   PaddingAll17,
   PaddingT17,
   PaddingAll16,
-  PaddingT14,
+  PaddingT14, PaddingT18,
 }
 
 enum ButtonVariant {

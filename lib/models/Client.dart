@@ -23,10 +23,10 @@ class Client extends User {
           isFreelancer: isFreelancer,
         );
 
-  factory Client.fromJson(DocumentSnapshot snapshot) {
-    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+  factory Client.fromJson(Map<String, dynamic> data) {
+   
     return Client(
-      uid: snapshot.id,
+      uid: 'id',
       firstname: data['firstname'],
       lastname: data['lastname'],
       email: data['email'],

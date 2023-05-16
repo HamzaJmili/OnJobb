@@ -1,3 +1,4 @@
+import '../home_page/controller/home_controller.dart';
 import 'controller/home_container_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:onjobb/core/app_export.dart';
@@ -8,6 +9,8 @@ import 'package:onjobb/presentation/saved_page/saved_page.dart';
 import 'package:onjobb/widgets/custom_bottom_bar.dart';
 
 class HomeContainerScreen extends GetWidget<HomeContainerController> {
+    
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

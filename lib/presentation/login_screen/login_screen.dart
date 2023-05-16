@@ -252,13 +252,12 @@ class LoginScreen extends GetWidget<LoginController> {
     String? userid = await controller.signInWithEmailPassword(
         controller.email.text, controller.password.text);
     if (userid == null) {
-      print('error in sign in');
+    
     } else {
       Get.toNamed(
         AppRoutes.homeContainerScreen,
       );
 
-      print('error sign in error');
     }
   }
 

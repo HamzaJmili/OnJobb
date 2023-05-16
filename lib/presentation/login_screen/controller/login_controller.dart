@@ -14,7 +14,7 @@ class LoginController extends GetxController {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       User user = userCredential.user!;
-      print(user.uid);
+     
       return user.uid;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

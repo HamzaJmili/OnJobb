@@ -60,6 +60,9 @@ import 'package:onjobb/presentation/app_navigation_screen/app_navigation_screen.
 import 'package:onjobb/presentation/app_navigation_screen/binding/app_navigation_binding.dart';
 import 'package:get/get.dart';
 
+import '../presentation/publish_job_screen/binding/publish_job_binding.dart';
+import '../presentation/publish_job_screen/publish_job_screen.dart';
+
 class AppRoutes {
   static const String splashScreen = '/splash_screen';
 
@@ -76,6 +79,7 @@ class AppRoutes {
       '/sign_up_complete_account_screen';
 
   static const String jobTypeScreen = '/job_type_screen';
+
 
   static const String speciallizationScreen = '/speciallization_screen';
 
@@ -106,6 +110,8 @@ class AppRoutes {
   static const String applyJobScreen = '/apply_job_screen';
 
   static const String appliedJobScreen = '/applied_job_screen';
+
+  static const String publishJobScreen = '/publish_job_screen';
 
   static const String notificationsGeneralScreen =
       '/notifications_general_screen';
@@ -267,6 +273,13 @@ class AppRoutes {
       page: () => AppliedJobScreen(),
       bindings: [
         AppliedJobBinding(),
+      ],
+    ),
+    GetPage(
+      name: publishJobScreen,
+      page: () => PublishJobScreen(),
+      bindings: [
+        PublishJobBinding(),
       ],
     ),
     GetPage(

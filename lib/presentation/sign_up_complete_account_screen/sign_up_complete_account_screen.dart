@@ -1,47 +1,41 @@
 import 'package:flutter/material.dart';
-
 import 'controller/sign_up_complete_account_controller.dart';
-import 'package:flutter/material.dart';
 import 'package:onjobb/core/app_export.dart';
 import 'package:onjobb/widgets/custom_button.dart';
 import 'package:onjobb/widgets/custom_text_form_field.dart';
-
 import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUpCompleteAccountScreen
     extends GetWidget<SignUpCompleteAccountController> {
+  String? previousRoute = Get.previousRoute;
+
   final bool isFreelancer = Get.arguments['isFreelancer'];
   final String email = Get.arguments['email'];
-  final List<String> specializations = Get.arguments['specializations'];
+  // final List<String> specializations = Get.arguments['specializations'];
   final String selectedCountry =
       Get.arguments['selectedCountry'] ?? 'Select your Country';
 
   @override
   Widget build(BuildContext context) {
-    for (int i = 0; i < specializations.length; i++) {
-      print(specializations[i]);
-    }
-
     String? previousRoute = Get.previousRoute;
     print(previousRoute);
-    if (previousRoute == AppRoutes.selectACountryScreen) {
+    if (previousRoute == AppRoutes.jobTypeScreen) {
       // user came from ScreenOne
       print('User came from selected country screen');
-    } else if (previousRoute == AppRoutes.signUpCreateAcountScreen) {
+    } else if (previousRoute == AppRoutes.speciallizationScreen) {
       // user came from ScreenTwo
-      print('User came from Sign create account screen');
     }
 
     return SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: ColorConstant.whiteA70002,
-            body: Stack (
-              children : [  
-                 SingleChildScrollView(
+            body: Stack(children: [
+              SingleChildScrollView(
                 child: Container(
                     width: double.maxFinite,
-                    padding: getPadding(left: 24, top: 13, right: 24, bottom: 13),
+                    padding:
+                        getPadding(left: 24, top: 13, right: 24, bottom: 13),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -131,8 +125,8 @@ class SignUpCompleteAccountScreen
                                       left: 30, top: 14, right: 16, bottom: 14),
                                   child: CustomImageView(
                                       svgPath: ImageConstant.imgCheckmark)),
-                              suffixConstraints:
-                                  BoxConstraints(maxHeight: getVerticalSize(52))),
+                              suffixConstraints: BoxConstraints(
+                                  maxHeight: getVerticalSize(52))),
                           Padding(
                               padding: getPadding(top: 28),
                               child: Text("Upload your image profile",
@@ -147,17 +141,25 @@ class SignUpCompleteAccountScreen
                               child: Container(
                                   margin: getMargin(top: 7),
                                   padding: getPadding(
-                                      left: 125, top: 39, right: 125, bottom: 39),
+                                      left: 125,
+                                      top: 39,
+                                      right: 125,
+                                      bottom: 39),
                                   decoration: AppDecoration.outlineIndigo502
                                       .copyWith(
-                                          borderRadius:
-                                              BorderRadiusStyle.roundedBorder24),
+                                          borderRadius: BorderRadiusStyle
+                                              .roundedBorder24),
                                   child: Column(
                                       mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         CustomImageView(
-                                          svgPath: controller.isUploaded.value==false ? ImageConstant.imgLock :  "" ,
+                                          svgPath:
+                                              controller.isUploaded.value ==
+                                                      false
+                                                  ? ImageConstant.imgLock
+                                                  : "",
                                           height: getSize(40),
                                           width: getSize(40),
                                           onTap: () {
@@ -168,8 +170,11 @@ class SignUpCompleteAccountScreen
                                             padding: getPadding(
                                               top: 8,
                                             ),
-                                            child:  Text(
-                                                    controller.isUploaded.value==false ? "Upload your image profile" : "Uploaded successfully",
+                                            child: Text(
+                                                controller.isUploaded.value ==
+                                                        false
+                                                    ? "Upload your image profile"
+                                                    : "Uploaded successfully",
                                                 overflow: TextOverflow.ellipsis,
                                                 textAlign: TextAlign.left,
                                                 style: AppStyle
@@ -201,9 +206,10 @@ class SignUpCompleteAccountScreen
                               margin: getMargin(top: 16),
                               padding: getPadding(
                                   left: 16, top: 12, right: 16, bottom: 12),
-                              decoration: AppDecoration.outlineIndigo50.copyWith(
-                                  borderRadius:
-                                      BorderRadiusStyle.roundedBorder24),
+                              decoration: AppDecoration.outlineIndigo50
+                                  .copyWith(
+                                      borderRadius:
+                                          BorderRadiusStyle.roundedBorder24),
                               child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -220,18 +226,33 @@ class SignUpCompleteAccountScreen
                                                         getHorizontalSize(
                                                             0.08)))),
                                     CustomImageView(
-                                      svgPath: ImageConstant.imgArrowrightGray900,
+                                      svgPath:
+                                          ImageConstant.imgArrowrightGray900,
                                       height: getSize(24),
                                       width: getSize(24),
                                       margin: getMargin(top: 1, bottom: 1),
                                       onTap: () {
-                                        Get.toNamed(
+                                        if (isFreelancer == true) {
+                                          List<String> specializations =
+                                              Get.arguments['specializations'];
+                                          Get.toNamed(
+                                              AppRoutes.selectACountryScreen,
+                                              arguments: {
+                                                'isFreelancer': isFreelancer,
+                                                'email': email,
+                                                'specializations':
+                                                    specializations,
+                                              });
+                                        } else {
+                                           Get.toNamed(
                                             AppRoutes.selectACountryScreen,
                                             arguments: {
                                               'isFreelancer': isFreelancer,
                                               'email': email,
-                                              'specializations' : specializations,
                                             });
+                                        }
+
+                                       
                                       },
                                     )
                                   ])),
@@ -240,19 +261,19 @@ class SignUpCompleteAccountScreen
                               text: "Continue",
                               margin: getMargin(top: 40),
                               padding: ButtonPadding.PaddingAll17,
-                              fontStyle:
-                                  ButtonFontStyle.PlusJakartaSansSemiBold16Gray50,
+                              fontStyle: ButtonFontStyle
+                                  .PlusJakartaSansSemiBold16Gray50,
                               onTap: () {
                                 onTapContinuewithemail();
                               }),
                         ])),
               ),
               Visibility(
-      visible: controller.showProgressIndicator.value,
-      child: const Center(
-        child:  CircularProgressIndicator(),
-      ),
-    ),
+                visible: controller.showProgressIndicator.value,
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
             ])));
   }
 
@@ -261,15 +282,31 @@ class SignUpCompleteAccountScreen
   }
 
   Future<void> onTapContinuewithemail() async {
-    bool? situation = await controller.signUpWithEmailAndPassword(
-        email: email,
-        password: controller.frameOneTwoController.text.trim(),
-        firstName: controller.frameOneController.text.trim(),
-        lastName: controller.frameOneOneController.text.trim(),
-        bio: controller.bio.text.trim() ,
-        country: selectedCountry,
-        isFreelancer: isFreelancer,
-        speciallizations: specializations);
+    bool situation;
+   if(isFreelancer== true)  {
+ List<String> specializations =Get.arguments['specializations'];
+        situation = await controller.signUpWithEmailAndPasswordFreelancer(
+            email: email,
+            password: controller.frameOneTwoController.text.trim(),
+            firstName: controller.frameOneController.text.trim(),
+            lastName: controller.frameOneOneController.text.trim(),
+            bio: controller.bio.text.trim(),
+            country: selectedCountry,
+            isFreelancer: isFreelancer,
+            speciallizations: specializations);
+   } else {
+ situation = await controller.signUpWithEmailAndPasswordClient(
+            email: email,
+            password: controller.frameOneTwoController.text.trim(),
+            firstName: controller.frameOneController.text.trim(),
+            lastName: controller.frameOneOneController.text.trim(),
+            bio: controller.bio.text.trim(),
+            country: selectedCountry,
+            isFreelancer: isFreelancer,
+          );
+   }
+        
+        
     if (situation == false) {
       Get.snackbar('Error', 'Error in sign up process please try later');
     } else {

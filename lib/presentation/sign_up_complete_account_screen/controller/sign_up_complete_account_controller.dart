@@ -72,7 +72,7 @@ class SignUpCompleteAccountController extends GetxController {
     return false;
   }
 
-  Future<bool> signUpWithEmailAndPassword({
+  Future<bool> signUpWithEmailAndPasswordFreelancer({
     required String email,
     required String password,
     required String firstName,
@@ -143,6 +143,87 @@ class SignUpCompleteAccountController extends GetxController {
         'photoUrl': imageUrl,
         'isFreelancer': isFreelancer,
         'speciallization': speciallizations,
+      });
+                showProgressIndicator.value = false;
+
+      return true;
+    }
+              showProgressIndicator.value = false;
+
+    return false;
+  }
+  Future<bool> signUpWithEmailAndPasswordClient({
+    required String email,
+    required String password,
+    required String firstName,
+    required String lastName,
+    required String bio,
+    required String country,
+    required bool isFreelancer,
+    
+  }) async {
+    showProgressIndicator.value = true;
+
+    // Check that all required fields are not empty
+    if (email.isEmpty ||
+        password.isEmpty ||
+        firstName.isEmpty ||
+        lastName.isEmpty ||
+        bio.isEmpty ||
+        country == 'Select your Country') {
+      Get.snackbar('Error', 'Please fill in all required fields');
+          showProgressIndicator.value = false;
+
+      return false;
+    }
+    UserCredential? userCredential;
+
+    try {
+      userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+    showProgressIndicator.value = false;
+
+      if (e.code == 'invalid-email') {
+        Get.snackbar('Error', 'invalid-email');
+
+        return false;
+      } else if (e.code == 'email-already-in-use') {
+        Get.snackbar('Error', 'email-already-in-use');
+        return false;
+      } else if (e.code == 'weak-password') {
+        Get.snackbar('Error', 'Weak password');
+        return false;
+      } else if (e.code == 'operation-not-allowed') {
+        Get.snackbar('Error', 'operation-not-allowed');
+        return false;
+      } else if (e.code == 'network-request-failed') {
+        Get.snackbar('Error', 'network-request-failed');
+        return false;
+      } else {
+        showProgressIndicator(false);
+        return false;
+      }
+    }
+
+    if (userCredential != null) {
+      // Save additional user data to Firestore database
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set({
+        'firstname': firstName,
+        'lastname': lastName,
+        'email': email,
+        'location': country,
+        'bio': bio,
+        'photoUrl': imageUrl,
+        'isFreelancer': isFreelancer,
+         
+        
       });
                 showProgressIndicator.value = false;
 

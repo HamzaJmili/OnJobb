@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'Skill.dart';
 
 class Job {
   String id;
   String title;
   String jobDescription;
   DateTime publishedAt;
-  List<Skill> skillsRequired;
+
   String type;
   int minSalary;
   int maxSalary;
@@ -19,7 +18,6 @@ class Job {
     required this.title,
     required this.jobDescription,
     required this.publishedAt,
-    required this.skillsRequired,
     required this.type,
     required this.minSalary,
     required this.maxSalary,
@@ -33,8 +31,7 @@ class Job {
       title: data['title'],
       jobDescription: data['jobDescription'],
       publishedAt: data['publishedAt'],
-      skillsRequired: List.from(
-          data['skillsRequired'].map((skill) => Skill.fromMap(skill))),
+    
       type: data['type'],
       minSalary: data['minSalary'],
       maxSalary: data['maxSalary'],
@@ -47,8 +44,6 @@ class Job {
       'title': title,
       'jobDescription': jobDescription,
       'publishedAt': publishedAt,
-      'skillsRequired': List<Map<String, dynamic>>.from(
-          skillsRequired.map((skill) => skill.toMap())),
       'type': type,
       'minSalary': minSalary,
       'maxSalary': maxSalary,
