@@ -14,7 +14,11 @@ import 'package:onjobb/presentation/apply_job_popup_dialog/apply_job_popup_dialo
 import 'package:onjobb/presentation/apply_job_popup_dialog/controller/apply_job_popup_controller.dart';
 
 class PublishJobScreen extends GetWidget<PublishJobController> {
-  final PublishJobController Controller = Get.put(PublishJobController());
+  final String uid = Get.arguments['uid'];
+  final String fullName = Get.arguments['fullName'];
+   final String imageUrl = Get.arguments['imageUrl'];
+ 
+  final PublishJobController controller = Get.put(PublishJobController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -53,7 +57,7 @@ class PublishJobScreen extends GetWidget<PublishJobController> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: getPadding(top: 18),
+                                        padding: getPadding(top: 14),
                                         child: Text("Title",
                                             overflow: TextOverflow.ellipsis,
                                             textAlign: TextAlign.left,
@@ -66,7 +70,7 @@ class PublishJobScreen extends GetWidget<PublishJobController> {
                                       ),
                                       CustomTextFormField(
                                           focusNode: FocusNode(),
-                                          // controller: controller.frameOneOneController,
+                                          controller: controller.title,
                                           hintText: "UI / UX designer",
                                           margin: getMargin(top: 9),
                                           padding:
@@ -91,7 +95,7 @@ class PublishJobScreen extends GetWidget<PublishJobController> {
                                       ),
                                       CustomTextFormField(
                                         focusNode: FocusNode(),
-                                        // controller: controller.frameOneOneController,
+                                        controller: controller.maxSalary,
                                         hintText: 'max salary',
                                         margin: getMargin(top: 9),
                                         padding:
@@ -117,7 +121,7 @@ class PublishJobScreen extends GetWidget<PublishJobController> {
                                       ),
                                       CustomTextFormField(
                                         focusNode: FocusNode(),
-                                        // controller: controller.frameOneTwoController,
+                                        controller: controller.minSalary,
                                         hintText: 'min salary',
                                         margin: getMargin(top: 9),
                                         padding:
@@ -199,23 +203,26 @@ class PublishJobScreen extends GetWidget<PublishJobController> {
                                             getHorizontalSize(0.07)))),
                         CustomTextFormField(
                             focusNode: FocusNode(),
-                            // controller: controller.bio,
+                            controller: controller.description,
                             hintText: "Describe the job  ",
-                            margin: getMargin(top: 7),
+                            margin: getMargin(
+                              top: 20,
+                              bottom: 12,
+                            ),
                             padding: TextFormFieldPadding.PaddingT55,
                             textInputAction: TextInputAction.done,
                             maxLines: 4),
-                        Text("msg_website_blog".tr,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtPlusJakartaSansMedium14.copyWith(
-                                letterSpacing: getHorizontalSize(0.07))),
-                        CustomTextFormField(
-                            focusNode: FocusNode(),
-                            // controller: controller.frameOneOneController,
-                            hintText: "Https://",
-                            margin: getMargin(top: 9),
-                            padding: TextFormFieldPadding.PaddingT15),
+                        // Text("msg_website_blog".tr,
+                        //     overflow: TextOverflow.ellipsis,
+                        //     textAlign: TextAlign.left,
+                        //     style: AppStyle.txtPlusJakartaSansMedium14.copyWith(
+                        //         letterSpacing: getHorizontalSize(0.07))),
+                        // CustomTextFormField(
+                        //     focusNode: FocusNode(),
+                        //     // controller: controller.frameOneOneController,
+                        //     hintText: "Https://",
+                        //     margin: getMargin(top: 14),
+                        //     padding: TextFormFieldPadding.PaddingT15),
                       ])),
             ),
             bottomNavigationBar: CustomButton(
@@ -229,17 +236,22 @@ class PublishJobScreen extends GetWidget<PublishJobController> {
                 })));
   }
 
-  onTapContinue() {
-    Get.dialog(AlertDialog(
-      backgroundColor: Colors.transparent,
-      contentPadding: EdgeInsets.zero,
-      insetPadding: EdgeInsets.only(left: 0),
-      content: ApplyJobPopupDialog(
-        Get.put(
-          ApplyJobPopupController(),
-        ),
-      ),
-    ));
+  onTapContinue() async {
+    
+    bool jobAdded = await controller.addJob( uid ,fullName , imageUrl);
+    
+    jobAdded == true
+        ? Get.dialog(AlertDialog(
+            backgroundColor: Colors.transparent,
+            contentPadding: EdgeInsets.zero,
+            insetPadding: const EdgeInsets.only(left: 0),
+            content: ApplyJobPopupDialog(
+              Get.put(
+                ApplyJobPopupController(),
+              ),
+            ),
+          ))
+        : '';
   }
 
   onTapArrowleft7() {

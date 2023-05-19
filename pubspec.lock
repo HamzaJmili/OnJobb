@@ -197,10 +197,10 @@ packages:
     dependency: "direct main"
     description:
       name: easy_localization
-      sha256: "6a2e99fa0bfe5765bf4c6ca9b137d5de2c75593007178c5e4cd2ae985f870080"
+      sha256: "30ebf25448ffe169e0bd9bc4b5da94faa8398967a2ad2ca09f438be8b6953645"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.1"
+    version: "3.0.2"
   easy_logger:
     dependency: transitive
     description:
@@ -343,10 +343,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_plugin_android_lifecycle
-      sha256: "96af49aa6b57c10a312106ad6f71deed5a754029c24789bbf620ba784f0bd0b0"
+      sha256: "950e77c2bbe1692bc0874fc7fb491b96a4dc340457f4ea1641443d0a6c1ea360"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.14"
+    version: "2.0.15"
   flutter_screenutil:
     dependency: "direct main"
     description:
@@ -481,10 +481,10 @@ packages:
     dependency: transitive
     description:
       name: image_picker_android
-      sha256: "89ba2aa6904d8180ca44fd5f5014523f02319101904e3e571fbe792e395b77ed"
+      sha256: "364967c8d581f5d75fc05f6c79fcf1115e3c05db3d3eee1aaca52e0da3f7501c"
       url: "https://pub.dev"
     source: hosted
-    version: "0.8.6+14"
+    version: "0.8.6+15"
   image_picker_for_web:
     dependency: transitive
     description:
@@ -806,10 +806,10 @@ packages:
     dependency: transitive
     description:
       name: sqflite
-      sha256: "41498eed139e9daadc18877cbd4c877fc184f29f08bf9fb04565c4afc6609f27"
+      sha256: b4d6710e1200e96845747e37338ea8a819a12b51689a3bcf31eff0003b37a0b9
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.8+3"
+    version: "2.2.8+4"
   sqflite_common:
     dependency: transitive
     description:

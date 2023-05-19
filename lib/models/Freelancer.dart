@@ -27,9 +27,9 @@ class Freelancer extends User {
           isFreelancer: isFreelancer,
         );
 
-  factory Freelancer.fromJson(Map<String, dynamic> json) {
+  factory Freelancer.fromJson(String id ,Map<String, dynamic> json) {
     return Freelancer(
-      uid: 'id',
+      uid: id,
       firstname: json['firstname'],
       lastname: json['lastname'],
       email: json['email'],

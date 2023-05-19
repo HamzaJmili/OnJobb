@@ -3,6 +3,7 @@ import 'package:onjobb/presentation/apply_job_popup_dialog/models/apply_job_popu
 
 class ApplyJobPopupController extends GetxController {
   Rx<ApplyJobPopupModel> applyJobPopupModelObj = ApplyJobPopupModel().obs;
+  
 
   @override
   void onReady() {

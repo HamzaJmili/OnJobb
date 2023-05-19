@@ -1,49 +1,49 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'Freelancer.dart';
+
 class Proposal {
   String id;
-  String freelancerId;
   String jobId;
   String portfolio;
-  String firstName;
-  String lastName;
+  Freelancer freelancer;
+  String coverLetter;
   String phoneNumber;
-  DateTime sendAt;
+  double salary;
+  Timestamp sendAt;
 
   Proposal({
     required this.id,
-    required this.freelancerId,
     required this.jobId,
     required this.portfolio,
-    required this.firstName,
-    required this.lastName,
+    required this.freelancer,
+    required this.coverLetter,
     required this.phoneNumber,
+    required this.salary,
     required this.sendAt,
   });
 
-  factory Proposal.fromDocumentSnapshot(DocumentSnapshot snapshot) {
-    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-
+  factory Proposal.fromJson(String id, Map<String, dynamic> data) {
     return Proposal(
-      id: snapshot.id,
-      freelancerId: data['freelancerId'],
+      id: id,
       jobId: data['jobId'],
       portfolio: data['portfolio'],
-      firstName: data['firstName'],
-      lastName: data['lastName'],
+      freelancer: data['freelancer'],
+      coverLetter: data['coverLetter'],
       phoneNumber: data['phoneNumber'],
+       salary: data['salary'],
       sendAt: data['sendAt'],
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'freelancerId': freelancerId,
       'jobId': jobId,
       'portfolio': portfolio,
-      'firstName': firstName,
-      'lastName': lastName,
+      'freelancer': freelancer.toMap(),
+      'coverLetter': coverLetter,
       'phoneNumber': phoneNumber,
+      'salary' : salary ,
       'sendAt': sendAt,
     };
   }

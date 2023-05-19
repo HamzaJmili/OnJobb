@@ -1,3 +1,6 @@
+import 'package:onjobb/presentation/home_page/home_page.dart';
+
+import '../home_container_screen/home_container_screen.dart';
 import 'controller/apply_job_popup_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:onjobb/core/app_export.dart';
@@ -5,6 +8,7 @@ import 'package:onjobb/widgets/custom_button.dart';
 
 // ignore_for_file: must_be_immutable
 class ApplyJobPopupDialog extends StatelessWidget {
+
   ApplyJobPopupDialog(this.controller);
 
   ApplyJobPopupController controller;
@@ -12,6 +16,7 @@ class ApplyJobPopupDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+     
         width: getHorizontalSize(302),
         padding: getPadding(all: 32),
         decoration: AppDecoration.fillWhiteA700
@@ -33,7 +38,7 @@ class ApplyJobPopupDialog extends StatelessWidget {
                           .copyWith(letterSpacing: getHorizontalSize(0.09)))),
               Padding(
                   padding: getPadding(top: 9),
-                  child: Text("msg_your_applicatio".tr,
+                  child: Text("Your Job is successfully posted",
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left,
                       style: AppStyle.txtPlusJakartaSansSemiBold14Bluegray400
@@ -53,8 +58,7 @@ class ApplyJobPopupDialog extends StatelessWidget {
   }
 
   onTapContinue() {
-    Get.toNamed(
-      AppRoutes.appliedJobScreen,
-    );
+    Get.to(() => HomeContainerScreen());
+    // Get.offAndToNamed('/home_container_screen');
   }
 }

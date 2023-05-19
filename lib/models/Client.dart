@@ -23,10 +23,10 @@ class Client extends User {
           isFreelancer: isFreelancer,
         );
 
-  factory Client.fromJson(Map<String, dynamic> data) {
+  factory Client.fromJson(String id ,Map<String, dynamic> data) {
    
     return Client(
-      uid: 'id',
+      uid: id,
       firstname: data['firstname'],
       lastname: data['lastname'],
       email: data['email'],

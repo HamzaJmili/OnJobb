@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class Job {
   String id;
   String title;
   String jobDescription;
-  DateTime publishedAt;
-
+  Timestamp publishedAt;
+  String fullName;
+  String imageUrl;
   String type;
-  int minSalary;
-  int maxSalary;
+  double minSalary;
+  double maxSalary;
   String idPublisher;
 
   Job({
@@ -18,20 +18,22 @@ class Job {
     required this.title,
     required this.jobDescription,
     required this.publishedAt,
+    required this.fullName,
+    required this.imageUrl,
     required this.type,
     required this.minSalary,
     required this.maxSalary,
   });
 
-  factory Job.fromDocumentSnapshot(DocumentSnapshot snapshot) {
-    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+  factory Job.fromJson(String id, Map<String, dynamic> data) {
     return Job(
-      id: snapshot.id,
+      id: id,
       idPublisher: data['idPublisher'],
       title: data['title'],
       jobDescription: data['jobDescription'],
+      fullName: data['fullName'],
+      imageUrl: data['ImageUrl'],
       publishedAt: data['publishedAt'],
-    
       type: data['type'],
       minSalary: data['minSalary'],
       maxSalary: data['maxSalary'],
@@ -44,6 +46,8 @@ class Job {
       'title': title,
       'jobDescription': jobDescription,
       'publishedAt': publishedAt,
+       'fullname' : fullName,
+       'imageUrl' : imageUrl ,
       'type': type,
       'minSalary': minSalary,
       'maxSalary': maxSalary,
