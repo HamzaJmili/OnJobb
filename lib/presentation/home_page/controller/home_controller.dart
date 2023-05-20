@@ -49,7 +49,7 @@ class HomeController extends GetxController {
         .get();
         
     for (var doc in snapshot.docs) {
-      print(doc.data());
+      
       Freelancer freelancer = Freelancer.fromJson(doc.id, doc.data());
       freelancersList.add(freelancer);
     }

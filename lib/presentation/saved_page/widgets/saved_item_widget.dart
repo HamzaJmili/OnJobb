@@ -1,19 +1,15 @@
+import '../../../models/Job.dart';
 import '../controller/saved_controller.dart';
-import '../models/saved_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:onjobb/core/app_export.dart';
 import 'package:onjobb/widgets/custom_button.dart';
 import 'package:onjobb/widgets/custom_icon_button.dart';
 
-// ignore: must_be_immutable
 class SavedItemWidget extends StatelessWidget {
-  SavedItemWidget(this.savedItemModelObj, {this.onTapSaveJobDetails});
+  SavedItemWidget(this.job, {this.onTapSaveJobDetails});
 
-  SavedItemModel savedItemModelObj;
-
-  var controller = Get.find<SavedController>();
-
-  VoidCallback? onTapSaveJobDetails;
+  final Job job;
+  final VoidCallback? onTapSaveJobDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -32,16 +28,11 @@ class SavedItemWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomIconButton(
-              height: 48,
-              width: 48,
-              margin: getMargin(
-                bottom: 68,
-              ),
-              child: CustomImageView(
-                svgPath: ImageConstant.imgUser48x48,
-              ),
-            ),
+            CircleAvatar(
+               backgroundImage:NetworkImage(job.imageUrl),
+               radius: 24,
+                ),
+           
             Padding(
               padding: getPadding(
                 left: 10,
@@ -51,15 +42,13 @@ class SavedItemWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Obx(
-                    () => Text(
-                      savedItemModelObj.uxdesignerTxt.value,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.left,
-                      style: AppStyle.txtPlusJakartaSansBold16.copyWith(
-                        letterSpacing: getHorizontalSize(
-                          0.08,
-                        ),
+                  Text(
+                    job.title,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.left,
+                    style: AppStyle.txtPlusJakartaSansBold16.copyWith(
+                      letterSpacing: getHorizontalSize(
+                        0.08,
                       ),
                     ),
                   ),
@@ -67,16 +56,14 @@ class SavedItemWidget extends StatelessWidget {
                     padding: getPadding(
                       top: 6,
                     ),
-                    child: Obx(
-                      () => Text(
-                        savedItemModelObj.dummystudioTxt.value,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.left,
-                        style: AppStyle.txtPlusJakartaSansSemiBold12Bluegray300
-                            .copyWith(
-                          letterSpacing: getHorizontalSize(
-                            0.06,
-                          ),
+                    child: Text(
+                      job.fullName,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.left,
+                      style: AppStyle.txtPlusJakartaSansSemiBold12Bluegray300
+                          .copyWith(
+                        letterSpacing: getHorizontalSize(
+                          0.06,
                         ),
                       ),
                     ),
@@ -86,7 +73,7 @@ class SavedItemWidget extends StatelessWidget {
                       top: 10,
                     ),
                     child: Text(
-                      "msg_560_12_000".tr,
+                      "\$${job.minSalary} -\$${job.maxSalary.toString()} /month",
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left,
                       style:
@@ -110,7 +97,7 @@ class SavedItemWidget extends StatelessWidget {
                           width: getHorizontalSize(
                             70,
                           ),
-                          text: "lbl_fulltime".tr,
+                          text: job.type,
                           variant: ButtonVariant.FillGray100,
                           shape: ButtonShape.RoundedBorder8,
                         ),
@@ -121,7 +108,7 @@ class SavedItemWidget extends StatelessWidget {
                           width: getHorizontalSize(
                             103,
                           ),
-                          text: "lbl_two_days_ago".tr,
+                          text: formatDate(job.publishedAt.toDate()),
                           margin: getMargin(
                             left: 8,
                           ),
@@ -151,5 +138,20 @@ class SavedItemWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String formatDate(DateTime dateTime) {
+    final now = DateTime.now();
+    final difference = now.difference(dateTime);
+
+    if (difference.inDays < 3) {
+      if (difference.inHours < 24) {
+        return '${difference.inHours}h ago';
+      } else {
+        return '${difference.inDays} days ago';
+      }
+    } else {
+      return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+    }
   }
 }

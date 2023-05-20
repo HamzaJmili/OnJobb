@@ -1,3 +1,7 @@
+import 'package:onjobb/presentation/saved_page/proposals_screen.dart';
+
+import '../../models/Job.dart';
+import '../home_page/controller/home_controller.dart';
 import '../saved_page/widgets/saved_item_widget.dart';
 import 'controller/saved_controller.dart';
 import 'models/saved_item_model.dart';
@@ -14,43 +18,118 @@ class SavedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            backgroundColor: ColorConstant.whiteA70002,
-            appBar: CustomAppBar(
-                height: getVerticalSize(50),
-                leadingWidth: 48,
-                leading: AppbarImage(
-                    height: getSize(24),
-                    width: getSize(24),
-                    svgPath: ImageConstant.imgArrowleft,
-                    margin: getMargin(left: 24, top: 13, bottom: 13),
-                    onTap: () {
-                      onTapArrowleft5();
+    controller.getJobs();
+
+    return Obx(() {
+      if (controller.userisFreelancer.value == true) {
+        // Show the freelancer my jobs page if the user is a freelancer
+        return SafeArea(child: Obx(() {
+          if (controller.freelancer.value == null) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            return Scaffold(
+                backgroundColor: ColorConstant.whiteA70002,
+                appBar: CustomAppBar(
+                    height: getVerticalSize(50),
+                    leadingWidth: 48,
+                    leading: AppbarImage(
+                        height: getSize(24),
+                        width: getSize(24),
+                        svgPath: ImageConstant.imgArrowleft,
+                        margin: getMargin(left: 24, top: 13, bottom: 13),
+                        onTap: () {
+                          onTapArrowleft5();
+                        }),
+                    centerTitle: true,
+                    title: AppbarTitle(text: "lbl_saved".tr)),
+                body: SingleChildScrollView(
+                  child: Padding(
+                      padding: getPadding(left: 24, top: 30, right: 24),
+                      child: Obx(() => ListView.separated(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          separatorBuilder: (context, index) {
+                            return SizedBox(height: getVerticalSize(12));
+                          },
+                          itemCount: controller.jobsList.length,
+                          itemBuilder: (context, index) {
+                            // SavedItemModel model = controller
+                            //     .savedModelObj.value.savedItemList.value[index];
+                            return SavedItemWidget(controller.jobsList[index],
+                                onTapSaveJobDetails: () {
+                              onTapSaveJobDetails(controller.jobsList[index]);
+                            });
+                          }))),
+                ));
+          }
+        }));
+      } else {
+        // Show the client my jobs page if the user is a Client
+        print(" the joblist of list is :   ${controller.jobsList.length} ");
+        return SafeArea(child: Obx(() {
+          if (controller.client.value == null) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            return Scaffold(
+                backgroundColor: ColorConstant.whiteA70002,
+                appBar: CustomAppBar(
+                    height: getVerticalSize(50),
+                    leadingWidth: 48,
+                    leading: AppbarImage(
+                        height: getSize(24),
+                        width: getSize(24),
+                        svgPath: ImageConstant.imgArrowleft,
+                        margin: getMargin(left: 24, top: 13, bottom: 13),
+                        onTap: () {
+                          onTapArrowleft5();
+                        }),
+                    centerTitle: true,
+                    title: AppbarTitle(text: "Posted Jobs")),
+                body: SingleChildScrollView(
+                  child: Padding(
+                    padding: getPadding(left: 24, top: 30, right: 24),
+                    child: Obx(() {
+                      if (controller.jobsList.isEmpty) {
+                        return const Center(
+                          child: Text(
+                            "You haven't posted any jobs yet",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        );
+                      } else {
+                        return ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          separatorBuilder: (context, index) {
+                            return SizedBox(height: getVerticalSize(12));
+                          },
+                          itemCount: controller.jobsList.length,
+                          itemBuilder: (context, index) {
+                            print(controller.jobsList[index].title);
+                            return SavedItemWidget(
+                              controller.jobsList[index],
+                              onTapSaveJobDetails: () {
+                                onTapSaveJobDetails(controller.jobsList[index]);
+                              },
+                            );
+                          },
+                        );
+                      }
                     }),
-                centerTitle: true,
-                title: AppbarTitle(text: "lbl_saved".tr)),
-            body: Padding(
-                padding: getPadding(left: 24, top: 30, right: 24),
-                child: Obx(() => ListView.separated(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    separatorBuilder: (context, index) {
-                      return SizedBox(height: getVerticalSize(12));
-                    },
-                    itemCount: controller
-                        .savedModelObj.value.savedItemList.value.length,
-                    itemBuilder: (context, index) {
-                      SavedItemModel model = controller
-                          .savedModelObj.value.savedItemList.value[index];
-                      return SavedItemWidget(model, onTapSaveJobDetails: () {
-                        onTapSaveJobDetails();
-                      });
-                    })))));
+                  ),
+                ));
+          }
+        }));
+      }
+    });
   }
 
-  onTapSaveJobDetails() {
-    Get.toNamed(AppRoutes.savedDetailJobScreen);
+  onTapSaveJobDetails(Job job) {
+    // Get.toNamed(AppRoutes.savedDetailJobScreen);
+    Get.to(
+      () => ProposalsScreen(),
+      arguments: job,
+    );
   }
 
   onTapArrowleft5() {

@@ -236,7 +236,7 @@ class ChatScreen extends GetWidget<ChatController> {
                     ])),
             bottomNavigationBar: CustomTextFormField(
                 focusNode: FocusNode(),
-                controller: controller.messageTwoController,
+                // controller: controller.messageTwoController,
                 hintText: "msg_type_your_messa".tr,
                 margin: getMargin(left: 24, right: 24, bottom: 40),
                 variant: TextFormFieldVariant.FillGray200,

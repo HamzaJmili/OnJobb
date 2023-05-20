@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../core/utils/size_utils.dart';
 import '../../models/Freelancer.dart';
 import '../../theme/app_style.dart';
+import '../profileFreelancer_page/profileFreelancer_page.dart';
+import '../profile_page/profile_page.dart';
 
 class FreelancerCardWidget extends StatelessWidget {
   final Freelancer freelancer;
@@ -81,8 +84,8 @@ class FreelancerCardWidget extends StatelessWidget {
   }
 
   onTapOnFreelancer() {
-    // Get.to(
-    //   () => FreelancerDetailsScreen(freelancer: freelancer),
-    // );
+    Get.to(
+      () => ProfileFreelancerPage(),arguments: freelancer ,
+    );
   }
 }

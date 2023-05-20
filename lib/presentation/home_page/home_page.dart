@@ -1,17 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../models/Client.dart';
 import '../../models/Freelancer.dart';
 import '../../models/Job.dart';
 import '../../widgets/custom_button.dart';
-import '../home_page/widgets/listgroup_item_widget.dart';
 import '../home_page/widgets/listuser_item_widget.dart';
-import '../publish_job_screen/publish_job_screen.dart';
 import 'controller/home_controller.dart';
 import 'freelancer_widget.dart';
 import 'job_widget.dart';
 import 'models/home_model.dart';
-import 'models/listgroup_item_model.dart';
 import 'models/listuser_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:onjobb/core/app_export.dart';
@@ -23,7 +19,7 @@ class HomePage extends StatelessWidget {
   HomeController controller = Get.put(HomeController(HomeModel().obs));
 
   final FirebaseAuth auth = FirebaseAuth.instance;
-  Freelancer? freelancer;
+  // Freelancer? freelancer;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -31,7 +27,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     controller.getCurrentUser();
     controller.getJobsAndClient();
-    print("the lengh of freelancerlist is : ${controller.freelancersList.length}");
     return Obx(() {
       if (controller.userisFreelancer.value == true) {
         // Show the freelancer home page if the user is a freelancer
@@ -43,7 +38,7 @@ class HomePage extends StatelessWidget {
                     "the client vlaue is null and here is : ${controller.freelancer.value?.email}");
                 return const Center(child: CircularProgressIndicator());
               } else {
-                freelancer = controller.freelancer.value;
+                // freelancer = controller.freelancer.value;
                 return Scaffold(
                     backgroundColor: ColorConstant.whiteA70002,
                     appBar: CustomAppBar(

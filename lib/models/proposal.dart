@@ -23,18 +23,18 @@ class Proposal {
     required this.sendAt,
   });
 
-  factory Proposal.fromJson(String id, Map<String, dynamic> data) {
-    return Proposal(
-      id: id,
-      jobId: data['jobId'],
-      portfolio: data['portfolio'],
-      freelancer: data['freelancer'],
-      coverLetter: data['coverLetter'],
-      phoneNumber: data['phoneNumber'],
-       salary: data['salary'],
-      sendAt: data['sendAt'],
-    );
-  }
+ factory Proposal.fromJson(String id, Map<String, dynamic> data) {
+  return Proposal(
+    id: id,
+    jobId: data['jobId'],
+    portfolio: data['portfolio'],
+    freelancer: Freelancer.fromJson(data['freelancer']['lastname'], data['freelancer']),
+    coverLetter: data['coverLetter'],
+    phoneNumber: data['phoneNumber'],
+    salary: data['salary'],
+    sendAt: data['sendAt'],
+  );
+}
 
   Map<String, dynamic> toMap() {
     return {

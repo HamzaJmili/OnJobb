@@ -76,7 +76,7 @@ final Map<String, String> enUs = {
   "lbl_6_000_month": "\$6.000/Month",
   "lbl_apply_now": "Apply Now",
   "lbl_cardano2": "Cardano",
-  "lbl_saved": "Saved",
+  "lbl_saved": "My jobs",
   "msg_it_s_easy_to_fi2": "It’s easy to find eployees here with us.",
   "msg_digital_marketi": "Digital Marketing",
   "lbl_opened": "Opened",

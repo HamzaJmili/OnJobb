@@ -149,4 +149,6 @@ class ImageConstant {
   static String imgTrophyGray100 = 'assets/images/img_trophy_gray_100.svg';
 
   static String imageNotFound = 'assets/images/image_not_found.png';
+
+  static String imageSend = 'assets/images/envoyer.png';
 }

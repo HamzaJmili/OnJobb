@@ -1,20 +1,22 @@
-import '../profile_page/widgets/chipviewskills_one_item_widget.dart';
-import '../profile_page/widgets/profile_item_widget.dart';
-import 'controller/profile_controller.dart';
-import 'models/chipviewskills_one_item_model.dart';
-import 'models/profile_item_model.dart';
-import 'models/profile_model.dart';
+
+
+import '../../models/Freelancer.dart';
+import '../../widgets/custom_button.dart';
+import '../chat_screen/chat_screen.dart';
+import 'controller/profileFreelancer_controller.dart';
+import 'models/profileFreelancer_model.dart';
 import 'package:flutter/material.dart';
 import 'package:onjobb/core/app_export.dart';
 import 'package:onjobb/widgets/app_bar/appbar_image.dart';
 import 'package:onjobb/widgets/app_bar/appbar_title.dart';
 import 'package:onjobb/widgets/app_bar/custom_app_bar.dart';
-import 'package:onjobb/widgets/custom_radio_button.dart';
+
 
 // ignore_for_file: must_be_immutable
-class ProfilePage extends StatelessWidget {
-  ProfileController controller = Get.put(ProfileController(ProfileModel().obs));
+class ProfileFreelancerPage extends StatelessWidget {
+  ProfileFreelancerController controller = Get.put(ProfileFreelancerController(ProfileFreelancerModel().obs));
 
+  Freelancer freelancer = Get.arguments;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -33,16 +35,17 @@ class ProfilePage extends StatelessWidget {
                     }),
                 centerTitle: true,
                 title: AppbarTitle(text: "lbl_profile".tr),
-                actions: [
-                  AppbarImage(
-                      height: getSize(24),
-                      width: getSize(24),
-                      svgPath: ImageConstant.imgSettings,
-                      margin: getMargin(left: 24, right: 24),
-                      onTap: () {
-                        onTapSettings2();
-                      })
-                ]),
+                // actions: [
+                //   AppbarImage(
+                //       height: getSize(24),
+                //       width: getSize(24),
+                //       svgPath: ImageConstant.imgSettings,
+                //       margin: getMargin(left: 24, right: 24),
+                //       onTap: () {
+                //         onTapSettings2();
+                //       })
+                // ]
+                ),
             body: SizedBox(
                 width: size.width,
                 child: SingleChildScrollView(
@@ -76,22 +79,29 @@ class ProfilePage extends StatelessWidget {
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
                                                     children: [
-                                                      CustomImageView(
-                                                          imagePath:
-                                                              ImageConstant
-                                                                  .img63,
-                                                          height: getSize(89),
-                                                          width: getSize(89),
-                                                          radius: BorderRadius
-                                                              .circular(
-                                                                  getHorizontalSize(
-                                                                      44))),
+                                                      // CustomImageView(
+                                                      //     imagePath:
+                                                      //         ImageConstant
+                                                      //             .img63,
+                                                      //     height: getSize(89),
+                                                      //     width: getSize(89),
+                                                      //     radius: BorderRadius
+                                                      //         .circular(
+                                                      //             getHorizontalSize(
+                                                      //                 44))),
+                                                      CircleAvatar(
+                                                        backgroundImage:
+                                                            NetworkImage(
+                                                                freelancer
+                                                                    .photoUrl),
+                                                        radius: 30,
+                                                      ),
                                                       Padding(
                                                           padding: getPadding(
                                                               top: 9),
                                                           child: Text(
-                                                              "msg_gustavo_lipshut"
-                                                                  .tr,
+                                                              " ${freelancer.firstname} ${freelancer.lastname}"
+                                                                  ,
                                                               overflow:
                                                                   TextOverflow
                                                                       .ellipsis,
@@ -107,38 +117,32 @@ class ProfilePage extends StatelessWidget {
                                                       Padding(
                                                           padding: getPadding(
                                                               top: 5),
-                                                          child: Obx(() =>
-                                                              CustomRadioButton(
-                                                                  text:
-                                                                      "lbl_open_to_work"
-                                                                          .tr,
-                                                                  value:
-                                                                      "lbl_open_to_work"
-                                                                          .tr,
-                                                                  groupValue:
-                                                                      controller
-                                                                          .radioGroup
-                                                                          .value,
-                                                                  margin:
-                                                                      getMargin(
-                                                                          top:
-                                                                              5),
-                                                                  fontStyle:
-                                                                      RadioFontStyle
-                                                                          .PoppinsMedium14,
-                                                                  onChange:
-                                                                      (value) {
-                                                                    controller
-                                                                        .radioGroup
-                                                                        .value = value;
-                                                                  })))
+                                                          child: CustomButton(
+                          
+                        height: getVerticalSize(36),
+                        width: getHorizontalSize(137),
+                        text: "    Send a Message",
+                        shape: ButtonShape.RoundedBorder20,
+                        padding: ButtonPadding.PaddingT14,
+                        
+                        onTap: () {
+  
+    Get.to(() => ChatScreen());
+                        },
+                        fontStyle:
+                            ButtonFontStyle.PlusJakartaSansSemiBold14Gray50,
+                        prefixWidget: Container(
+                            margin: getMargin(right: 2),
+                            child: CustomImageView(
+                                imagePath: ImageConstant.imageSend))),)
                                                     ])))
                                       ])),
                               Container(
                                   width: getHorizontalSize(272),
                                   margin:
                                       getMargin(left: 52, top: 15, right: 50),
-                                  child: Text("msg_ui_ux_designer".tr,
+                                  child: Text(
+                                      " ${freelancer.speciallization.join(", ")}",
                                       maxLines: null,
                                       textAlign: TextAlign.center,
                                       style: AppStyle.txtInterRegular14
@@ -308,8 +312,7 @@ class ProfilePage extends StatelessWidget {
                                             width: getHorizontalSize(272),
                                             margin:
                                                 getMargin(top: 14, right: 22),
-                                            child: Text(
-                                                "msg_lorem_ipsum_dol9".tr,
+                                            child: Text(" ${freelancer.bio}",
                                                 maxLines: null,
                                                 textAlign: TextAlign.left,
                                                 style: AppStyle
@@ -319,72 +322,7 @@ class ProfilePage extends StatelessWidget {
                                                             getHorizontalSize(
                                                                 0.07))))
                                       ])),
-                              Container(
-                                  margin:
-                                      getMargin(left: 25, top: 24, right: 23),
-                                  padding: getPadding(
-                                      left: 9, top: 16, right: 9, bottom: 16),
-                                  decoration: AppDecoration.outlineIndigo50
-                                      .copyWith(
-                                          borderRadius: BorderRadiusStyle
-                                              .roundedBorder12),
-                                  child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                            padding:
-                                                getPadding(left: 7, right: 7),
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Padding(
-                                                      padding: getPadding(
-                                                          top: 1, bottom: 2),
-                                                      child: Text(
-                                                          "lbl_skills".tr,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          textAlign:
-                                                              TextAlign.left,
-                                                          style: AppStyle
-                                                              .txtInterSemiBold16
-                                                              .copyWith(
-                                                                  letterSpacing:
-                                                                      getHorizontalSize(
-                                                                          0.08)))),
-                                                  CustomImageView(
-                                                      svgPath:
-                                                          ImageConstant.imgEdit,
-                                                      height: getSize(24),
-                                                      width: getSize(24))
-                                                ])),
-                                        Padding(
-                                            padding:
-                                                getPadding(top: 12, bottom: 17),
-                                            child: Obx(() => Wrap(
-                                                runSpacing: getVerticalSize(5),
-                                                spacing: getHorizontalSize(5),
-                                                children: List<Widget>.generate(
-                                                    controller
-                                                        .profileModelObj
-                                                        .value
-                                                        .chipviewskillsOneItemList
-                                                        .value
-                                                        .length, (index) {
-                                                  ChipviewskillsOneItemModel
-                                                      model = controller
-                                                          .profileModelObj
-                                                          .value
-                                                          .chipviewskillsOneItemList
-                                                          .value[index];
-                                                  return ChipviewskillsOneItemWidget(
-                                                      model);
-                                                }))))
-                                      ])),
+                              
                               Container(
                                   margin:
                                       getMargin(left: 24, top: 24, right: 24),
@@ -429,48 +367,48 @@ class ProfilePage extends StatelessWidget {
                                                       margin:
                                                           getMargin(bottom: 1))
                                                 ])),
-                                        Padding(
-                                            padding: getPadding(top: 22),
-                                            child: Obx(() => ListView.separated(
-                                                physics:
-                                                    NeverScrollableScrollPhysics(),
-                                                shrinkWrap: true,
-                                                separatorBuilder:
-                                                    (context, index) {
-                                                  return Padding(
-                                                      padding: getPadding(
-                                                          top: 11.5,
-                                                          bottom: 11.5),
-                                                      child: SizedBox(
-                                                          width:
-                                                              getHorizontalSize(
-                                                                  235),
-                                                          child: Divider(
-                                                              height:
-                                                                  getVerticalSize(
-                                                                      1),
-                                                              thickness:
-                                                                  getVerticalSize(
-                                                                      1),
-                                                              color: ColorConstant
-                                                                  .indigo50)));
-                                                },
-                                                itemCount: controller
-                                                    .profileModelObj
-                                                    .value
-                                                    .profileItemList
-                                                    .value
-                                                    .length,
-                                                itemBuilder: (context, index) {
-                                                  ProfileItemModel model =
-                                                      controller
-                                                          .profileModelObj
-                                                          .value
-                                                          .profileItemList
-                                                          .value[index];
-                                                  return ProfileItemWidget(
-                                                      model);
-                                                })))
+                                        // Padding(
+                                        //     padding: getPadding(top: 22),
+                                        //     child: Obx(() => ListView.separated(
+                                        //         physics:
+                                        //             NeverScrollableScrollPhysics(),
+                                        //         shrinkWrap: true,
+                                        //         separatorBuilder:
+                                        //             (context, index) {
+                                        //           return Padding(
+                                        //               padding: getPadding(
+                                        //                   top: 11.5,
+                                        //                   bottom: 11.5),
+                                        //               child: SizedBox(
+                                        //                   width:
+                                        //                       getHorizontalSize(
+                                        //                           235),
+                                        //                   child: Divider(
+                                        //                       height:
+                                        //                           getVerticalSize(
+                                        //                               1),
+                                        //                       thickness:
+                                        //                           getVerticalSize(
+                                        //                               1),
+                                        //                       color: ColorConstant
+                                        //                           .indigo50)));
+                                        //         },
+                                        //         itemCount: controller
+                                        //             .profileFreelancerModelObj
+                                        //             .value
+                                        //             .profileItemList
+                                        //             .value
+                                        //             .length,
+                                        //         itemBuilder: (context, index) {
+                                        //           ProfileItemModel model =
+                                        //               controller
+                                        //                   .profileModelObj
+                                        //                   .value
+                                        //                   .profileItemList
+                                        //                   .value[index];
+                                        //           return ProfileItemWidget(
+                                        //               model );
+                                        //         })))
                                       ])),
                               Container(
                                   margin:
