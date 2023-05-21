@@ -18,6 +18,8 @@ class SavedController extends GetxController {
   // List<Job> jobsList = [];
 
   final RxList<Job> jobsList = <Job>[].obs;
+  final RxList<Job> savedJobsList = <Job>[].obs;
+
   Future<void> getCurrentUser() async {
     try {
       User user = auth.currentUser!;
@@ -33,7 +35,7 @@ class SavedController extends GetxController {
         userisFreelancer.value = false;
       } else if (data['isFreelancer'] == true) {
         freelancer.value = Freelancer.fromJson(docSnapshot.id, data);
-       
+
         userisFreelancer.value = true;
       }
     } catch (e) {
@@ -48,18 +50,49 @@ class SavedController extends GetxController {
         .collection('jobs')
         .where('idPublisher', isEqualTo: client.value?.uid)
         .get();
-  for (var doc in snapshot.docs) {
+    for (var doc in snapshot.docs) {
+      Job job = Job.fromJson(doc.id, doc.data());
 
-  Job job = Job.fromJson(doc.id, doc.data());
+      // Check if the job with the same UID already exists in jobsList
+      bool isJobExists =
+          jobsList.any((existingJob) => existingJob.id == job.id);
 
-  // Check if the job with the same UID already exists in jobsList
-  bool isJobExists = jobsList.any((existingJob) => existingJob.id == job.id);
+      if (!isJobExists) {
+        jobsList.add(job);
+      }
+    }
+  }
 
-  if (!isJobExists) {
-    jobsList.add(job);
+Future<void> getSavedJobs() async {
+  await getCurrentUser();
+
+  final savedJobsSnapshot = await FirebaseFirestore.instance
+      .collection('savedJobs')
+      .where('freelancerId', isEqualTo: freelancer.value?.uid)
+      .get();
+
+  for (var savedJobDoc in savedJobsSnapshot.docs) {
+    String jobId = savedJobDoc.get('jobId');
+    final jobSnapshot = await FirebaseFirestore.instance
+        .collection('jobs')
+        .doc(jobId)
+        .get();
+
+    if (jobSnapshot.exists && jobSnapshot.data() != null) {
+      Map<String, dynamic> jobData = jobSnapshot.data()!;
+
+      Job job = Job.fromJson(jobSnapshot.id, jobData);
+
+      bool isJobExists =
+          savedJobsList.any((existingJob) => existingJob.id == job.id);
+      if (!isJobExists) {
+        savedJobsList.add(job);
+      }
+    }
   }
 }
-  }
+
+
 
   
 

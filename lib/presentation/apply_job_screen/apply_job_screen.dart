@@ -145,9 +145,9 @@ class ApplyJobScreen extends GetWidget<ApplyJobController> {
 
   onTapContinue() async {
 
-//  bool a= await  controller.addProposal(job.id);
+ bool a= await controller.addProposal(job.id);
 
-//  if(a==true) {
+ if(a==true) {
    Get.dialog(AlertDialog(
       backgroundColor: Colors.transparent,
       contentPadding: EdgeInsets.zero,
@@ -158,7 +158,7 @@ class ApplyJobScreen extends GetWidget<ApplyJobController> {
         ),
       ),
     ));
-//  }
+ }
    
   }
 

@@ -9,8 +9,8 @@ import '../../theme/app_style.dart';
 
 class YourJobWidget extends StatelessWidget {
   final Job job;
-  
-  const YourJobWidget({required this.job});
+ final String freelancerId;
+  const YourJobWidget({required this.job, required this.freelancerId});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -134,7 +134,7 @@ class YourJobWidget extends StatelessWidget {
   onTapOnJob() {
      Get.offAll(
     () => JobDetailsScreen(),
-    arguments: job,
+    arguments: {'job': job , 'freelancerId': freelancerId}
   );
     // Get.toNamed(
     //   AppRoutes.jobDetailsScreen,

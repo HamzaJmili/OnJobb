@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   // Freelancer? freelancer;
-
+  String freelancerId = '';
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -34,8 +34,6 @@ class HomePage extends StatelessWidget {
             key: _formKey,
             child: Obx(() {
               if (controller.freelancer.value == null) {
-                print(
-                    "the client vlaue is null and here is : ${controller.freelancer.value?.email}");
                 return const Center(child: CircularProgressIndicator());
               } else {
                 // freelancer = controller.freelancer.value;
@@ -248,8 +246,13 @@ class HomePage extends StatelessWidget {
                                                 itemBuilder: (context, index) {
                                                   Job job = controller
                                                       .jobsList[index];
+                                              
                                                   return YourJobWidget(
-                                                      job: job);
+                                                      job: job,
+                                                      freelancerId: controller
+                                                          .freelancer
+                                                          .value
+                                                          ?.uid ?? '');
                                                 },
                                               ),
                                       ),
@@ -267,7 +270,9 @@ class HomePage extends StatelessWidget {
                 "the client vlaue is null and here is : ${controller.client.value?.email}");
             return const Center(child: CircularProgressIndicator());
           } else {
+            print(controller.client.value?.uid);
             return Scaffold(
+              
                 backgroundColor: ColorConstant.whiteA70002,
                 appBar: CustomAppBar(
                     height: getVerticalSize(50),

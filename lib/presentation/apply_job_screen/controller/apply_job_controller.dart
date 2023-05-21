@@ -39,6 +39,7 @@ class ApplyJobController extends GetxController {
   }
 
   Future<bool> addProposal(String jobid) async {
+    print("inside proposal");
     // Example type, modify according to your needs
     double salary = double.tryParse(salaire.text) ?? 0.0;
 
@@ -60,7 +61,9 @@ class ApplyJobController extends GetxController {
           salary: salary,
           sendAt: Timestamp.now());
       // CollectionReference proposalsCollection =
-     await FirebaseFirestore.instance.collection('proposals').add(proposal.toMap());
+      await FirebaseFirestore.instance
+          .collection('proposals')
+          .add(proposal.toMap());
       print(" print after collection ref");
       // await proposalsCollection.add({
       //   'jobId': jobid,

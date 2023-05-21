@@ -28,7 +28,7 @@ class Proposal {
     id: id,
     jobId: data['jobId'],
     portfolio: data['portfolio'],
-    freelancer: Freelancer.fromJson(data['freelancer']['lastname'], data['freelancer']),
+    freelancer: Freelancer.fromJson(data['freelancer']['uid'], data['freelancer']),
     coverLetter: data['coverLetter'],
     phoneNumber: data['phoneNumber'],
     salary: data['salary'],

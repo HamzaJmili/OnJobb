@@ -6,6 +6,7 @@ import '../../widgets/app_bar/appbar_title.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/custom_button.dart';
 import '../../core/app_export.dart';
+import '../profileFreelancer_page/profileFreelancer_page.dart';
 import 'controller/proposals_controller.dart';
 
 class ProposalsScreen extends StatelessWidget {
@@ -201,16 +202,18 @@ class ProposalsScreen extends StatelessWidget {
                                   children: [
                                     Text(
                                       proposal.freelancer.firstname,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    SizedBox(width: 12),
+                                   const SizedBox(width: 12),
                                     IconButton(
-                                      icon: Icon(Icons.visibility),
+                                      icon:const Icon(Icons.visibility),
                                       onPressed: () {
-                                        // Handle view profile
+                                          Get.to(
+      () => ProfileFreelancerPage(),arguments: proposal.freelancer ,
+    );
                                       },
                                     ),
                                   ],

@@ -83,7 +83,6 @@ class HomeController extends GetxController {
   }
 
   getJobsAndClient() async {
-    isLoading.value = true;
 
     jobsList = await getJobs();
     freelancersList = await getFreelancers();

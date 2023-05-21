@@ -2,6 +2,7 @@ import 'package:onjobb/presentation/saved_page/proposals_screen.dart';
 
 import '../../models/Job.dart';
 import '../home_page/controller/home_controller.dart';
+import '../job_details_screen/job_details_screen.dart';
 import '../saved_page/widgets/saved_item_widget.dart';
 import 'controller/saved_controller.dart';
 import 'models/saved_item_model.dart';
@@ -19,7 +20,7 @@ class SavedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     controller.getJobs();
-
+    controller.getSavedJobs();
     return Obx(() {
       if (controller.userisFreelancer.value == true) {
         // Show the freelancer my jobs page if the user is a freelancer
@@ -27,6 +28,10 @@ class SavedPage extends StatelessWidget {
           if (controller.freelancer.value == null) {
             return const Center(child: CircularProgressIndicator());
           } else {
+            if (controller.savedJobsList.isEmpty) {
+              return const Center(child: Text('You have 0 saved jobs'));
+            }
+
             return Scaffold(
                 backgroundColor: ColorConstant.whiteA70002,
                 appBar: CustomAppBar(
@@ -51,13 +56,15 @@ class SavedPage extends StatelessWidget {
                           separatorBuilder: (context, index) {
                             return SizedBox(height: getVerticalSize(12));
                           },
-                          itemCount: controller.jobsList.length,
+                          itemCount: controller.savedJobsList.length,
                           itemBuilder: (context, index) {
                             // SavedItemModel model = controller
                             //     .savedModelObj.value.savedItemList.value[index];
-                            return SavedItemWidget(controller.jobsList[index],
+                            return SavedItemWidget(
+                                controller.savedJobsList[index],
                                 onTapSaveJobDetails: () {
-                              onTapSaveJobDetails(controller.jobsList[index]);
+                              onTapSaveJobDetailsFreelancer(
+                                  controller.savedJobsList[index]);
                             });
                           }))),
                 ));
@@ -109,7 +116,8 @@ class SavedPage extends StatelessWidget {
                             return SavedItemWidget(
                               controller.jobsList[index],
                               onTapSaveJobDetails: () {
-                                onTapSaveJobDetails(controller.jobsList[index]);
+                                onTapSaveJobDetailsClient(
+                                    controller.jobsList[index]);
                               },
                             );
                           },
@@ -124,12 +132,18 @@ class SavedPage extends StatelessWidget {
     });
   }
 
-  onTapSaveJobDetails(Job job) {
+  onTapSaveJobDetailsClient(Job job) {
     // Get.toNamed(AppRoutes.savedDetailJobScreen);
     Get.to(
       () => ProposalsScreen(),
       arguments: job,
     );
+  }
+
+  onTapSaveJobDetailsFreelancer(Job job) {
+    // Get.toNamed(AppRoutes.savedDetailJobScreen);
+    Get.offAll(() => JobDetailsScreen(),
+        arguments: {'job' : job, 'freelancerId': controller.freelancer.value?.uid ?? ''} );
   }
 
   onTapArrowleft5() {
