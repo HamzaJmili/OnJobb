@@ -47,9 +47,8 @@ class HomeController extends GetxController {
         .collection('users')
         .where('isFreelancer', isEqualTo: true)
         .get();
-        
+
     for (var doc in snapshot.docs) {
-      
       Freelancer freelancer = Freelancer.fromJson(doc.id, doc.data());
       freelancersList.add(freelancer);
     }
@@ -83,7 +82,6 @@ class HomeController extends GetxController {
   }
 
   getJobsAndClient() async {
-
     jobsList = await getJobs();
     freelancersList = await getFreelancers();
     for (var job in jobsList) {
@@ -103,6 +101,12 @@ class HomeController extends GetxController {
   }
 
   Rx<HomeModel> homeModelObj;
+
+  @override
+  void onInit() {
+    super.onInit();
+    getCurrentUser();
+  }
 
   @override
   void onReady() {

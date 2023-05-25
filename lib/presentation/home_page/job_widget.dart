@@ -114,20 +114,26 @@ class YourJobWidget extends StatelessWidget {
     );
   }
 
-  String formatDate(DateTime dateTime) {
-      final now = DateTime.now();
-    final difference = now.difference(dateTime);
+ String formatDate(DateTime dateTime) {
+  final now = DateTime.now();
+  final difference = now.difference(dateTime);
 
-    if (difference.inDays < 3) {
-      if (difference.inHours < 24) {
-        return '${difference.inHours}h ago';
+  if (difference.inDays < 3) {
+    if (difference.inHours < 1) {
+      if (difference.inMinutes < 1) {
+        return 'Just now';
       } else {
-        return '${difference.inDays} days ago';
+        return '${difference.inMinutes} minutes ago';
       }
+    } else if (difference.inHours < 24) {
+      return '${difference.inHours} hours ago';
     } else {
-      return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+      return '${difference.inDays} days ago';
     }
+  } else {
+    return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
   }
+}
 
  
 

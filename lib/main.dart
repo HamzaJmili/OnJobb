@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'core/app_export.dart';
+import 'presentation/chat_screen/controller/chat_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +19,7 @@ void main() async {
     Logger.init(kReleaseMode ? LogMode.live : LogMode.debug);
     runApp(MyApp(currentUser: currentUser));
   });
+  Get.put(ChatController());
 }
 
 class MyApp extends StatelessWidget {

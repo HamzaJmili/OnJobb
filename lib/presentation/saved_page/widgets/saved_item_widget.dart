@@ -1,9 +1,7 @@
 import '../../../models/Job.dart';
-import '../controller/saved_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:onjobb/core/app_export.dart';
 import 'package:onjobb/widgets/custom_button.dart';
-import 'package:onjobb/widgets/custom_icon_button.dart';
 
 class SavedItemWidget extends StatelessWidget {
   SavedItemWidget(this.job, {this.onTapSaveJobDetails});

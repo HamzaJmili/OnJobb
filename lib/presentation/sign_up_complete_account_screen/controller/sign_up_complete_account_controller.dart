@@ -45,7 +45,7 @@ class SignUpCompleteAccountController extends GetxController {
   Future<bool> uploadProfileImage() async {
     try {
       final pickedFile =
-          await ImagePicker().pickImage(source: ImageSource.camera);
+          await ImagePicker().pickImage(source: ImageSource.gallery);
       if (pickedFile != null) {
         print("Upload image to Firebase storage");
         // Upload image to Firebase storage

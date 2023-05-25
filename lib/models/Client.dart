@@ -37,8 +37,9 @@ class Client extends User {
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
+      'uid' : uid ,
       'firstname': firstname,
       'lastname': lastname,
       'email': email,

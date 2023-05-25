@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Message {
-  String id;
+
   String senderId;
   String receiverId;
   String text;
-  DateTime sendAt;
+  Timestamp sendAt;
 
   Message({
-    required this.id,
+    
     required this.senderId,
     required this.receiverId,
     required this.text,
@@ -18,7 +18,7 @@ class Message {
   factory Message.fromDocumentSnapshot(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
     return Message(
-      id: snapshot.id,
+      
       senderId: data['senderId'],
       receiverId: data['receiverId'],
       text: data['text'],
@@ -34,4 +34,26 @@ class Message {
       'sendAt': sendAt,
     };
   }
+factory Message.fromMap(Object? map) {
+  if (map == null) {
+    // Handle the case when the map is null
+    return Message(
+      senderId: '',
+      receiverId: '',
+      text: '',
+      sendAt: Timestamp.now(),
+    );
+  }
+
+  final data = Map<String, dynamic>.from(map as Map<dynamic, dynamic>);
+
+  return Message(
+    senderId: data['senderId']?.toString() ?? '',
+    receiverId: data['receiverId']?.toString() ?? '',
+    text: data['text']?.toString() ?? '',
+    sendAt: data['sendAt'] as Timestamp? ?? Timestamp.now(),
+  );
+}
+
+
 }

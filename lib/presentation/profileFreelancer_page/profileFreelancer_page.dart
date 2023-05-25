@@ -1,5 +1,3 @@
-
-
 import '../../models/Freelancer.dart';
 import '../../widgets/custom_button.dart';
 import '../chat_screen/chat_screen.dart';
@@ -11,10 +9,10 @@ import 'package:onjobb/widgets/app_bar/appbar_image.dart';
 import 'package:onjobb/widgets/app_bar/appbar_title.dart';
 import 'package:onjobb/widgets/app_bar/custom_app_bar.dart';
 
-
 // ignore_for_file: must_be_immutable
 class ProfileFreelancerPage extends StatelessWidget {
-  ProfileFreelancerController controller = Get.put(ProfileFreelancerController(ProfileFreelancerModel().obs));
+  ProfileFreelancerController controller =
+      Get.put(ProfileFreelancerController(ProfileFreelancerModel().obs));
 
   Freelancer freelancer = Get.arguments;
   @override
@@ -23,29 +21,29 @@ class ProfileFreelancerPage extends StatelessWidget {
         child: Scaffold(
             backgroundColor: ColorConstant.whiteA70002,
             appBar: CustomAppBar(
-                height: getVerticalSize(37),
-                leadingWidth: 48,
-                leading: AppbarImage(
-                    height: getSize(24),
-                    width: getSize(24),
-                    svgPath: ImageConstant.imgArrowleft,
-                    margin: getMargin(left: 24),
-                    onTap: () {
-                      onTapArrowleft11();
-                    }),
-                centerTitle: true,
-                title: AppbarTitle(text: "lbl_profile".tr),
-                // actions: [
-                //   AppbarImage(
-                //       height: getSize(24),
-                //       width: getSize(24),
-                //       svgPath: ImageConstant.imgSettings,
-                //       margin: getMargin(left: 24, right: 24),
-                //       onTap: () {
-                //         onTapSettings2();
-                //       })
-                // ]
-                ),
+              height: getVerticalSize(37),
+              leadingWidth: 48,
+              leading: AppbarImage(
+                  height: getSize(24),
+                  width: getSize(24),
+                  svgPath: ImageConstant.imgArrowleft,
+                  margin: getMargin(left: 24),
+                  onTap: () {
+                    onTapArrowleft11();
+                  }),
+              centerTitle: true,
+              title: AppbarTitle(text: "lbl_profile".tr),
+              // actions: [
+              //   AppbarImage(
+              //       height: getSize(24),
+              //       width: getSize(24),
+              //       svgPath: ImageConstant.imgSettings,
+              //       margin: getMargin(left: 24, right: 24),
+              //       onTap: () {
+              //         onTapSettings2();
+              //       })
+              // ]
+            ),
             body: SizedBox(
                 width: size.width,
                 child: SingleChildScrollView(
@@ -100,8 +98,7 @@ class ProfileFreelancerPage extends StatelessWidget {
                                                           padding: getPadding(
                                                               top: 9),
                                                           child: Text(
-                                                              " ${freelancer.firstname} ${freelancer.lastname}"
-                                                                  ,
+                                                              " ${freelancer.firstname} ${freelancer.lastname}",
                                                               overflow:
                                                                   TextOverflow
                                                                       .ellipsis,
@@ -115,26 +112,47 @@ class ProfileFreelancerPage extends StatelessWidget {
                                                                           getHorizontalSize(
                                                                               0.09)))),
                                                       Padding(
-                                                          padding: getPadding(
-                                                              top: 5),
-                                                          child: CustomButton(
-                          
-                        height: getVerticalSize(36),
-                        width: getHorizontalSize(137),
-                        text: "    Send a Message",
-                        shape: ButtonShape.RoundedBorder20,
-                        padding: ButtonPadding.PaddingT14,
-                        
-                        onTap: () {
-  
-    Get.to(() => ChatScreen());
-                        },
-                        fontStyle:
-                            ButtonFontStyle.PlusJakartaSansSemiBold14Gray50,
-                        prefixWidget: Container(
-                            margin: getMargin(right: 2),
-                            child: CustomImageView(
-                                imagePath: ImageConstant.imageSend))),)
+                                                        padding:
+                                                            getPadding(top: 5),
+                                                        child: CustomButton(
+                                                            height:
+                                                                getVerticalSize(
+                                                                    36),
+                                                            width:
+                                                                getHorizontalSize(
+                                                                    137),
+                                                            text:
+                                                                "    Send a Message",
+                                                            shape: ButtonShape
+                                                                .RoundedBorder20,
+                                                            padding:
+                                                                ButtonPadding
+                                                                    .PaddingT14,
+                                                            onTap: () {
+                                                              try {  Get.to(
+                                                                  () =>
+                                                                      ChatScreen(),
+                                                                  arguments:
+                                                                      freelancer
+                                                                          .toMap());} catch (e) {
+                                                                print(
+                                                                    "error is : $e");
+                                                              }
+                                                            
+                                                            },
+                                                            fontStyle:
+                                                                ButtonFontStyle
+                                                                    .PlusJakartaSansSemiBold14Gray50,
+                                                            prefixWidget: Container(
+                                                                margin:
+                                                                    getMargin(
+                                                                        right:
+                                                                            2),
+                                                                child: CustomImageView(
+                                                                    imagePath:
+                                                                        ImageConstant
+                                                                            .imageSend))),
+                                                      )
                                                     ])))
                                       ])),
                               Container(
@@ -322,7 +340,6 @@ class ProfileFreelancerPage extends StatelessWidget {
                                                             getHorizontalSize(
                                                                 0.07))))
                                       ])),
-                              
                               Container(
                                   margin:
                                       getMargin(left: 24, top: 24, right: 24),
