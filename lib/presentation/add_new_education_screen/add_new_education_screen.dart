@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import 'controller/add_new_education_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:onjobb/core/app_export.dart';
@@ -48,7 +50,7 @@ class AddNewEducationScreen extends GetWidget<AddNewEducationController> {
                                               getHorizontalSize(0.07))),
                               CustomTextFormField(
                                   focusNode: FocusNode(),
-                                  controller: controller.frameOneController,
+                                  controller: controller.school,
                                   hintText: "msg_ex_harvard_uni".tr,
                                   margin: getMargin(top: 9)),
                               Padding(
@@ -66,7 +68,7 @@ class AddNewEducationScreen extends GetWidget<AddNewEducationController> {
                                   icon: Container(
                                       margin: getMargin(left: 30, right: 24),
                                       decoration: BoxDecoration(
-                                          color: ColorConstant.gray90002),
+                                          color: ColorConstant.whiteA700),
                                       child: CustomImageView(
                                           svgPath: ImageConstant
                                               .imgArrowdownGray90002)),
@@ -89,7 +91,7 @@ class AddNewEducationScreen extends GetWidget<AddNewEducationController> {
                                                   getHorizontalSize(0.07)))),
                               CustomTextFormField(
                                   focusNode: FocusNode(),
-                                  controller: controller.frameOneTwoController,
+                                  controller: controller.fieldOfStudy,
                                   hintText: "lbl_ex_business".tr,
                                   margin: getMargin(top: 7)),
                               Padding(
@@ -103,8 +105,8 @@ class AddNewEducationScreen extends GetWidget<AddNewEducationController> {
                                               letterSpacing:
                                                   getHorizontalSize(0.07)))),
                               GestureDetector(
-                                  onTap: () {
-                                    onTapRowsmalllabelregultwo();
+                                  onTap: () { 
+                                   onTapStartDate();
                                   },
                                   child: Container(
                                       margin: getMargin(top: 9),
@@ -124,11 +126,9 @@ class AddNewEducationScreen extends GetWidget<AddNewEducationController> {
                                             Padding(
                                                 padding: getPadding(top: 2),
                                                 child: Obx(() => Text(
-                                                    controller
-                                                        .addNewEducationModelObj
-                                                        .value
-                                                        .smalllabelregulTwoTxt
-                                                        .value,
+                                                  controller.startDate.value != null
+      ? DateFormat('dd/MM/yyyy').format(controller.startDate.value!)
+      : '',
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     textAlign: TextAlign.left,
@@ -156,7 +156,7 @@ class AddNewEducationScreen extends GetWidget<AddNewEducationController> {
                                                   getHorizontalSize(0.07)))),
                               GestureDetector(
                                   onTap: () {
-                                    onTapRowsmalllabelregulthree();
+                                    onTapEndDate();
                                   },
                                   child: Container(
                                       margin: getMargin(top: 9),
@@ -176,11 +176,9 @@ class AddNewEducationScreen extends GetWidget<AddNewEducationController> {
                                             Padding(
                                                 padding: getPadding(top: 2),
                                                 child: Obx(() => Text(
-                                                    controller
-                                                        .addNewEducationModelObj
-                                                        .value
-                                                        .smalllabelregulThreeTxt
-                                                        .value,
+                                                   controller.endDate.value != null
+      ? DateFormat('dd/MM/yyyy').format(controller.endDate.value!)
+      : '',
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     textAlign: TextAlign.left,
@@ -196,40 +194,6 @@ class AddNewEducationScreen extends GetWidget<AddNewEducationController> {
                                                 height: getSize(24),
                                                 width: getSize(24))
                                           ]))),
-                              Padding(
-                                  padding: getPadding(top: 18),
-                                  child: Text("lbl_grade".tr,
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.left,
-                                      style: AppStyle
-                                          .txtPlusJakartaSansMedium14Bluegray900
-                                          .copyWith(
-                                              letterSpacing:
-                                                  getHorizontalSize(0.07)))),
-                              CustomTextFormField(
-                                  focusNode: FocusNode(),
-                                  controller:
-                                      controller.frameOneThreeController,
-                                  hintText: "lbl_ex_business".tr,
-                                  margin: getMargin(top: 9)),
-                              Padding(
-                                  padding: getPadding(top: 20),
-                                  child: Text("lbl_description".tr,
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.left,
-                                      style: AppStyle
-                                          .txtPlusJakartaSansMedium14Bluegray900
-                                          .copyWith(
-                                              letterSpacing:
-                                                  getHorizontalSize(0.07)))),
-                              CustomTextFormField(
-                                  focusNode: FocusNode(),
-                                  controller: controller.frameOneFourController,
-                                  hintText: "lbl_lorem_ipsun".tr,
-                                  margin: getMargin(top: 7),
-                                  padding: TextFormFieldPadding.PaddingT55,
-                                  textInputAction: TextInputAction.done,
-                                  maxLines: 6)
                             ])))),
             bottomNavigationBar: CustomButton(
                 height: getVerticalSize(56),
@@ -238,41 +202,64 @@ class AddNewEducationScreen extends GetWidget<AddNewEducationController> {
                 padding: ButtonPadding.PaddingAll17,
                 fontStyle: ButtonFontStyle.PlusJakartaSansSemiBold16Gray50,
                 onTap: () {
+                  controller.addEducation();
                   onTapSavechanges();
                 })));
   }
 
-  Future<void> onTapRowsmalllabelregultwo() async {
+  // Future<void> onTapRowsmalllabelregultwo() async {
+  //   DateTime? dateTime = await showDatePicker(
+  //       context: Get.context!,
+  //       initialDate: controller
+  //           .addNewEducationModelObj.value.selectedSmalllabelregulTwoTxt!.value,
+  //       firstDate: DateTime(1970),
+  //       lastDate: DateTime(
+  //           DateTime.now().year, DateTime.now().month, DateTime.now().day));
+  //   if (dateTime != null) {
+  //     controller.addNewEducationModelObj.value.selectedSmalllabelregulTwoTxt!
+  //         .value = dateTime;
+  //     controller.addNewEducationModelObj.value.smalllabelregulTwoTxt.value =
+  //         dateTime.format(DD_MM_YYYY);
+  //   }
+  // }
+  Future<void> onTapStartDate() async {
     DateTime? dateTime = await showDatePicker(
-        context: Get.context!,
-        initialDate: controller
-            .addNewEducationModelObj.value.selectedSmalllabelregulTwoTxt!.value,
-        firstDate: DateTime(1970),
-        lastDate: DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day));
+      context: Get.context!,
+      initialDate: controller.startDate.value ?? DateTime.now(),
+      firstDate: DateTime(1970),
+      lastDate: DateTime.now(),
+    );
     if (dateTime != null) {
-      controller.addNewEducationModelObj.value.selectedSmalllabelregulTwoTxt!
-          .value = dateTime;
-      controller.addNewEducationModelObj.value.smalllabelregulTwoTxt.value =
-          dateTime.format(DD_MM_YYYY);
+      controller.startDate.value = dateTime;
     }
   }
 
-  Future<void> onTapRowsmalllabelregulthree() async {
+  Future<void> onTapEndDate() async {
     DateTime? dateTime = await showDatePicker(
-        context: Get.context!,
-        initialDate: controller.addNewEducationModelObj.value
-            .selectedSmalllabelregulThreeTxt!.value,
-        firstDate: DateTime(1970),
-        lastDate: DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day));
+      context: Get.context!,
+      initialDate: controller.endDate.value ?? DateTime.now(),
+      firstDate: DateTime(1970),
+      lastDate: DateTime.now(),
+    );
     if (dateTime != null) {
-      controller.addNewEducationModelObj.value.selectedSmalllabelregulThreeTxt!
-          .value = dateTime;
-      controller.addNewEducationModelObj.value.smalllabelregulThreeTxt.value =
-          dateTime.format(DD_MM_YYYY);
+      controller.endDate.value = dateTime;
     }
   }
+  // Future<void> onTapRowsmalllabelregulthree() async {
+  //   DateTime? dateTime = await showDatePicker(
+  //       context: Get.context!,
+  //       initialDate: controller.addNewEducationModelObj.value
+  //           .selectedSmalllabelregulThreeTxt!.value,
+  //       firstDate: DateTime(1970),
+  //       lastDate: DateTime(
+  //           DateTime.now().year, DateTime.now().month, DateTime.now().day));
+  //   if (dateTime != null) {
+  //     controller.addNewEducationModelObj.value.selectedSmalllabelregulThreeTxt!
+  //         .value = dateTime;
+  //     controller.addNewEducationModelObj.value.smalllabelregulThreeTxt.value =
+  //         dateTime.format(DD_MM_YYYY);
+  //   }
+  // }
 
   onTapSavechanges() {
     Get.toNamed(

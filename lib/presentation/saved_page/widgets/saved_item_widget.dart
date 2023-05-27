@@ -3,11 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:onjobb/core/app_export.dart';
 import 'package:onjobb/widgets/custom_button.dart';
 
+import '../controller/saved_controller.dart';
+
 class SavedItemWidget extends StatelessWidget {
-  SavedItemWidget(this.job, {this.onTapSaveJobDetails});
+    SavedController controller = Get.put(SavedController());
+
+  SavedItemWidget(this.job,
+      {this.onTapSaveJobDetails, required this.isFreelancer});
 
   final Job job;
   final VoidCallback? onTapSaveJobDetails;
+  final bool isFreelancer;
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +33,9 @@ class SavedItemWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CircleAvatar(
-               backgroundImage:NetworkImage(job.imageUrl),
-               radius: 24,
-                ),
-           
+              backgroundImage: NetworkImage(job.imageUrl),
+              radius: 24,
+            ),
             Padding(
               padding: getPadding(
                 left: 10,
@@ -120,7 +125,9 @@ class SavedItemWidget extends StatelessWidget {
               ),
             ),
             CustomImageView(
-              svgPath: ImageConstant.imgBookmark1,
+              svgPath: isFreelancer
+                  ? ImageConstant.imgBookmark1
+                  : ImageConstant.imgTrash,
               height: getSize(
                 24,
               ),
@@ -131,6 +138,11 @@ class SavedItemWidget extends StatelessWidget {
                 left: 30,
                 bottom: 92,
               ),
+              onTap: () {
+                isFreelancer
+                    ? controller.deleteFromSavedJobs(job.id)
+                    : controller.deleteClientJob(job.id);
+              },
             ),
           ],
         ),
@@ -143,8 +155,14 @@ class SavedItemWidget extends StatelessWidget {
     final difference = now.difference(dateTime);
 
     if (difference.inDays < 3) {
-      if (difference.inHours < 24) {
-        return '${difference.inHours}h ago';
+      if (difference.inHours < 1) {
+        if (difference.inMinutes < 1) {
+          return 'Just now';
+        } else {
+          return '${difference.inMinutes} minutes ago';
+        }
+      } else if (difference.inHours < 24) {
+        return '${difference.inHours} hours ago';
       } else {
         return '${difference.inDays} days ago';
       }

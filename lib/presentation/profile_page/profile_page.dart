@@ -1,3 +1,5 @@
+import '../../models/Education.dart';
+import '../../models/Experience.dart';
 import '../profile_page/widgets/chipviewskills_one_item_widget.dart';
 import '../profile_page/widgets/profile_item_widget.dart';
 import 'controller/profile_controller.dart';
@@ -17,14 +19,12 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    controller.getCurrentUser();
     return Obx(() {
       if (controller.userisFreelancer.value == true) {
         // show profile page of freelancer
         return SafeArea(child: Obx(() {
            if (controller.freelancer.value == null) {
-          print(
-              "print inside the firstif in profile page means freelancer.value==null ");
+          
           return const Center(child: CircularProgressIndicator());
         } else {
           return Scaffold(
@@ -275,334 +275,176 @@ class ProfilePage extends StatelessWidget {
                                       height: getVerticalSize(2),
                                       thickness: getVerticalSize(2),
                                       color: ColorConstant.indigo50)),
+                          
                               Container(
-                                  margin:
-                                      getMargin(left: 24, top: 22, right: 24),
-                                  padding: getPadding(
-                                      left: 16, top: 14, right: 16, bottom: 14),
-                                  decoration: AppDecoration.outlineIndigo50
-                                      .copyWith(
-                                          borderRadius: BorderRadiusStyle
-                                              .roundedBorder12),
-                                  child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                            padding: getPadding(top: 1),
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Padding(
-                                                      padding: getPadding(
-                                                          top: 2, bottom: 1),
-                                                      child: Text(
-                                                          "lbl_about_me".tr,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          textAlign:
-                                                              TextAlign.left,
-                                                          style: AppStyle
-                                                              .txtInterSemiBold16
-                                                              .copyWith(
-                                                                  letterSpacing:
-                                                                      getHorizontalSize(
-                                                                          0.08)))),
-                                                  CustomImageView(
-                                                      svgPath:
-                                                          ImageConstant.imgEdit,
-                                                      height: getSize(24),
-                                                      width: getSize(24))
-                                                ])),
-                                        Container(
-                                            width: getHorizontalSize(272),
-                                            margin:
-                                                getMargin(top: 14, right: 22),
-                                            child: Text(
-                                                "${controller.freelancer.value?.bio}",
-                                                maxLines: null,
-                                                textAlign: TextAlign.left,
-                                                style: AppStyle
-                                                    .txtPlusJakartaSansMedium14Bluegray400
-                                                    .copyWith(
-                                                        letterSpacing:
+                            width: double.maxFinite,
+                            margin :getMargin(top : 20, right : 10 , left : 10),
+                            child: Container(
+                                padding: getPadding(all: 16),
+                                decoration: AppDecoration.outlineIndigo50
+                                    .copyWith(
+                                        borderRadius:
+                                            BorderRadiusStyle.roundedBorder12),
+                                child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                          padding: getPadding(top: 1),
+                                          child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Padding(
+                                                    padding: getPadding(top: 2),
+                                                    child: Text(
+                                                        "lbl_experience".tr,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: AppStyle
+                                                            .txtPlusJakartaSansBold18
+                                                            .copyWith(
+                                                                letterSpacing:
+                                                                    getHorizontalSize(
+                                                                        0.09)))),
+                                                CustomImageView(
+                                                    svgPath:
+                                                        ImageConstant.imgShare,
+                                                    height: getSize(24),
+                                                    width: getSize(24),
+                                                    margin:
+                                                        getMargin(bottom: 1),
+                                                    onTap: () {
+                                                      onTapImgShare();
+                                                    })
+                                              ])),
+                                      Padding(
+                                          padding:
+                                              getPadding(top: 15, right: 60),
+                                          child: Obx(() => ListView.separated(
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
+                                              shrinkWrap: true,
+                                              separatorBuilder:
+                                                  (context, index) {
+                                                return Padding(
+                                                    padding: getPadding(
+                                                        top: 19.5,
+                                                        bottom: 19.5),
+                                                    child: SizedBox(
+                                                        width:
                                                             getHorizontalSize(
-                                                                0.07))))
-                                      ])),
-                              Container(
-                                  margin:
-                                      getMargin(left: 25, top: 24, right: 23),
-                                  padding: getPadding(
-                                      left: 9, top: 16, right: 9, bottom: 16),
-                                  decoration: AppDecoration.outlineIndigo50
-                                      .copyWith(
-                                          borderRadius: BorderRadiusStyle
-                                              .roundedBorder12),
-                                  child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                            padding:
-                                                getPadding(left: 7, right: 7),
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Padding(
-                                                      padding: getPadding(
-                                                          top: 1, bottom: 2),
-                                                      child: Text(
-                                                          "lbl_skills".tr,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          textAlign:
-                                                              TextAlign.left,
-                                                          style: AppStyle
-                                                              .txtInterSemiBold16
-                                                              .copyWith(
-                                                                  letterSpacing:
-                                                                      getHorizontalSize(
-                                                                          0.08)))),
-                                                  CustomImageView(
-                                                      svgPath:
-                                                          ImageConstant.imgEdit,
-                                                      height: getSize(24),
-                                                      width: getSize(24))
-                                                ])),
-                                        Padding(
-                                            padding:
-                                                getPadding(top: 12, bottom: 17),
-                                            child: Obx(() => Wrap(
-                                                runSpacing: getVerticalSize(5),
-                                                spacing: getHorizontalSize(5),
-                                                children: List<Widget>.generate(
+                                                                295),
+                                                        child: Divider(
+                                                            height:
+                                                                getVerticalSize(
+                                                                    1),
+                                                            thickness:
+                                                                getVerticalSize(
+                                                                    1),
+                                                            color: ColorConstant
+                                                                .indigo50)));
+                                              },
+                                              itemCount: controller
+                                                  .experiencesList.length,
+                                              itemBuilder: (context, index) {
+                                                Experience experience =
                                                     controller
-                                                        .profileModelObj
-                                                        .value
-                                                        .chipviewskillsOneItemList
-                                                        .value
-                                                        .length, (index) {
-                                                  ChipviewskillsOneItemModel
-                                                      model = controller
-                                                          .profileModelObj
-                                                          .value
-                                                          .chipviewskillsOneItemList
-                                                          .value[index];
-                                                  return ChipviewskillsOneItemWidget(
-                                                      model);
-                                                }))))
-                                      ])),
+                                                        .experiencesList[index];
+                                                return ProfileItemWidget(
+                                                    experience.toMap(), false);
+                                              })))
+                                    ]))),
                               Container(
-                                  margin:
-                                      getMargin(left: 24, top: 24, right: 24),
-                                  padding: getPadding(
-                                      left: 16, top: 15, right: 16, bottom: 15),
-                                  decoration: AppDecoration.outlineIndigo50
-                                      .copyWith(
-                                          borderRadius: BorderRadiusStyle
-                                              .roundedBorder12),
-                                  child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                            padding: getPadding(top: 1),
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Padding(
-                                                      padding:
-                                                          getPadding(top: 2),
-                                                      child: Text(
-                                                          "lbl_experience".tr,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          textAlign:
-                                                              TextAlign.left,
-                                                          style: AppStyle
-                                                              .txtPlusJakartaSansBold18
-                                                              .copyWith(
-                                                                  letterSpacing:
-                                                                      getHorizontalSize(
-                                                                          0.09)))),
-                                                  CustomImageView(
-                                                      svgPath: ImageConstant
-                                                          .imgShare,
-                                                      height: getSize(24),
-                                                      width: getSize(24),
-                                                      margin:
-                                                          getMargin(bottom: 1))
-                                                ])),
-                                        Padding(
-                                            padding: getPadding(top: 22),
-                                            child: Obx(() => ListView.separated(
-                                                physics:
-                                                    NeverScrollableScrollPhysics(),
-                                                shrinkWrap: true,
-                                                separatorBuilder:
-                                                    (context, index) {
-                                                  return Padding(
-                                                      padding: getPadding(
-                                                          top: 11.5,
-                                                          bottom: 11.5),
-                                                      child: SizedBox(
-                                                          width:
-                                                              getHorizontalSize(
-                                                                  235),
-                                                          child: Divider(
-                                                              height:
-                                                                  getVerticalSize(
-                                                                      1),
-                                                              thickness:
-                                                                  getVerticalSize(
-                                                                      1),
-                                                              color: ColorConstant
-                                                                  .indigo50)));
-                                                },
-                                                itemCount: controller
-                                                    .profileModelObj
-                                                    .value
-                                                    .profileItemList
-                                                    .value
-                                                    .length,
-                                                itemBuilder: (context, index) {
-                                                  ProfileItemModel model =
-                                                      controller
-                                                          .profileModelObj
-                                                          .value
-                                                          .profileItemList
-                                                          .value[index];
-                                                  return ProfileItemWidget(
-                                                      model);
-                                                })))
-                                      ])),
-                              Container(
-                                  margin:
-                                      getMargin(left: 24, top: 24, right: 24),
-                                  padding: getPadding(all: 16),
-                                  decoration: AppDecoration.outlineBluegray50
-                                      .copyWith(
-                                          borderRadius: BorderRadiusStyle
-                                              .roundedBorder12),
-                                  child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Padding(
-                                                  padding: getPadding(top: 2),
-                                                  child: Text(
-                                                      "lbl_education".tr,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      textAlign: TextAlign.left,
-                                                      style: AppStyle
-                                                          .txtPlusJakartaSansBold16
-                                                          .copyWith(
-                                                              letterSpacing:
-                                                                  getHorizontalSize(
-                                                                      0.08)))),
-                                              CustomImageView(
-                                                  svgPath:
-                                                      ImageConstant.imgShare,
-                                                  height: getSize(24),
-                                                  width: getSize(24))
-                                            ]),
-                                        Padding(
-                                            padding:
-                                                getPadding(top: 24, right: 83),
-                                            child: Row(children: [
-                                              CustomImageView(
-                                                  svgPath:
-                                                      ImageConstant.imgTrophy,
-                                                  height: getSize(48),
-                                                  width: getSize(48)),
-                                              Expanded(
-                                                  child: Padding(
-                                                      padding: getPadding(
-                                                          left: 12,
-                                                          top: 5,
-                                                          bottom: 1),
-                                                      child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                                "msg_university_of_o"
-                                                                    .tr,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                                style: AppStyle
-                                                                    .txtPlusJakartaSansSemiBold14Gray900
-                                                                    .copyWith(
-                                                                        letterSpacing:
-                                                                            getHorizontalSize(0.07))),
-                                                            Padding(
-                                                                padding:
-                                                                    getPadding(
-                                                                        top: 6),
-                                                                child: Row(
-                                                                    children: [
-                                                                      Padding(
-                                                                          padding: getPadding(
-                                                                              top:
-                                                                                  1),
-                                                                          child: Text(
-                                                                              "msg_computer_scienc".tr,
-                                                                              overflow: TextOverflow.ellipsis,
-                                                                              textAlign: TextAlign.left,
-                                                                              style: AppStyle.txtPlusJakartaSansMedium12.copyWith(letterSpacing: getHorizontalSize(0.06)))),
-                                                                      Padding(
-                                                                          padding: getPadding(
-                                                                              left:
-                                                                                  4,
-                                                                              top:
-                                                                                  1),
-                                                                          child: Text(
-                                                                              "lbl".tr,
-                                                                              overflow: TextOverflow.ellipsis,
-                                                                              textAlign: TextAlign.left,
-                                                                              style: AppStyle.txtPlusJakartaSansMedium12.copyWith(letterSpacing: getHorizontalSize(0.06)))),
-                                                                      Padding(
-                                                                          padding: getPadding(
-                                                                              left:
-                                                                                  4,
-                                                                              bottom:
-                                                                                  1),
-                                                                          child: Text(
-                                                                              "lbl_2019".tr,
-                                                                              overflow: TextOverflow.ellipsis,
-                                                                              textAlign: TextAlign.left,
-                                                                              style: AppStyle.txtPlusJakartaSansMedium12.copyWith(letterSpacing: getHorizontalSize(0.06))))
-                                                                    ]))
-                                                          ])))
-                                            ]))
-                                      ]))
+                            width: double.maxFinite,
+                             margin :getMargin( right : 10 , left : 10),
+                            child: Container(
+                                padding: getPadding(all: 16),
+                                margin: getMargin(top: 30),
+                                decoration: AppDecoration.outlineIndigo50
+                                    .copyWith(
+                                        borderRadius:
+                                            BorderRadiusStyle.roundedBorder12),
+                                child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                          padding: getPadding(top: 1),
+                                          child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Padding(
+                                                    padding: getPadding(top: 2),
+                                                    child: Text(
+                                                        "lbl_education".tr,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: AppStyle
+                                                            .txtPlusJakartaSansBold18
+                                                            .copyWith(
+                                                                letterSpacing:
+                                                                    getHorizontalSize(
+                                                                        0.09)))),
+                                                CustomImageView(
+                                                    svgPath:
+                                                        ImageConstant.imgShare,
+                                                    height: getSize(24),
+                                                    width: getSize(24),
+                                                    margin:
+                                                        getMargin(bottom: 1),
+                                                    onTap: () {
+                                                      onTapImgShare();
+                                                    })
+                                              ])),
+                                      Padding(
+                                          padding:
+                                              getPadding(top: 15, right: 60),
+                                          child: Obx(() => ListView.separated(
+                                              physics:
+                                                  const NeverScrollableScrollPhysics(),
+                                              shrinkWrap: true,
+                                              separatorBuilder:
+                                                  (context, index) {
+                                                return Padding(
+                                                    padding: getPadding(
+                                                        top: 19.5,
+                                                        bottom: 19.5),
+                                                    child: SizedBox(
+                                                        width:
+                                                            getHorizontalSize(
+                                                                295),
+                                                        child: Divider(
+                                                            height:
+                                                                getVerticalSize(
+                                                                    1),
+                                                            thickness:
+                                                                getVerticalSize(
+                                                                    1),
+                                                            color: ColorConstant
+                                                                .indigo50)));
+                                              },
+                                              itemCount: controller
+                                                  .educationsList.length,
+                                              itemBuilder: (context, index) {
+                                                Education education = controller
+                                                    .educationsList[index];
+                                                
+                                                return ProfileItemWidget(
+                                                    education.toMap(), true);
+                                              })))
+                                    ])))
                             ])))));
         }
         }));
@@ -944,6 +786,23 @@ class ProfilePage extends StatelessWidget {
   onTapSettings2() {
     Get.toNamed(
       AppRoutes.settingsScreen,
+    );
+  }
+   onTapImgShare() {
+    Get.toNamed(
+      AppRoutes.newPositionScreen,
+    );
+  }
+
+  onTapAddnewposition() {
+    Get.toNamed(
+      AppRoutes.newPositionScreen,
+    );
+  }
+
+  onTapAddneweducation() {
+    Get.toNamed(
+      AppRoutes.addNewEducationScreen,
     );
   }
 }

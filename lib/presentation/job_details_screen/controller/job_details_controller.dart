@@ -6,10 +6,22 @@ class JobDetailsController extends GetxController {
   Rx<JobDetailsModel> jobDetailsModelObj = JobDetailsModel().obs;
 
   Future<void> saveJob(String jobId, String freelancerId) async {
-    try {
-      // Access the Firestore instance
-      FirebaseFirestore firestore = FirebaseFirestore.instance;
+  try {
+    // Access the Firestore instance
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+    // Check if the job is already saved
+    QuerySnapshot querySnapshot = await firestore
+        .collection('savedJobs')
+        .where('jobId', isEqualTo: jobId)
+        .where('freelancerId', isEqualTo: freelancerId)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      // Job already saved, display snackbar
+      Get.snackbar('Error', 'Job already saved',
+          snackPosition: SnackPosition.TOP);
+    } else {
       // Define the data for the new document
       Map<String, dynamic> data = {
         'jobId': jobId,
@@ -21,11 +33,15 @@ class JobDetailsController extends GetxController {
 
       // Document added successfully
       print('Job saved successfully!');
-    } catch (error) {
-      // An error occurred while adding the document
-      print('Error saving job: $error');
+      Get.snackbar('Success', 'Job saved',
+          snackPosition: SnackPosition.BOTTOM);
     }
+  } catch (error) {
+    // An error occurred while adding the document
+    print('Error saving job: $error');
   }
+}
+
 
   @override
   void onReady() {

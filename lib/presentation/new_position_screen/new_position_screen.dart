@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import 'controller/new_position_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:onjobb/core/app_export.dart';
@@ -47,76 +49,9 @@ class NewPositionScreen extends GetWidget<NewPositionController> {
                                               getHorizontalSize(0.07))),
                               CustomTextFormField(
                                   focusNode: FocusNode(),
-                                  controller: controller.frameOneController,
+                                  controller: controller.jobTitle,
                                   hintText: "lbl_ex_ui_designer".tr,
                                   margin: getMargin(top: 9)),
-                              Container(
-                                  width: double.maxFinite,
-                                  child: Container(
-                                      margin: getMargin(top: 20),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadiusStyle.roundedBorder8),
-                                      child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Text("lbl_employment_type".tr,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.left,
-                                                style: AppStyle
-                                                    .txtPlusJakartaSansMedium14Bluegray900
-                                                    .copyWith(
-                                                        letterSpacing:
-                                                            getHorizontalSize(
-                                                                0.07))),
-                                            Container(
-                                                margin: getMargin(top: 7),
-                                                padding: getPadding(
-                                                    left: 16,
-                                                    top: 13,
-                                                    right: 16,
-                                                    bottom: 13),
-                                                decoration: AppDecoration
-                                                    .outlineIndigo50
-                                                    .copyWith(
-                                                        borderRadius:
-                                                            BorderRadiusStyle
-                                                                .roundedBorder24),
-                                                child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Padding(
-                                                          padding: getPadding(
-                                                              top: 2),
-                                                          child: Text(
-                                                              "lbl_please_select"
-                                                                  .tr,
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .left,
-                                                              style: AppStyle
-                                                                  .txtPlusJakartaSansMedium16
-                                                                  .copyWith(
-                                                                      letterSpacing:
-                                                                          getHorizontalSize(
-                                                                              0.08)))),
-                                                      CustomImageView(
-                                                          svgPath: ImageConstant
-                                                              .imgArrowdownGray90002,
-                                                          height: getSize(24),
-                                                          width: getSize(24),
-                                                          margin: getMargin(
-                                                              right: 3))
-                                                    ]))
-                                          ]))),
                               Padding(
                                   padding: getPadding(top: 20),
                                   child: Text("lbl_company_name".tr,
@@ -129,7 +64,7 @@ class NewPositionScreen extends GetWidget<NewPositionController> {
                                                   getHorizontalSize(0.07)))),
                               CustomTextFormField(
                                   focusNode: FocusNode(),
-                                  controller: controller.frameOneOneController,
+                                  controller: controller.companyName,
                                   hintText: "lbl_ex_shopee".tr,
                                   margin: getMargin(top: 7)),
                               Padding(
@@ -144,7 +79,7 @@ class NewPositionScreen extends GetWidget<NewPositionController> {
                                                   getHorizontalSize(0.07)))),
                               CustomTextFormField(
                                   focusNode: FocusNode(),
-                                  controller: controller.countryController,
+                                  controller: controller.countryName,
                                   hintText: "msg_ex_singapore".tr,
                                   margin: getMargin(top: 9)),
                               Padding(
@@ -159,7 +94,7 @@ class NewPositionScreen extends GetWidget<NewPositionController> {
                                                   getHorizontalSize(0.07)))),
                               GestureDetector(
                                   onTap: () {
-                                    onTapRowsmalllabelregulthree();
+                                    onTapStartDate();
                                   },
                                   child: Container(
                                       margin: getMargin(top: 9),
@@ -179,11 +114,9 @@ class NewPositionScreen extends GetWidget<NewPositionController> {
                                             Padding(
                                                 padding: getPadding(top: 2),
                                                 child: Obx(() => Text(
-                                                    controller
-                                                        .newPositionModelObj
-                                                        .value
-                                                        .smalllabelregulThreeTxt
-                                                        .value,
+                                                    controller.startDate.value != null
+      ? DateFormat('dd/MM/yyyy').format(controller.startDate.value!)
+      : '',
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     textAlign: TextAlign.left,
@@ -211,7 +144,7 @@ class NewPositionScreen extends GetWidget<NewPositionController> {
                                                   getHorizontalSize(0.07)))),
                               GestureDetector(
                                   onTap: () {
-                                    onTapRowsmalllabelregulfour();
+                                    onTapEndDate();
                                   },
                                   child: Container(
                                       margin: getMargin(top: 9),
@@ -229,13 +162,15 @@ class NewPositionScreen extends GetWidget<NewPositionController> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Padding(
+                                              
                                                 padding: getPadding(top: 2),
-                                                child: Obx(() => Text(
-                                                    controller
-                                                        .newPositionModelObj
-                                                        .value
-                                                        .smalllabelregulFourTxt
-                                                        .value,
+                                                
+                                                child: Obx(() => 
+                                                Text(
+                                                  
+                                                     controller.endDate.value != null
+      ? DateFormat('dd/MM/yyyy').format(controller.endDate.value!)
+      : '',
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     textAlign: TextAlign.left,
@@ -251,24 +186,6 @@ class NewPositionScreen extends GetWidget<NewPositionController> {
                                                 height: getSize(24),
                                                 width: getSize(24))
                                           ]))),
-                              Padding(
-                                  padding: getPadding(top: 20),
-                                  child: Text("msg_job_role_descri".tr,
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.left,
-                                      style: AppStyle
-                                          .txtPlusJakartaSansMedium14Bluegray900
-                                          .copyWith(
-                                              letterSpacing:
-                                                  getHorizontalSize(0.07)))),
-                              CustomTextFormField(
-                                  focusNode: FocusNode(),
-                                  controller: controller.frameOneTwoController,
-                                  hintText: "lbl_lorem_ipsun".tr,
-                                  margin: getMargin(top: 7),
-                                  padding: TextFormFieldPadding.PaddingT55,
-                                  textInputAction: TextInputAction.done,
-                                  maxLines: 6)
                             ])))),
             bottomNavigationBar: CustomButton(
                 height: getVerticalSize(56),
@@ -277,41 +194,69 @@ class NewPositionScreen extends GetWidget<NewPositionController> {
                 padding: ButtonPadding.PaddingAll17,
                 fontStyle: ButtonFontStyle.PlusJakartaSansSemiBold16Gray50,
                 onTap: () {
-                  onTapSavechanges();
+                  // onTapSavechanges();
+                  controller.addExperience();
+                  Get.toNamed(
+      AppRoutes.experienceSettingScreen,
+    );
                 })));
   }
 
-  Future<void> onTapRowsmalllabelregulthree() async {
+  // Future<void> onTapRowsmalllabelregulthree() async {
+  //   DateTime? dateTime = await showDatePicker(
+  //       context: Get.context!,
+  //       initialDate: controller
+  //           .newPositionModelObj.value.selectedSmalllabelregulThreeTxt!.value,
+  //       firstDate: DateTime(1970),
+  //       lastDate: DateTime(
+  //           DateTime.now().year, DateTime.now().month, DateTime.now().day));
+  //   if (dateTime != null) {
+  //     controller.newPositionModelObj.value.selectedSmalllabelregulThreeTxt!
+  //         .value = dateTime;
+  //     controller.newPositionModelObj.value.smalllabelregulThreeTxt.value =
+  //         dateTime.format(DD_MM_YYYY);
+  //   }
+  // }
+
+  Future<void> onTapStartDate() async {
     DateTime? dateTime = await showDatePicker(
-        context: Get.context!,
-        initialDate: controller
-            .newPositionModelObj.value.selectedSmalllabelregulThreeTxt!.value,
-        firstDate: DateTime(1970),
-        lastDate: DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day));
+      context: Get.context!,
+      initialDate: controller.startDate.value ?? DateTime.now(),
+      firstDate: DateTime(1970),
+      lastDate: DateTime.now(),
+    );
     if (dateTime != null) {
-      controller.newPositionModelObj.value.selectedSmalllabelregulThreeTxt!
-          .value = dateTime;
-      controller.newPositionModelObj.value.smalllabelregulThreeTxt.value =
-          dateTime.format(DD_MM_YYYY);
+      controller.startDate.value = dateTime;
     }
   }
 
-  Future<void> onTapRowsmalllabelregulfour() async {
+  Future<void> onTapEndDate() async {
     DateTime? dateTime = await showDatePicker(
-        context: Get.context!,
-        initialDate: controller
-            .newPositionModelObj.value.selectedSmalllabelregulFourTxt!.value,
-        firstDate: DateTime(1970),
-        lastDate: DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day));
+      context: Get.context!,
+      initialDate: controller.endDate.value ?? DateTime.now(),
+      firstDate: DateTime(1970),
+      lastDate: DateTime.now(),
+    );
     if (dateTime != null) {
-      controller.newPositionModelObj.value.selectedSmalllabelregulFourTxt!
-          .value = dateTime;
-      controller.newPositionModelObj.value.smalllabelregulFourTxt.value =
-          dateTime.format(DD_MM_YYYY);
+      controller.endDate.value = dateTime;
     }
   }
+
+  // Future<void> onTapRowsmalllabelregulfour() async {
+  //   DateTime? dateTime = await showDatePicker(
+  //       context: Get.context!,
+  //       initialDate: controller
+  //           .newPositionModelObj.value.selectedSmalllabelregulFourTxt!.value,
+  //       firstDate: DateTime(1970),
+  //       lastDate: DateTime(
+  //           DateTime.now().year, DateTime.now().month, DateTime.now().day));
+  //   if (dateTime != null) {
+  //     controller.newPositionModelObj.value.selectedSmalllabelregulFourTxt!
+  //         .value = dateTime;
+  //     controller.newPositionModelObj.value.smalllabelregulFourTxt.value =
+  //         dateTime.format(DD_MM_YYYY);
+  //   }
+  // }
 
   onTapSavechanges() {
     Get.toNamed(

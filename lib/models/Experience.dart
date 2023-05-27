@@ -1,32 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Experience {
-  String id;
+  String idFreelancer;
   String title;
   String companyName;
   String location;
-  String jobPost;
   DateTime startDate;
   DateTime endDate;
 
   Experience({
-    required this.id,
+    required this.idFreelancer,
     required this.title,
     required this.companyName,
     required this.location,
-    required this.jobPost,
     required this.startDate,
     required this.endDate,
   });
 
-  factory Experience.fromDocumentSnapshot(DocumentSnapshot snapshot) {
-    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+  factory Experience.fromJson(Map<String, dynamic> data) {
+    
     return Experience(
-      id: snapshot.id,
+      idFreelancer: data['idFreelancer'],
       title: data['title'],
       companyName: data['companyName'],
       location: data['location'],
-      jobPost: data['jobPost'],
       startDate: (data['startDate'] as Timestamp).toDate(),
       endDate: (data['endDate'] as Timestamp).toDate(),
     );
@@ -34,10 +31,10 @@ class Experience {
 
   Map<String, dynamic> toMap() {
     return {
+      'idFreelancer': idFreelancer,
       'title': title,
       'companyName': companyName,
       'location': location,
-      'jobPost': jobPost,
       'startDate': startDate,
       'endDate': endDate,
     };

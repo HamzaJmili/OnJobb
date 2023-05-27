@@ -1,21 +1,24 @@
+import 'package:intl/intl.dart';
+
 import '../controller/experience_setting_controller.dart';
-import '../models/listuser2_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:onjobb/core/app_export.dart';
 import 'package:onjobb/widgets/custom_icon_button.dart';
 
 // ignore: must_be_immutable
 class Listuser2ItemWidget extends StatelessWidget {
-  Listuser2ItemWidget(this.listuser2ItemModelObj);
+  Listuser2ItemWidget(this.item, this.isEdu, {super.key});
 
-  Listuser2ItemModel listuser2ItemModelObj;
+  final Map<String, dynamic> item;
+
+  final bool isEdu;
 
   var controller = Get.find<ExperienceSettingController>();
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         CustomIconButton(
           height: 48,
@@ -26,7 +29,7 @@ class Listuser2ItemWidget extends StatelessWidget {
         ),
         Padding(
           padding: getPadding(
-            left: 12,
+            left: 10,
             top: 5,
             bottom: 1,
           ),
@@ -34,15 +37,15 @@ class Listuser2ItemWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Obx(
-                () => Text(
-                  listuser2ItemModelObj.internshipuiuxTxt.value,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.left,
-                  style: AppStyle.txtPlusJakartaSansSemiBold14Gray900.copyWith(
-                    letterSpacing: getHorizontalSize(
-                      0.07,
-                    ),
+              Text(
+                isEdu
+                    ? item['school']
+                    : item['title'] ,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.left,
+                style: AppStyle.txtPlusJakartaSansSemiBold14Gray900.copyWith(
+                  letterSpacing: getHorizontalSize(
+                    0.07,
                   ),
                 ),
               ),
@@ -57,7 +60,9 @@ class Listuser2ItemWidget extends StatelessWidget {
                         top: 1,
                       ),
                       child: Text(
-                        "lbl_shopee_sg".tr,
+                        isEdu
+                            ? item['degree'] 
+                            : item['companyName'] ,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
                         style: AppStyle.txtPlusJakartaSansMedium12.copyWith(
@@ -88,15 +93,13 @@ class Listuser2ItemWidget extends StatelessWidget {
                         left: 4,
                         bottom: 1,
                       ),
-                      child: Obx(
-                        () => Text(
-                          listuser2ItemModelObj.zipcodeTxt.value,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.left,
-                          style: AppStyle.txtPlusJakartaSansMedium12.copyWith(
-                            letterSpacing: getHorizontalSize(
-                              0.06,
-                            ),
+                      child: Text(
+                        '${DateFormat('MM/yyyy').format(item['startDate'])} - ${DateFormat('MM/yyyy').format(item['endDate'])}',
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.left,
+                        style: AppStyle.txtPlusJakartaSansMedium12.copyWith(
+                          letterSpacing: getHorizontalSize(
+                            0.06,
                           ),
                         ),
                       ),

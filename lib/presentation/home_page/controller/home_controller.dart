@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:onjobb/core/app_export.dart';
 import 'package:onjobb/presentation/home_page/models/home_model.dart';
 import 'package:onjobb/models/Client.dart';
@@ -9,6 +10,7 @@ import '../../../models/Job.dart';
 
 class HomeController extends GetxController {
   HomeController(this.homeModelObj);
+  TextEditingController searchText = TextEditingController();
   final FirebaseAuth auth = FirebaseAuth.instance;
   Rx<bool> userisFreelancer = true.obs;
   Rx<bool> isLoading = true.obs;
@@ -18,6 +20,10 @@ class HomeController extends GetxController {
   List<Job> jobsList = [];
   List<Client> clientList = [];
   List<Freelancer> freelancersList = [];
+  var filteredJobsList = [].obs;
+  var filteredFreelancersList = [].obs;
+
+  var searchValue = "".obs;
 
   Future<void> getCurrentUser() async {
     try {
@@ -41,8 +47,9 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<List<Freelancer>> getFreelancers() async {
-    List<Freelancer> freelancersList = [];
+// Future<List<Freelancer>>
+  Future<void> getFreelancers() async {
+    // List<Freelancer> freelancersList = [];
     final snapshot = await FirebaseFirestore.instance
         .collection('users')
         .where('isFreelancer', isEqualTo: true)
@@ -52,17 +59,18 @@ class HomeController extends GetxController {
       Freelancer freelancer = Freelancer.fromJson(doc.id, doc.data());
       freelancersList.add(freelancer);
     }
-    return freelancersList;
+    // return freelancersList;
   }
 
-  Future<List<Job>> getJobs() async {
-    List<Job> jobsList = [];
+//  Future<List<Job>>
+  Future<void> getJobs() async {
+    // List<Job> jobsList = [];
     final snapshot = await FirebaseFirestore.instance.collection('jobs').get();
     for (var doc in snapshot.docs) {
       Job job = Job.fromJson(doc.id, doc.data());
       jobsList.add(job);
     }
-    return jobsList;
+    // return jobsList;
   }
 
   Future<Client?> getClientById(String idPublisher) async {
@@ -82,8 +90,8 @@ class HomeController extends GetxController {
   }
 
   getJobsAndClient() async {
-    jobsList = await getJobs();
-    freelancersList = await getFreelancers();
+    // jobsList = await getJobs();
+    // freelancersList = await getFreelancers();
     for (var job in jobsList) {
       Client? client = await getClientById(job.idPublisher);
       if (client != null) {
@@ -103,9 +111,42 @@ class HomeController extends GetxController {
   Rx<HomeModel> homeModelObj;
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    getCurrentUser();
+    await getCurrentUser();
+    getJobs();
+    await getFreelancers();
+    await getJobs();
+    getJobsAndClient();
+    filteredJobsList.value = jobsList;
+    filteredFreelancersList.value = freelancersList;
+    searchValue.listen((value) {
+      filterList(value);
+    });
+    searchText.addListener(() {
+      filterList(searchText.text);
+    });
+  }
+
+  void filterList(String value) {
+    if(userisFreelancer.value) { 
+ if (value.isEmpty) {
+      filteredJobsList.value = jobsList;
+      return;
+    }
+    filteredJobsList.value = jobsList
+        .where((job) => job.title.toLowerCase().contains(value.toLowerCase()))
+        .toList();
+    } else {
+ if (value.isEmpty) {
+      filteredFreelancersList.value = freelancersList;
+      return;
+    }
+    filteredFreelancersList.value = freelancersList
+        .where((freelancer) =>  freelancer.lastname.toLowerCase().contains(value.toLowerCase()) || freelancer.firstname.toLowerCase().contains(value.toLowerCase())) 
+        .toList();
+    }
+   
   }
 
   @override

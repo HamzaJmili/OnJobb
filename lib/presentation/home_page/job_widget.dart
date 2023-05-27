@@ -138,7 +138,7 @@ class YourJobWidget extends StatelessWidget {
  
 
   onTapOnJob() {
-     Get.offAll(
+     Get.to(
     () => JobDetailsScreen(),
     arguments: {'job': job , 'freelancerId': freelancerId}
   );

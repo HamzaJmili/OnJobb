@@ -15,12 +15,12 @@ import 'package:onjobb/widgets/app_bar/custom_app_bar.dart';
 
 // ignore_for_file: must_be_immutable
 class SavedPage extends StatelessWidget {
-  SavedController controller = Get.put(SavedController(SavedModel().obs));
+  SavedController controller = Get.put(SavedController());
 
   @override
   Widget build(BuildContext context) {
-    controller.getJobs();
-    controller.getSavedJobs();
+    // controller.getJobs();
+    // controller.getSavedJobs();
     return Obx(() {
       if (controller.userisFreelancer.value == true) {
         // Show the freelancer my jobs page if the user is a freelancer
@@ -28,46 +28,55 @@ class SavedPage extends StatelessWidget {
           if (controller.freelancer.value == null) {
             return const Center(child: CircularProgressIndicator());
           } else {
-            if (controller.savedJobsList.isEmpty) {
-              return const Center(child: Text('You have 0 saved jobs'));
-            }
+            
 
-            return Scaffold(
-                backgroundColor: ColorConstant.whiteA70002,
-                appBar: CustomAppBar(
-                    height: getVerticalSize(50),
-                    leadingWidth: 48,
-                    leading: AppbarImage(
-                        height: getSize(24),
-                        width: getSize(24),
-                        svgPath: ImageConstant.imgArrowleft,
-                        margin: getMargin(left: 24, top: 13, bottom: 13),
-                        onTap: () {
-                          onTapArrowleft5();
-                        }),
-                    centerTitle: true,
-                    title: AppbarTitle(text: "lbl_saved".tr)),
-                body: SingleChildScrollView(
-                  child: Padding(
-                      padding: getPadding(left: 24, top: 30, right: 24),
-                      child: Obx(() => ListView.separated(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          separatorBuilder: (context, index) {
-                            return SizedBox(height: getVerticalSize(12));
-                          },
-                          itemCount: controller.savedJobsList.length,
-                          itemBuilder: (context, index) {
-                            // SavedItemModel model = controller
-                            //     .savedModelObj.value.savedItemList.value[index];
-                            return SavedItemWidget(
-                                controller.savedJobsList[index],
-                                onTapSaveJobDetails: () {
-                              onTapSaveJobDetailsFreelancer(
-                                  controller.savedJobsList[index]);
-                            });
-                          }))),
-                ));
+             return Scaffold(
+  backgroundColor: ColorConstant.whiteA70002,
+  appBar: CustomAppBar(
+    height: getVerticalSize(50),
+    leadingWidth: 48,
+    leading: AppbarImage(
+      height: getSize(24),
+      width: getSize(24),
+      svgPath: ImageConstant.imgArrowleft,
+      margin: getMargin(left: 24, top: 13, bottom: 13),
+      onTap: () {
+        onTapArrowleft5();
+      },
+    ),
+    centerTitle: true,
+    title: AppbarTitle(text: "lbl_saved".tr),
+  ),
+  body: SingleChildScrollView(
+    child: Padding(
+      padding: getPadding(left: 24, top: 30, right: 24),
+      child: Obx(() {
+        if (controller.savedJobsList.isEmpty) {
+          return const Center(child: Text('You have 0 saved jobs'));
+        } else {
+          return ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            separatorBuilder: (context, index) {
+              return SizedBox(height: getVerticalSize(12));
+            },
+            itemCount: controller.savedJobsList.length,
+            itemBuilder: (context, index) {
+              return SavedItemWidget(
+                controller.savedJobsList[index],
+                onTapSaveJobDetails: () {
+                  onTapSaveJobDetailsFreelancer(controller.savedJobsList[index]);
+                },
+                isFreelancer: true,
+              );
+            },
+          );
+        }
+      }),
+    ),
+  ),
+);
+
           }
         }));
       } else {
@@ -118,8 +127,8 @@ class SavedPage extends StatelessWidget {
                               onTapSaveJobDetails: () {
                                 onTapSaveJobDetailsClient(
                                     controller.jobsList[index]);
-                              },
-                            );
+                              }
+                          ,isFreelancer : false  );
                           },
                         );
                       }
@@ -142,7 +151,7 @@ class SavedPage extends StatelessWidget {
 
   onTapSaveJobDetailsFreelancer(Job job) {
     // Get.toNamed(AppRoutes.savedDetailJobScreen);
-    Get.offAll(() => JobDetailsScreen(),
+    Get.to(() => JobDetailsScreen(),
         arguments: {'job' : job, 'freelancerId': controller.freelancer.value?.uid ?? ''} );
   }
 
