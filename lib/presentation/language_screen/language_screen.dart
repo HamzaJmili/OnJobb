@@ -36,6 +36,7 @@ class LanguageScreen extends GetWidget<LanguageController> {
                     children: [
                       Container(
                           width: double.maxFinite,
+                          margin: EdgeInsets.only(top : 50),
                           child: Container(
                               padding: getPadding(
                                   left: 16, top: 21, right: 16, bottom: 21),
@@ -99,71 +100,7 @@ class LanguageScreen extends GetWidget<LanguageController> {
                                                   model);
                                             })))
                                   ]))),
-                      Container(
-                          width: double.maxFinite,
-                          child: Container(
-                              margin: getMargin(top: 24, bottom: 5),
-                              padding: getPadding(all: 16),
-                              decoration: AppDecoration.outlineIndigo50
-                                  .copyWith(
-                                      borderRadius:
-                                          BorderRadiusStyle.roundedBorder12),
-                              child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                        padding: getPadding(top: 3),
-                                        child: Text("lbl_other_languages".tr,
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.left,
-                                            style: AppStyle
-                                                .txtPlusJakartaSansSemiBold12Bluegray400
-                                                .copyWith(
-                                                    letterSpacing:
-                                                        getHorizontalSize(
-                                                            0.06)))),
-                                    Padding(
-                                        padding: getPadding(top: 19),
-                                        child: Obx(() => ListView.separated(
-                                            physics:
-                                                NeverScrollableScrollPhysics(),
-                                            shrinkWrap: true,
-                                            separatorBuilder: (context, index) {
-                                              return Padding(
-                                                  padding: getPadding(
-                                                      top: 8.0, bottom: 8.0),
-                                                  child: SizedBox(
-                                                      width: getHorizontalSize(
-                                                          295),
-                                                      child: Divider(
-                                                          height:
-                                                              getVerticalSize(
-                                                                  1),
-                                                          thickness:
-                                                              getVerticalSize(
-                                                                  1),
-                                                          color: ColorConstant
-                                                              .indigo50)));
-                                            },
-                                            itemCount: controller
-                                                .languageModelObj
-                                                .value
-                                                .listchinesesItemList
-                                                .value
-                                                .length,
-                                            itemBuilder: (context, index) {
-                                              ListchinesesItemModel model =
-                                                  controller
-                                                      .languageModelObj
-                                                      .value
-                                                      .listchinesesItemList
-                                                      .value[index];
-                                              return ListchinesesItemWidget(
-                                                  model);
-                                            })))
-                                  ])))
+                      
                     ]))));
   }
 

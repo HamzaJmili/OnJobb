@@ -291,8 +291,7 @@ final Map<String, String> enUs = {
   "msg_conditions_of_u": "Conditions of Use",
   "msg_job_role_descri": "Job Role Description",
   "lbl_login": " Login",
-  "msg_including_conse":
-      " including consent to electronic communications and I affirm that the information provided is my own.",
+  "msg_including_conse": " including consent to electronic communications and I affirm that the information provided is my own.",
   "msg_jakarta_indone": "Jakarta, Indonesia (Remote)",
   "lbl_finland": "Finland",
   "msg_1100_12_000": "\$1100 - \$12.000/Month",
@@ -317,5 +316,5 @@ final Map<String, String> enUs = {
   "lbl_experience": "Experiences",
   "lbl_full_name": "Full Name",
   "msg_ex_singapore": "Ex: Singapore, Singapore",
-  "lbl_field_of_study": "Field of study"
+  "lbl_field_of_study": "Field of study",
 };

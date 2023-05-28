@@ -1,3 +1,4 @@
+import '../../widgets/custom_radio_button.dart';
 import 'controller/settings_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:onjobb/core/app_export.dart';
@@ -287,7 +288,7 @@ class SettingsScreen extends GetWidget<SettingsController> {
                                       indent: getHorizontalSize(36))),
                               GestureDetector(
                                   onTap: () {
-                                    onTapLanguage();
+                                    // onTapLanguage();
                                   },
                                   child: Padding(
                                       padding: getPadding(top: 15),
@@ -317,13 +318,35 @@ class SettingsScreen extends GetWidget<SettingsController> {
                                                                 getHorizontalSize(
                                                                     0.08)))),
                                             Spacer(),
-                                            CustomImageView(
-                                                svgPath:
-                                                    ImageConstant.imgArrowright,
-                                                height: getSize(24),
-                                                width: getSize(24),
-                                                margin: getMargin(bottom: 4))
-                                          ]))),
+                                          
+                                       Align(
+  alignment: Alignment.center,
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      CustomRadioButton(
+        fontStyle: RadioFontStyle.PlusJakartaSansSemiBold16Gray900,
+        value: 'french',
+        groupValue: controller.selectedLanguage.value,
+        text: 'French',
+         onChange: (value) {
+    controller.updateLanguage(value);
+  },
+      ),
+     const SizedBox(width: 16),
+      CustomRadioButton(
+        fontStyle: RadioFontStyle.PlusJakartaSansSemiBold16Gray900,
+        value: 'english',
+        groupValue: controller.selectedLanguage.value,
+        text: 'English',
+         onChange: (value) {
+    controller.updateLanguage(value);
+  },
+      ),
+    ],
+  ),
+)
+  ]))),
                               Padding(
                                   padding: getPadding(top: 14),
                                   child: Divider(

@@ -35,8 +35,9 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.standard,
       ),
       translations: AppLocalization(),
-      locale: Get.deviceLocale,
-      fallbackLocale: Locale('en', 'US'),
+      // locale: Get.deviceLocale,
+      locale: const Locale('fr', 'FR'),
+      fallbackLocale:const  Locale('fr', 'FR'),
       title: 'onjobb',
       initialBinding: InitialBindings(),
       initialRoute: currentUser == null
