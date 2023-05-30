@@ -22,6 +22,7 @@ class HomeController extends GetxController {
   List<Freelancer> freelancersList = [];
   var filteredJobsList = [].obs;
   var filteredFreelancersList = [].obs;
+  var recommendedJobs = [].obs;
 
   var searchValue = "".obs;
 
@@ -39,7 +40,6 @@ class HomeController extends GetxController {
         userisFreelancer.value = false;
       } else if (data['isFreelancer'] == true) {
         freelancer.value = Freelancer.fromJson(docSnapshot.id, data);
-
         userisFreelancer.value = true;
       }
     } catch (e) {
@@ -64,13 +64,45 @@ class HomeController extends GetxController {
 
 //  Future<List<Job>>
   Future<void> getJobs() async {
-    // List<Job> jobsList = [];
     final snapshot = await FirebaseFirestore.instance.collection('jobs').get();
     for (var doc in snapshot.docs) {
       Job job = Job.fromJson(doc.id, doc.data());
       jobsList.add(job);
     }
-    // return jobsList;
+
+    // Sort the jobsList by publishedAt in descending order
+    jobsList.sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
+  }
+
+  void fillRecommendedJobs() {
+    for (Job job in jobsList) {
+      bool containsSpecialization =
+          freelancer.value!.speciallization.any((specialization) {
+        return specialization
+            .toString()
+            .toLowerCase()
+            .contains(job.title.toLowerCase());
+      });
+
+      if (containsSpecialization) {
+        print('we found a job to be recomm');
+        recommendedJobs.add(job);
+      }
+    }
+
+    if (recommendedJobs.isEmpty || recommendedJobs.length > 5) {
+      for (Job job in jobsList) {
+        if (recommendedJobs.length >= 5) {
+          break;
+        }
+
+        recommendedJobs.add(job);
+      }
+      print(' the length inside recomm function is ${recommendedJobs.length} and :  ${jobsList.length} ');
+    }
+
+    // Do something with the recommendedJobs list
+    // ...
   }
 
   Future<Client?> getClientById(String idPublisher) async {
@@ -114,9 +146,9 @@ class HomeController extends GetxController {
   void onInit() async {
     super.onInit();
     await getCurrentUser();
-    getJobs();
-    await getFreelancers();
     await getJobs();
+    fillRecommendedJobs();
+    await getFreelancers();
     getJobsAndClient();
     filteredJobsList.value = jobsList;
     filteredFreelancersList.value = freelancersList;
@@ -129,24 +161,25 @@ class HomeController extends GetxController {
   }
 
   void filterList(String value) {
-    if(userisFreelancer.value) { 
- if (value.isEmpty) {
-      filteredJobsList.value = jobsList;
-      return;
-    }
-    filteredJobsList.value = jobsList
-        .where((job) => job.title.toLowerCase().contains(value.toLowerCase()))
-        .toList();
+    if (userisFreelancer.value) {
+      if (value.isEmpty) {
+        filteredJobsList.value = jobsList;
+        return;
+      }
+      filteredJobsList.value = jobsList
+          .where((job) => job.title.toLowerCase().contains(value.toLowerCase()))
+          .toList();
     } else {
- if (value.isEmpty) {
-      filteredFreelancersList.value = freelancersList;
-      return;
+      if (value.isEmpty) {
+        filteredFreelancersList.value = freelancersList;
+        return;
+      }
+      filteredFreelancersList.value = freelancersList
+          .where((freelancer) =>
+              freelancer.lastname.toLowerCase().contains(value.toLowerCase()) ||
+              freelancer.firstname.toLowerCase().contains(value.toLowerCase()))
+          .toList();
     }
-    filteredFreelancersList.value = freelancersList
-        .where((freelancer) =>  freelancer.lastname.toLowerCase().contains(value.toLowerCase()) || freelancer.firstname.toLowerCase().contains(value.toLowerCase())) 
-        .toList();
-    }
-   
   }
 
   @override
