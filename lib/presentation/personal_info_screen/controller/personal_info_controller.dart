@@ -45,17 +45,17 @@ class PersonalInfoController extends GetxController {
   }
 
   Future<void> callFetchMe() async {
-    try {
-      getMeResp = await Get.find<ApiClient>().fetchMe(headers: {
-        'Content-type': 'application/json',
-        'Authorization':
-            'Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNmZiNzBhZWJiM2RiYjVlYmVkYTBmMiIsInVzZXJuYW1lIjoiT3Jpb24xNyIsImlhdCI6MTY3ODc3NjY2OX0.16TzzeJMkGbsT-hk-wigjBt4xeJNcwNzVvnl05evYUk',
-      });
-      _handleFetchMeSuccess();
-    } on GetMeResp catch (e) {
-      getMeResp = e;
-      rethrow;
-    }
+    // try {
+    //   getMeResp = await Get.find<ApiClient>().fetchMe(headers: {
+    //     'Content-type': 'application/json',
+    //     'Authorization':
+    //         'Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNmZiNzBhZWJiM2RiYjVlYmVkYTBmMiIsInVzZXJuYW1lIjoiT3Jpb24xNyIsImlhdCI6MTY3ODc3NjY2OX0.16TzzeJMkGbsT-hk-wigjBt4xeJNcwNzVvnl05evYUk',
+    //   });
+    //   _handleFetchMeSuccess();
+    // } on GetMeResp catch (e) {
+    //   getMeResp = e;
+    //   rethrow;
+    // }
   }
 
   void _handleFetchMeSuccess() {

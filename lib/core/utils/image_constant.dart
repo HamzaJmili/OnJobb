@@ -151,6 +151,8 @@ class ImageConstant {
   static String imageNotFound = 'assets/images/image_not_found.png';
 
   static String imageSend = 'assets/images/envoyer.png';
-  
+
   static String imagesendmsg = 'assets/images/sendmsg.png';
+
+
 }

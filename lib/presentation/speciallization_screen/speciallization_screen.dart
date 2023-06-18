@@ -43,7 +43,7 @@ class SpeciallizationScreen extends GetWidget<SpeciallizationController> {
                                   letterSpacing: getHorizontalSize(0.12)))),
                       Padding(
                           padding: getPadding(top: 7),
-                          child: Text("msg_lorem_ipsum_dol7".tr,
+                          child: Text("",
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.left,
                               style: AppStyle

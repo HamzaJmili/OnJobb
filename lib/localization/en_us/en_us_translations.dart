@@ -175,7 +175,8 @@ final Map<String, String> enUs = {
   "msg_the_best_app_fo2": "The best app for ",
   "msg_lorem_ipsum_dol7": "Lorem ipsum dolor sit amet, consectetur",
   "lbl_https": "Https://...",
-  "msg_lorem_ipsum_dol6": "Lorem ipsum dolor sit amet",
+  "msg_lorem_ipsum_dol6": "Enter your credentials to log in",
+  "msg_lorem_ipsum_dol20": "Fill in the necessary information",
   "msg_lorem_ipsum_dol5":
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   "msg_lorem_ipsum_dol4":
@@ -317,4 +318,16 @@ final Map<String, String> enUs = {
   "lbl_full_name": "Full Name",
   "msg_ex_singapore": "Ex: Singapore, Singapore",
   "lbl_field_of_study": "Field of study",
+  "lbl_selectcountry" : "select your country" ,
+  'lbl_maxSalary' : 'Max Salary',
+'lbl_minSalary' :'Min Salary',
+'lbl_create_new_post' : 'create new post',
+"Remote" : "Remote",
+"On-site" : "On-site",
+"One-time Job" : "One-time Job",
+"Job Description : write at least 100 characters" : "Job Description: write at least 100 characters",
+"Describe the job" : "Describe the job",
+"lbl_write_to_client": "Write to the Client",
+"lbl_cover_letter": "Cover Letter: Write at least 100 characters",
+"lbl_add_phone_number": "You can add your phone number (optional)",
 };

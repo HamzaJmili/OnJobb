@@ -59,7 +59,7 @@ class SliderapplicationsurelyItemWidget extends StatelessWidget {
                       ),
                     ),
                     TextSpan(
-                      text: "lbl_each_company".tr,
+                      text: " ${"lbl_each_company".tr}",
                       style: TextStyle(
                         color: ColorConstant.gray900,
                         fontSize: getFontSize(
@@ -77,25 +77,25 @@ class SliderapplicationsurelyItemWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            Container(
-              width: getHorizontalSize(
-                243,
-              ),
-              margin: getMargin(
-                top: 14,
-              ),
-              child: Text(
-                "msg_semper_in_cursu".tr,
-                maxLines: null,
-                textAlign: TextAlign.center,
-                style:
-                    AppStyle.txtPlusJakartaSansSemiBold14Bluegray300.copyWith(
-                  letterSpacing: getHorizontalSize(
-                    0.07,
-                  ),
-                ),
-              ),
-            ),
+            // Container(
+            //   width: getHorizontalSize(
+            //     243,
+            //   ),
+            //   margin: getMargin(
+            //     top: 14,
+            //   ),
+            //   child: Text(
+            //     "msg_semper_in_cursu".tr,
+            //     maxLines: null,
+            //     textAlign: TextAlign.center,
+            //     style:
+            //         AppStyle.txtPlusJakartaSansSemiBold14Bluegray300.copyWith(
+            //       letterSpacing: getHorizontalSize(
+            //         0.07,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             GestureDetector(
               onTap: () {
                 onTapBtnGetStarted?.call();

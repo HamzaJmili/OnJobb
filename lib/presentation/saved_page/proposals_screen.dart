@@ -38,12 +38,12 @@ class ProposalsScreen extends StatelessWidget {
           centerTitle: true,
           title: AppbarTitle(text: "lbl_job_details".tr),
           actions: [
-            AppbarImage(
-              height: getSize(24),
-              width: getSize(24),
-              svgPath: ImageConstant.imgBookmark,
-              margin: getMargin(left: 16, top: 13, right: 16, bottom: 13),
-            ),
+            // AppbarImage(
+            //   height: getSize(24),
+            //   width: getSize(24),
+            //   svgPath: ImageConstant.imgBookmark,
+            //   margin: getMargin(left: 16, top: 13, right: 16, bottom: 13),
+            // ),
           ],
         ),
         body: SingleChildScrollView(
@@ -70,7 +70,7 @@ class ProposalsScreen extends StatelessWidget {
                       ),
                       child: CircleAvatar(
                         backgroundImage: NetworkImage(job.imageUrl),
-                        radius: 24,
+                        radius: 27,
                       ),
                     ),
                     Padding(

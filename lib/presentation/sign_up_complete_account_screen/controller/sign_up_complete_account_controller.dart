@@ -10,6 +10,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SignUpCompleteAccountController extends GetxController {
+  
   TextEditingController frameOneController = TextEditingController();
 
   TextEditingController frameOneOneController = TextEditingController();
@@ -44,8 +45,9 @@ class SignUpCompleteAccountController extends GetxController {
 
   Future<bool> uploadProfileImage() async {
     try {
-      final pickedFile =
-          await ImagePicker().pickImage(source: ImageSource.gallery);
+      
+      final pickedFile =await ImagePicker().pickImage(source: ImageSource.gallery);
+
       if (pickedFile != null) {
         print("Upload image to Firebase storage");
         // Upload image to Firebase storage

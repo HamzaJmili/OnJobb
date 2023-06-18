@@ -13,7 +13,7 @@ class SignUpCompleteAccountScreen
   final String email = Get.arguments['email'];
   // final List<String> specializations = Get.arguments['specializations'];
   final String selectedCountry =
-      Get.arguments['selectedCountry'] ?? 'Select your Country';
+      Get.arguments['selectedCountry'] ?? "lbl_selectcountry".tr;
 
   @override
   Widget build(BuildContext context) {
@@ -58,18 +58,18 @@ class SignUpCompleteAccountScreen
                                           .copyWith(
                                               letterSpacing:
                                                   getHorizontalSize(0.12))))),
-                          Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                  padding: getPadding(top: 9, right: 26),
-                                  child: Text("msg_lorem_ipsum_dol6".tr,
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.left,
-                                      style: AppStyle
-                                          .txtPlusJakartaSansMedium14Bluegray400
-                                          .copyWith(
-                                              letterSpacing:
-                                                  getHorizontalSize(0.07))))),
+                          // Align(
+                          //     alignment: Alignment.center,
+                          //     child: Padding(
+                          //         padding: getPadding(top: 9, right: 10),
+                          //         child: Text("msg_lorem_ipsum_dol20".tr,
+                          //             overflow: TextOverflow.ellipsis,
+                          //             textAlign: TextAlign.left,
+                          //             style: AppStyle
+                          //                 .txtPlusJakartaSansMedium14Bluegray400
+                          //                 .copyWith(
+                          //                     letterSpacing:
+                          //                         getHorizontalSize(0.07))))),
                           Padding(
                               padding: getPadding(top: 33),
                               child: Text("lbl_first_name".tr,
@@ -129,7 +129,7 @@ class SignUpCompleteAccountScreen
                                   maxHeight: getVerticalSize(52))),
                           Padding(
                               padding: getPadding(top: 28),
-                              child: Text("Upload your image profile",
+                              child: Text("Ajoutez votre image du profil",
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.left,
                                   style: AppStyle.txtPlusJakartaSansMedium14
@@ -169,14 +169,16 @@ class SignUpCompleteAccountScreen
                                         Padding(
                                             padding: getPadding(
                                               top: 8,
+                                            
+                                              
                                             ),
                                             child: Text(
                                                 controller.isUploaded.value ==
                                                         false
-                                                    ? "Upload your image profile"
+                                                    ? "Cliquez ici"
                                                     : "Uploaded successfully",
                                                 overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.left,
+                                                textAlign: TextAlign.center,
                                                 style: AppStyle
                                                     .txtPlusJakartaSansSemiBold14Gray900
                                                     .copyWith(
@@ -197,7 +199,7 @@ class SignUpCompleteAccountScreen
                           CustomTextFormField(
                               focusNode: FocusNode(),
                               controller: controller.bio,
-                              hintText: "Write about you ",
+                              hintText: "Écrivez quelque chose à propos de vous",
                               margin: getMargin(top: 7),
                               padding: TextFormFieldPadding.PaddingT55,
                               textInputAction: TextInputAction.done,

@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
       title: 'onjobb',
       initialBinding: InitialBindings(),
       initialRoute: currentUser == null
-          ? AppRoutes.loginScreen
+          ? AppRoutes.onboardingOneScreen
           : AppRoutes.homeContainerScreen,
       getPages: AppRoutes.pages,
     );

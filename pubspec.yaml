@@ -19,7 +19,6 @@ dependencies:
   cached_network_image: ^3.2.3
   image_picker: ^0.8.7+3
   google_fonts: ^4.0.3
-  connectivity_plus: ^2.3.6 # discover network connectivity and configure themselves accordingly. It can distinguish between cellular vs WiFi connection.
   shared_preferences: ^2.0.15 #Wraps platform-specific persistent storage for simple data 
   flutter_svg: ^1.1.6
   google_sign_in: ^5.0.7
@@ -35,7 +34,6 @@ dependencies:
   firebase_core: ^2.11.0
   cloud_firestore: ^4.6.0
   firebase_storage: ^11.2.0
-  get_storage: ^2.0.3
 
   
 

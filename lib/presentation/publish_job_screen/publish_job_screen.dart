@@ -1,5 +1,3 @@
-import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 
 import '../../widgets/custom_radio_button.dart';
 import '../../widgets/custom_text_form_field.dart';
@@ -58,7 +56,7 @@ class PublishJobScreen extends GetWidget<PublishJobController> {
                                     children: [
                                       Padding(
                                         padding: getPadding(top: 14),
-                                        child: Text("Title",
+                                        child: Text("lbl_title".tr,
                                             overflow: TextOverflow.ellipsis,
                                             textAlign: TextAlign.left,
                                             style: AppStyle
@@ -86,17 +84,17 @@ class PublishJobScreen extends GetWidget<PublishJobController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Padding(
+                                       Padding(
                                         padding:
                                             EdgeInsets.only(left: 20, top: 15),
                                         child: Text(
-                                          'Max salary',
+                                          'lbl_maxSalary'.tr,
                                         ),
                                       ),
                                       CustomTextFormField(
                                         focusNode: FocusNode(),
                                         controller: controller.maxSalary,
-                                        hintText: 'max salary',
+                                        hintText: '800\$',
                                         margin: getMargin(top: 9),
                                         padding:
                                             TextFormFieldPadding.PaddingT15,
@@ -112,17 +110,17 @@ class PublishJobScreen extends GetWidget<PublishJobController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Padding(
+                                       Padding(
                                         padding:
                                             EdgeInsets.only(left: 20, top: 15),
                                         child: Text(
-                                          'Min salary',
+                                         'lbl_minSalary'.tr
                                         ),
                                       ),
                                       CustomTextFormField(
                                         focusNode: FocusNode(),
                                         controller: controller.minSalary,
-                                        hintText: 'min salary',
+                                        hintText: '200\$',
                                         margin: getMargin(top: 9),
                                         padding:
                                             TextFormFieldPadding.PaddingT15_1,
@@ -141,7 +139,8 @@ class PublishJobScreen extends GetWidget<PublishJobController> {
                             right: 37.0,
                             bottom: 16.0,
                           ),
-                          child: Text("Job type : ",
+                          child: Text(
+"lbl_job_type".tr,
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.left,
                               style: AppStyle.txtPlusJakartaSansMedium14
@@ -166,7 +165,7 @@ class PublishJobScreen extends GetWidget<PublishJobController> {
                                       print(
                                           " the previous value is ${controller.selectedJobType.value}");
                                     },
-                                    text: 'Remote',
+                                    text: "Remote".tr,
                                   ),
                                   CustomRadioButton(
                                     value: 'on-site',
@@ -175,7 +174,7 @@ class PublishJobScreen extends GetWidget<PublishJobController> {
                                     onChange: (value) {
                                       controller.selectedJobType.value = value;
                                     },
-                                    text: 'On-site',
+                                    text: 'On-site'.tr,
                                   ),
                                   CustomRadioButton(
                                     value: 'one-time',
@@ -184,7 +183,7 @@ class PublishJobScreen extends GetWidget<PublishJobController> {
                                     onChange: (value) {
                                       controller.selectedJobType.value = value;
                                     },
-                                    text: 'One-time Job',
+                                    text: 'One-time Job'.tr,
                                   ),
                                 ],
                               );
@@ -194,17 +193,19 @@ class PublishJobScreen extends GetWidget<PublishJobController> {
                         Padding(
                             padding: getPadding(top: 28),
                             child: Text(
-                                "Job Description : write at least 345 caracteres ",
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.left,
-                                style: AppStyle.txtPlusJakartaSansMedium14
-                                    .copyWith(
-                                        letterSpacing:
-                                            getHorizontalSize(0.07)))),
+                                "Job Description : write at least 345 caracteres ".tr,
+                               overflow: TextOverflow.ellipsis,
+                                            textAlign: TextAlign.left,
+                                            style: AppStyle
+                                                .txtPlusJakartaSansMedium16Gray900
+                                                .copyWith(
+                                                    letterSpacing:
+                                                        getHorizontalSize(
+                                                            0.07)))),
                         CustomTextFormField(
                             focusNode: FocusNode(),
                             controller: controller.description,
-                            hintText: "Describe the job  ",
+                            hintText: "Describe the job".tr,
                             margin: getMargin(
                               top: 20,
                               bottom: 12,

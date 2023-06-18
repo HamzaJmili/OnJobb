@@ -8,7 +8,6 @@ import 'controller/home_controller.dart';
 import 'freelancer_widget.dart';
 import 'job_widget.dart';
 import 'models/home_model.dart';
-import 'models/listuser_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:onjobb/core/app_export.dart';
 import 'package:onjobb/widgets/app_bar/appbar_image.dart';
@@ -64,7 +63,7 @@ class HomePage extends StatelessWidget {
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              "Hi welcome back FREELANCER ${controller.freelancer.value?.firstname}",
+                              "Bonjour, ravie de te revoir ${controller.freelancer.value?.firstname}",
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.left,
                               style: AppStyle.txtPlusJakartaSansBold14.copyWith(
@@ -190,7 +189,7 @@ class HomePage extends StatelessWidget {
                           ),
                           SizedBox(height: getVerticalSize(10)),
                           SizedBox(
-                            height: getVerticalSize(300),
+                            height: getVerticalSize(470),
                             child: Obx(
                               () => controller.isLoading.value
                                   ? Center(child: CircularProgressIndicator())
@@ -254,7 +253,7 @@ class HomePage extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Hi welcome back Client ${controller.client.value?.firstname}",
+                          "Bonjour, ravie de te revoir ${controller.client.value?.firstname}",
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.left,
                           style: AppStyle.txtPlusJakartaSansBold14.copyWith(
@@ -291,110 +290,111 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              body: SingleChildScrollView(
-                child: Padding(
-                  padding: getPadding(left: 2, right: 2, top: 30),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin: getMargin(bottom: 25),
-                        padding: getPadding(left: 16, right: 16),
-                        decoration: AppDecoration.outlineIndigo50.copyWith(
-                          borderRadius: BorderRadiusStyle.roundedBorder24,
-                        ),
-                        child: Row(
-                          children: [
-                            CustomImageView(
-                              svgPath: ImageConstant.imgSearch,
-                              height: getSize(18),
-                              width: getSize(18),
-                              margin: getMargin(right: 8),
-                            ),
-                            Expanded(
-                              child: TextField(
-                                controller: controller.searchText,
-                                decoration: InputDecoration(
-                                  hintText: "lbl_search".tr,
-                                  hintStyle: AppStyle.txtPlusJakartaSansMedium16
+              body: Stack(
+                children: [SingleChildScrollView(
+                  child: Padding(
+                    padding: getPadding(left: 2, right: 2, top: 30),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: getMargin(bottom: 25),
+                          padding: getPadding(left: 16, right: 16),
+                          decoration: AppDecoration.outlineIndigo50.copyWith(
+                            borderRadius: BorderRadiusStyle.roundedBorder24,
+                          ),
+                          child: Row(
+                            children: [
+                              CustomImageView(
+                                svgPath: ImageConstant.imgSearch,
+                                height: getSize(18),
+                                width: getSize(18),
+                                margin: getMargin(right: 8),
+                              ),
+                              Expanded(
+                                child: TextField(
+                                  controller: controller.searchText,
+                                  decoration: InputDecoration(
+                                    hintText: "lbl_search".tr,
+                                    hintStyle: AppStyle.txtPlusJakartaSansMedium16
+                                        .copyWith(
+                                      letterSpacing: getHorizontalSize(0.08),
+                                    ),
+                                    border: InputBorder.none,
+                                    contentPadding: EdgeInsets.zero,
+                                  ),
+                                  textAlign: TextAlign.left,
+                                  style: AppStyle.txtPlusJakartaSansMedium16
                                       .copyWith(
                                     letterSpacing: getHorizontalSize(0.08),
                                   ),
-                                  border: InputBorder.none,
-                                  contentPadding: EdgeInsets.zero,
-                                ),
-                                textAlign: TextAlign.left,
-                                style: AppStyle.txtPlusJakartaSansMedium16
-                                    .copyWith(
-                                  letterSpacing: getHorizontalSize(0.08),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      Text(
-                        "lbl_recommendation".tr,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.left,
-                        style: AppStyle.txtPlusJakartaSansSemiBold18.copyWith(
-                          letterSpacing: getHorizontalSize(0.09),
+                        // Text(
+                        //   "lbl_recommendation".tr,
+                        //   overflow: TextOverflow.ellipsis,
+                        //   textAlign: TextAlign.left,
+                        //   style: AppStyle.txtPlusJakartaSansSemiBold18.copyWith(
+                        //     letterSpacing: getHorizontalSize(0.09),
+                        //   ),
+                        // ),
+                        // SizedBox(height: getVerticalSize(16)),
+                        // Container(
+                        //   // height: getVerticalSize(193),
+                        //   // child: Obx(() => ListView.separated(
+                        //   //   padding: EdgeInsets.zero,
+                        //   //   scrollDirection: Axis.horizontal,
+                        //   //   separatorBuilder: (context, index) {
+                        //   //     return SizedBox(height: getVerticalSize(16));
+                        //   //   },
+                        //   //   itemCount: controller.homeModelObj.value.listuserItemList.value.length,
+                        //   //   itemBuilder: (context, index) {
+                        //   //     ListuserItemModel model = controller.homeModelObj.value.listuserItemList.value[index];
+                        //   //     return ListuserItemWidget(model);
+                        //   //   },
+                        //   // )),
+                        // ),
+                        SizedBox(height: getVerticalSize(22)),
+                        Text(
+                          "Freelancers",
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.left,
+                          style: AppStyle.txtInterSemiBold16.copyWith(
+                            letterSpacing: getHorizontalSize(0.08),
+                          ),
                         ),
-                      ),
-                      SizedBox(height: getVerticalSize(16)),
-                      Container(
-                        // height: getVerticalSize(193),
-                        // child: Obx(() => ListView.separated(
-                        //   padding: EdgeInsets.zero,
-                        //   scrollDirection: Axis.horizontal,
-                        //   separatorBuilder: (context, index) {
-                        //     return SizedBox(height: getVerticalSize(16));
-                        //   },
-                        //   itemCount: controller.homeModelObj.value.listuserItemList.value.length,
-                        //   itemBuilder: (context, index) {
-                        //     ListuserItemModel model = controller.homeModelObj.value.listuserItemList.value[index];
-                        //     return ListuserItemWidget(model);
-                        //   },
-                        // )),
-                      ),
-                      SizedBox(height: getVerticalSize(22)),
-                      Text(
-                        "lbl_recent_jobs".tr,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.left,
-                        style: AppStyle.txtInterSemiBold16.copyWith(
-                          letterSpacing: getHorizontalSize(0.08),
+                        SizedBox(height: getVerticalSize(10)),
+                        SizedBox(
+                          height: getVerticalSize(470),
+                          child: Obx(
+                            () => controller.isLoading.value
+                                ? const Center(child: CircularProgressIndicator())
+                                : ListView.builder(
+                                    itemCount:
+                                        controller.filteredFreelancersList.length,
+                                    itemBuilder: (context, index) {
+                                      Freelancer freelancer = controller
+                                          .filteredFreelancersList[index];
+                                      return FreelancerCardWidget(
+                                          freelancer: freelancer);
+                                    },
+                                  ),
+                          ),
                         ),
-                      ),
-                      SizedBox(height: getVerticalSize(10)),
-                      SizedBox(
-                        height: getVerticalSize(300),
-                        child: Obx(
-                          () => controller.isLoading.value
-                              ? const Center(child: CircularProgressIndicator())
-                              : ListView.builder(
-                                  itemCount:
-                                      controller.filteredFreelancersList.length,
-                                  itemBuilder: (context, index) {
-                                    Freelancer freelancer = controller
-                                        .filteredFreelancersList[index];
-                                    return FreelancerCardWidget(
-                                        freelancer: freelancer);
-                                  },
-                                ),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              floatingActionButton: Positioned(
+        Positioned(
                 bottom: 10,
                 right: 10,
                 child: CustomButton(
                   height: getVerticalSize(48),
                   width: getHorizontalSize(137),
-                  text: "Post a new Job",
+                  text: "Nouveau poste",
                   shape: ButtonShape.RoundedBorder20,
                   padding: ButtonPadding.PaddingT14,
                   onTap: () {
@@ -414,7 +414,8 @@ class HomePage extends StatelessWidget {
                     child: CustomImageView(svgPath: ImageConstant.imgPlus18x18),
                   ),
                 ),
-              ),
+              ),     ] ),
+             
             );
           }
         }));

@@ -57,7 +57,7 @@ class SliderthebestappforItemWidget extends StatelessWidget {
                       ),
                     ),
                     TextSpan(
-                      text: "msg_find_your_dream2".tr,
+                      text: " ${"msg_find_your_dream2".tr}",
                       style: TextStyle(
                         color: ColorConstant.gray900,
                         fontSize: getFontSize(
@@ -75,25 +75,25 @@ class SliderthebestappforItemWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            Container(
-              width: getHorizontalSize(
-                243,
-              ),
-              margin: getMargin(
-                top: 19,
-              ),
-              child: Text(
-                "msg_semper_in_cursu".tr,
-                maxLines: null,
-                textAlign: TextAlign.center,
-                style:
-                    AppStyle.txtPlusJakartaSansSemiBold14Bluegray300.copyWith(
-                  letterSpacing: getHorizontalSize(
-                    0.07,
-                  ),
-                ),
-              ),
-            ),
+            // Container(
+            //   width: getHorizontalSize(
+            //     243,
+            //   ),
+            //   margin: getMargin(
+            //     top: 19,
+            //   ),
+            //   child: Text(
+            //     "msg_semper_in_cursu".tr,
+            //     maxLines: null,
+            //     textAlign: TextAlign.center,
+            //     style:
+            //         AppStyle.txtPlusJakartaSansSemiBold14Bluegray300.copyWith(
+            //       letterSpacing: getHorizontalSize(
+            //         0.07,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             GestureDetector(
               onTap: () {
                 onTapBtnNextvalue?.call();
@@ -109,7 +109,7 @@ class SliderthebestappforItemWidget extends StatelessWidget {
                   bottom: 17,
                 ),
                 width: getHorizontalSize(
-                  101,
+                  150,
                 ),
                 decoration: AppDecoration.btnFillGray900.copyWith(
                   borderRadius: BorderRadiusStyle.btnRoundedBorder24,
@@ -119,7 +119,7 @@ class SliderthebestappforItemWidget extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: AppStyle.btnPlusJakartaSansSemiBold16Gray50.copyWith(
                     letterSpacing: getHorizontalSize(
-                      0.08,
+                      0.05,
                     ),
                   ),
                 ),

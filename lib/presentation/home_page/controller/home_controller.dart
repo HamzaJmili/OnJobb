@@ -57,6 +57,8 @@ class HomeController extends GetxController {
 
     for (var doc in snapshot.docs) {
       Freelancer freelancer = Freelancer.fromJson(doc.id, doc.data());
+      freelancer.email;
+  
       freelancersList.add(freelancer);
     }
     // return freelancersList;
@@ -64,6 +66,7 @@ class HomeController extends GetxController {
 
 //  Future<List<Job>>
   Future<void> getJobs() async {
+
     final snapshot = await FirebaseFirestore.instance.collection('jobs').get();
     for (var doc in snapshot.docs) {
       Job job = Job.fromJson(doc.id, doc.data());
@@ -85,7 +88,7 @@ class HomeController extends GetxController {
       });
 
       if (containsSpecialization) {
-        print('we found a job to be recomm');
+      
         recommendedJobs.add(job);
       }
     }
@@ -98,7 +101,7 @@ class HomeController extends GetxController {
 
         recommendedJobs.add(job);
       }
-      print(' the length inside recomm function is ${recommendedJobs.length} and :  ${jobsList.length} ');
+     
     }
 
     // Do something with the recommendedJobs list
@@ -146,8 +149,11 @@ class HomeController extends GetxController {
   void onInit() async {
     super.onInit();
     await getCurrentUser();
-    await getJobs();
+    if(userisFreelancer.value==true) {
+       await getJobs();
     fillRecommendedJobs();
+    }
+   
     await getFreelancers();
     getJobsAndClient();
     filteredJobsList.value = jobsList;

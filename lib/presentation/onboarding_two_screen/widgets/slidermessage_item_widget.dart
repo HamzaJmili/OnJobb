@@ -58,7 +58,7 @@ class SlidermessageItemWidget extends StatelessWidget {
                       ),
                     ),
                     TextSpan(
-                      text: "msg_future_is_starting".tr,
+                      text: " ${"msg_future_is_starting".tr}",
                       style: TextStyle(
                         color: ColorConstant.gray900,
                         fontSize: getFontSize(
@@ -76,27 +76,27 @@ class SlidermessageItemWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            Container(
-              width: getHorizontalSize(
-                243,
-              ),
-              margin: getMargin(
-                left: 17,
-                top: 14,
-                right: 17,
-              ),
-              child: Text(
-                "msg_semper_in_cursu".tr,
-                maxLines: null,
-                textAlign: TextAlign.center,
-                style:
-                    AppStyle.txtPlusJakartaSansSemiBold14Bluegray300.copyWith(
-                  letterSpacing: getHorizontalSize(
-                    0.07,
-                  ),
-                ),
-              ),
-            ),
+            // Container(
+            //   width: getHorizontalSize(
+            //     243,
+            //   ),
+            //   margin: getMargin(
+            //     left: 17,
+            //     top: 14,
+            //     right: 17,
+            //   ),
+            //   child: Text(
+            //     "msg_semper_in_cursu".tr,
+            //     maxLines: null,
+            //     textAlign: TextAlign.center,
+            //     style:
+            //         AppStyle.txtPlusJakartaSansSemiBold14Bluegray300.copyWith(
+            //       letterSpacing: getHorizontalSize(
+            //         0.07,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             GestureDetector(
               onTap: () {
                 onTapBtnNextstep?.call();
@@ -112,7 +112,7 @@ class SlidermessageItemWidget extends StatelessWidget {
                   bottom: 17,
                 ),
                 width: getHorizontalSize(
-                  101,
+                  150,
                 ),
                 decoration: AppDecoration.btnFillGray900.copyWith(
                   borderRadius: BorderRadiusStyle.btnRoundedBorder24,

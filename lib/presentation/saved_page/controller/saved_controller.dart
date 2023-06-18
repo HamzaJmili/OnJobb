@@ -114,6 +114,8 @@ class SavedController extends GetxController {
       // An error occurred while deleting the job
       print('Error deleting job: $error');
     }
+    
+    getJobs();
   }
 
   Future<void> deleteClientJob(String jobId) async {
@@ -137,6 +139,7 @@ class SavedController extends GetxController {
       // An error occurred while deleting the job
       print('Error deleting job: $error');
     }
+     getSavedJobs();
   }
 
   @override

@@ -76,7 +76,7 @@ class SavedItemWidget extends StatelessWidget {
                       top: 10,
                     ),
                     child: Text(
-                      "\$${job.minSalary} -\$${job.maxSalary.toString()} /month",
+                      "\$${job.minSalary} -\$${job.maxSalary.toString()} ",
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left,
                       style:

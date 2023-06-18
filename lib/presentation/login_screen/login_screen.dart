@@ -27,14 +27,14 @@ class LoginScreen extends GetWidget<LoginController> {
                             onTapImgArrowleft();
                           }),
                       Padding(
-                          padding: getPadding(top: 44),
+                          padding: getPadding(top: 60),
                           child: Text("msg_hi_welcome_bac".tr,
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.left,
                               style: AppStyle.txtPlusJakartaSansBold24.copyWith(
                                   letterSpacing: getHorizontalSize(0.12)))),
                       Padding(
-                          padding: getPadding(top: 11),
+                          padding: getPadding(top: 20),
                           child: Text("msg_lorem_ipsum_dol6".tr,
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.left,
@@ -42,21 +42,21 @@ class LoginScreen extends GetWidget<LoginController> {
                                   .txtPlusJakartaSansMedium14Bluegray400
                                   .copyWith(
                                       letterSpacing: getHorizontalSize(0.07)))),
-                      CustomButton(
-                          height: getVerticalSize(56),
-                          text: "msg_continue_with_g".tr,
-                          margin: getMargin(top: 31),
-                          variant: ButtonVariant.OutlineGray900,
-                          padding: ButtonPadding.PaddingT17,
-                          fontStyle: ButtonFontStyle
-                              .PlusJakartaSansSemiBold16Gray900_1,
-                          prefixWidget: Container(
-                              margin: getMargin(right: 12),
-                              child: CustomImageView(
-                                  svgPath: ImageConstant.imgGoogle)),
-                          onTap: () {
-                            onTapContinuewithgoogle();
-                          }),
+                      // CustomButton(
+                      //     height: getVerticalSize(56),
+                      //     text: "msg_continue_with_g".tr,
+                      //     margin: getMargin(top: 31),
+                      //     variant: ButtonVariant.OutlineGray900,
+                      //     padding: ButtonPadding.PaddingT17,
+                      //     fontStyle: ButtonFontStyle
+                      //         .PlusJakartaSansSemiBold16Gray900_1,
+                      //     prefixWidget: Container(
+                      //         margin: getMargin(right: 12),
+                      //         child: CustomImageView(
+                      //             svgPath: ImageConstant.imgGoogle)),
+                      //     onTap: () {
+                      //       onTapContinuewithgoogle();
+                      //     }),
                       // CustomButton(
                       //     height: getVerticalSize(56),
                       //     text: "msg_continue_with_a".tr,
@@ -82,26 +82,18 @@ class LoginScreen extends GetWidget<LoginController> {
                                         child: Divider(
                                             height: getVerticalSize(1),
                                             thickness: getVerticalSize(1),
-                                            color: ColorConstant.indigo50))),
-                                Padding(
-                                    padding: getPadding(left: 12),
-                                    child: Text("msg_or_continue_wit".tr,
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.left,
-                                        style: AppStyle
-                                            .txtPlusJakartaSansSemiBold14Bluegray300
-                                            .copyWith(
-                                                letterSpacing:
-                                                    getHorizontalSize(0.07)))),
-                                Padding(
-                                    padding: getPadding(top: 8, bottom: 8),
-                                    child: SizedBox(
-                                        width: getHorizontalSize(74),
-                                        child: Divider(
-                                            height: getVerticalSize(1),
-                                            thickness: getVerticalSize(1),
-                                            color: ColorConstant.indigo50,
-                                            indent: getHorizontalSize(12))))
+                                            color: Colors.white))),
+                                // Padding(
+                                //     padding: getPadding(left: 12),
+                                //     child: Text("msg_or_continue_wit".tr,
+                                //         overflow: TextOverflow.ellipsis,
+                                //         textAlign: TextAlign.left,
+                                //         style: AppStyle
+                                //             .txtPlusJakartaSansSemiBold14Bluegray300
+                                //             .copyWith(
+                                //                 letterSpacing:
+                                //                     getHorizontalSize(0.07)))),
+                              
                               ])),
                       Align(
                           alignment: Alignment.centerLeft,

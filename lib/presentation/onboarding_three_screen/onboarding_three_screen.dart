@@ -133,7 +133,7 @@ class OnboardingThreeScreen extends GetWidget<OnboardingThreeController> {
 
   onTapBtnGetStarted() {
     Get.toNamed(
-      AppRoutes.signUpCreateAcountScreen,
+      AppRoutes.loginScreen,
     );
   }
 }

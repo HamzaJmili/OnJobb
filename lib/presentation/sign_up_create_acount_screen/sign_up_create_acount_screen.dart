@@ -29,7 +29,7 @@ class SignUpCreateAcountScreen extends GetWidget<SignUpCreateAcountController> {
                             onTapImgArrowleft();
                           }),
                       Padding(
-                          padding: getPadding(top: 44),
+                          padding: getPadding(top: 70),
                           child: Text("lbl_create_account".tr,
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.left,
@@ -37,71 +37,71 @@ class SignUpCreateAcountScreen extends GetWidget<SignUpCreateAcountController> {
                                   letterSpacing: getHorizontalSize(0.12)))),
                       Padding(
                           padding: getPadding(top: 11),
-                          child: Text("msg_lorem_ipsum_dol6".tr,
+                          child: Text("msg_lorem_ipsum_dol20".tr,
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.left,
                               style: AppStyle.txtPlusJakartaSansMedium16
                                   .copyWith(
                                       letterSpacing: getHorizontalSize(0.08)))),
-                      CustomButton(
-                          height: getVerticalSize(56),
-                          text: "msg_continue_with_g".tr,
-                          margin: getMargin(top: 28),
-                          variant: ButtonVariant.OutlineGray900,
-                          padding: ButtonPadding.PaddingT17,
-                          fontStyle: ButtonFontStyle
-                              .PlusJakartaSansSemiBold16Gray900_1,
-                          prefixWidget: Container(
-                              margin: getMargin(right: 12),
-                              child: CustomImageView(
-                                  svgPath: ImageConstant.imgGoogle)),
-                          onTap: () {
-                            onTapContinuewithgoogle();
-                          }),
-                      CustomButton(
-                          height: getVerticalSize(56),
-                          text: "msg_continue_with_a".tr,
-                          margin: getMargin(top: 16),
-                          variant: ButtonVariant.OutlineGray900,
-                          padding: ButtonPadding.PaddingT17,
-                          fontStyle: ButtonFontStyle
-                              .PlusJakartaSansSemiBold16Gray900_1,
-                          prefixWidget: Container(
-                              margin: getMargin(right: 12),
-                              child: CustomImageView(
-                                  svgPath: ImageConstant.imgFire))),
+                      // CustomButton(
+                      //     height: getVerticalSize(56),
+                      //     text: "msg_continue_with_g".tr,
+                      //     margin: getMargin(top: 28),
+                      //     variant: ButtonVariant.OutlineGray900,
+                      //     padding: ButtonPadding.PaddingT17,
+                      //     fontStyle: ButtonFontStyle
+                      //         .PlusJakartaSansSemiBold16Gray900_1,
+                      //     prefixWidget: Container(
+                      //         margin: getMargin(right: 12),
+                      //         child: CustomImageView(
+                      //             svgPath: ImageConstant.imgGoogle)),
+                      //     onTap: () {
+                      //       onTapContinuewithgoogle();
+                      //     }),
+                      // CustomButton(
+                      //     height: getVerticalSize(56),
+                      //     text: "msg_continue_with_a".tr,
+                      //     margin: getMargin(top: 16),
+                      //     variant: ButtonVariant.OutlineGray900,
+                      //     padding: ButtonPadding.PaddingT17,
+                      //     fontStyle: ButtonFontStyle
+                      //         .PlusJakartaSansSemiBold16Gray900_1,
+                      //     prefixWidget: Container(
+                      //         margin: getMargin(right: 12),
+                      //         child: CustomImageView(
+                      //             svgPath: ImageConstant.imgFire))),
                       Padding(
                           padding: getPadding(left: 33, top: 26, right: 33),
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                // Padding(
+                                //     padding: getPadding(top: 8, bottom: 8),
+                                //     child: SizedBox(
+                                //         width: getHorizontalSize(62),
+                                //         child: Divider(
+                                //             height: getVerticalSize(1),
+                                //             thickness: getVerticalSize(1),
+                                //             color: Colors.white))),
+                                // Padding(
+                                //     padding: getPadding(left: 12),
+                                //     child: Text("msg_or_continue_wit".tr,
+                                //         overflow: TextOverflow.ellipsis,
+                                //         textAlign: TextAlign.left,
+                                //         style: AppStyle
+                                //             .txtPlusJakartaSansSemiBold14Bluegray300
+                                //             .copyWith(
+                                //                 letterSpacing:
+                                //                     getHorizontalSize(0.07)))),
                                 Padding(
-                                    padding: getPadding(top: 8, bottom: 8),
-                                    child: SizedBox(
-                                        width: getHorizontalSize(62),
-                                        child: Divider(
-                                            height: getVerticalSize(1),
-                                            thickness: getVerticalSize(1),
-                                            color: ColorConstant.indigo50))),
-                                Padding(
-                                    padding: getPadding(left: 12),
-                                    child: Text("msg_or_continue_wit".tr,
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.left,
-                                        style: AppStyle
-                                            .txtPlusJakartaSansSemiBold14Bluegray300
-                                            .copyWith(
-                                                letterSpacing:
-                                                    getHorizontalSize(0.07)))),
-                                Padding(
-                                    padding: getPadding(top: 8, bottom: 8),
+                                    padding: getPadding(top: 120, bottom: 8),
                                     child: SizedBox(
                                         width: getHorizontalSize(74),
                                         child: Divider(
                                             height: getVerticalSize(1),
                                             thickness: getVerticalSize(1),
-                                            color: ColorConstant.indigo50,
+                                            color: Colors.white,
                                             indent: getHorizontalSize(12))))
                               ])),
                       Align(

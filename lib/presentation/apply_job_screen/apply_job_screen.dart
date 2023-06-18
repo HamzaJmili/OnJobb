@@ -55,7 +55,7 @@ class ApplyJobScreen extends GetWidget<ApplyJobController> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text(
-                                          "You can Add your phone Number (optional)",
+                                          "lbl_add_phone_number".tr,
                                           overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.left,
                                           style: AppStyle
@@ -66,7 +66,7 @@ class ApplyJobScreen extends GetWidget<ApplyJobController> {
                                       CustomTextFormField(
                                           focusNode: FocusNode(),
                                           controller: controller.phoneNumber,
-                                          hintText: "Your phone number",
+                                          hintText: "+212639457304",
                                           margin: getMargin(top: 14),
                                           padding:
                                               TextFormFieldPadding.PaddingT15),
@@ -79,13 +79,13 @@ class ApplyJobScreen extends GetWidget<ApplyJobController> {
                                               padding: EdgeInsets.only(
                                                   left: 20, top: 15),
                                               child: Text(
-                                                'salary',
+                                                'salaire',
                                               ),
                                             ),
                                             CustomTextFormField(
                                               focusNode: FocusNode(),
                                               controller: controller.salaire,
-                                              hintText: 'salary',
+                                              hintText: '240\$',
                                               margin: getMargin(top: 9),
                                               padding: TextFormFieldPadding
                                                   .PaddingT15,
@@ -101,7 +101,7 @@ class ApplyJobScreen extends GetWidget<ApplyJobController> {
                         Padding(
                             padding: getPadding(top: 28),
                             child: Text(
-                                "Cover letter : write at least 345 caracteres ",
+                                "lbl_cover_letter".tr,
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.left,
                                 style: AppStyle.txtPlusJakartaSansMedium14
@@ -111,7 +111,7 @@ class ApplyJobScreen extends GetWidget<ApplyJobController> {
                         CustomTextFormField(
                             focusNode: FocusNode(),
                             controller: controller.coverLetter,
-                            hintText: "write to the Client ",
+                            hintText: "lbl_write_to_client".tr,
                             margin: getMargin(
                               top: 20,
                               bottom: 12,
